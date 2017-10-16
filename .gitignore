@@ -1,0 +1,7 @@
+application/config/database.php
+application/config/config.php
+.htaccess
+!tools/.htaccess
+!database/.htaccess
+diff.diff
+robots.txt

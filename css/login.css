@@ -1,0 +1,280 @@
+body {
+    font-family: Hanuman,"Lucida Grande",Arial;
+    margin: 0;
+    padding: 0;
+}
+table {
+    border-collapse: collapse;
+}
+td {
+    border: medium none;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+#container {
+    margin-left: auto;
+    margin-right: 40px;
+    margin-top: 40px;
+	margin-bottom: 45px;
+    position: relative;
+    width: 580px;
+	float: right;
+/*	background: linear-gradient(to bottom,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);
+*/	box-shadow: 0 4px 2px -1px rgba(0,0,0,.25);
+    background: #122588;
+}
+
+#top {
+    background-position: 0 0;
+    height: 50px;
+	text-align: center;
+    color: red;
+    margin-top: 10px;
+    font-size: 18px;
+	
+}
+#top img
+{
+	position: relative;
+	top: 10px;
+}
+#form_field_username, #form_field_password, #form_field_password_confirm {
+    height: 50px;
+}
+#form_field_submit {
+    height: 60px;
+}
+#login_form {
+}
+#bottom {
+    /*background-image: url("../images/login/login.png");*/
+    background-position: left bottom;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: normal;
+    width: 480px;
+}
+#bottom td{
+    height: 30px;
+    padding: 3px 20px 0;
+    vertical-align: top;
+}
+#bottom a{
+	color:#8ac;
+	text-decoration:none;
+}
+#bottom a:hover{
+	color:#fff;
+}
+#bottom #left{
+	text-align:left;
+}
+#bottom #right{
+	text-align:right;
+}
+#welcome_message {
+    text-align: center;
+	padding: 20px;
+	/*box-shadow: 0 4px 2px -1px rgba(0,0,0,.25);*/
+	background: #122588;
+	/*background: -moz-linear-gradient(top,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#75b8dd),color-stop(14%,#68add0),color-stop(36%,#4c93b6),color-stop(57%,#337fa5),color-stop(71%,#1c74a0),color-stop(86%,#046da0),color-stop(89%,#006da0),color-stop(100%,#006da0));
+	background: -webkit-linear-gradient(top,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);
+	background: -o-linear-gradient(top,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);
+	background: -ms-linear-gradient(top,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);
+	background: linear-gradient(to bottom,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);*/
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border-bottom: 4px solid #ff9100 !important;
+	padding: 10px 0 0 0;
+	height: 40px;
+	font-family: 'NiDA Funan';
+	color: #fff;
+	font-size: 1.2em;
+	font-weight: bolder;
+}
+.form_field_label {
+    background-position: left -140px;
+    color:#fff;;
+    padding-left: 20px;
+    width: 150px;
+}
+.form_field {
+    background-position: right -140px;
+    padding-left: 10px;
+    width: 280px;
+}
+#form_field_username .form_field input[type=text]{
+	height: 35px;
+}
+#form_field_password .form_field input[type=password]{
+	height: 35px;
+}
+#submit_button {
+    background-position: right -240px;
+    padding-left: 179px;
+    width: 280px;
+
+}
+#submit_button input {
+    cursor: pointer;
+    padding: 5px 0;
+    text-align: center;
+    width: 236px;
+    color:#110067;
+	background: #DFEFE8;
+	margin-left: 2px;
+}
+#submit_button input:hover {
+    background-position: right -300px;
+	background:#DFEFE8;
+    color:black;
+}
+input {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    font-size: 1em;
+    font-family: "NiDA Khmer Empire";
+    width: 355px;
+	padding-left: 5px;
+	background: white;
+}
+.top_message {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+    color: #fff;
+    margin: auto;
+    padding: 20px 0;
+    top: 0;
+	position: absolute;
+    width: 100%;
+}
+.top_message_error {
+    background: none repeat scroll 0 0 #FFCCCC;
+    border-bottom: 1px solid #CC4444;
+    border-top: 1px solid #CC4444;
+    color: #880000;
+    margin: auto;
+    padding: 20px 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+#footer {
+clear: both;
+width: 100%;
+margin-top: 30px;
+/* background-color: #21a3dc; */
+border-top: 3px solid #ff9100 !important;
+clear: both;
+width: 100%;
+margin-top: 30px;
+background-color: #21a3dc;
+border-top: 4px solid #63B7DB;
+box-shadow: 0 4px 2px -1px rgba(0,0,0,.25);
+/*background: #006da0;
+*//*background: -moz-linear-gradient(top,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);
+background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#75b8dd),color-stop(14%,#68add0),color-stop(36%,#4c93b6),color-stop(57%,#337fa5),color-stop(71%,#1c74a0),color-stop(86%,#046da0),color-stop(89%,#006da0),color-stop(100%,#006da0));
+background: -webkit-linear-gradient(top,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);
+background: -o-linear-gradient(top,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);
+background: -ms-linear-gradient(top,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);
+background: linear-gradient(to bottom,#75b8dd 0,#68add0 14%,#4c93b6 36%,#337fa5 57%,#1c74a0 71%,#046da0 86%,#006da0 89%,#006da0 100%);*/
+position: absolute;
+background: #122588;
+
+z-index: 1000;
+bottom: 0;
+}
+#footer table#main {
+margin: 0 auto;
+width: 98%;
+}
+table {
+white-space: normal;
+line-height: normal;
+font-weight: normal;
+font-size: medium;
+font-variant: normal;
+font-style: normal;
+color: -webkit-text;
+text-align: start;
+}
+tbody {
+display: table-row-group;
+vertical-align: middle;
+border-color: inherit;
+}
+table {
+display: table;
+border-collapse: separate;
+border-spacing: 2px;
+border-color: gray;
+}
+.textgreen {
+color: #FFFFFF;
+text-shadow: 1px 1px 1px #0B3D4C;
+}
+.footertitle {
+font-size: 1em;
+font-weight: bolder;
+}
+.f_style {
+font: 14px /*'Khmer OS Muol Light'*/;
+text-shadow: 1px 1px 1px #0B404A;
+}
+user agent stylesheetlabel {
+cursor: default;
+}
+#footer table tr td dl {
+line-height: 30px;
+color: #ffffff;
+}
+user agent stylesheetdl {
+display: block;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+}
+strong, b {
+font-weight: bold;
+}
+.textyellow {
+color: #ffff00;
+}
+.footertitle {
+font-size: 1em;
+font-weight: bolder;
+}
+label {
+cursor: default;
+}
+#footer a {
+text-decoration: none;
+color: #ffffff;
+font-weight: bold;
+}
+#footer a:hover {
+text-decoration:underline;
+color: #ffffff;
+}
+marquee[Attributes Style] {
+-internal-marquee-style: scroll;
+-internal-marquee-direction: left;
+-internal-marquee-increment: 5px;
+}
+marquee {
+display: inline-block;
+}
+div#marquee {
+float: right;
+padding-right: 10px;
+padding-left: 10px;
+width: 99%;
+background-color: #ffffff;
+color: #116A91;
+}

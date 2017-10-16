@@ -1,0 +1,35 @@
+﻿<?php
+$lang['config_info']='ពត៌មានទិន្នន័យដែលបានរក្សាទុក';
+$lang['config_company']='ឈ្មោះក្រុមហ៊ុន';
+$lang['config_address']='អាស័យដ្ឋានក្រុមហ៊ុន';
+$lang['config_phone']='លេខទូរស័ព្ទរបស់ក្រុមហ៊ុន';
+$lang['config_website']='គេហទំព័ររបស់ក្រុមហ៊ុន';
+$lang['config_fax']='ទូរសារ';
+$lang['config_default_tax_rate']='អត្រាពន្ធ%ដែលកំណត់ជាគោល';
+$lang['config_default_tax_rate_1']='អត្រាពន្ធ%ប្រភេទទី១';
+$lang['config_default_tax_rate_2']='អត្រាពន្ធ%ប្រភេទទី២';
+$lang['config_company_required']='សូមបំពេញឈ្មោះក្រុមហ៊ុន';
+$lang['config_address_required']='សូមបំពេញអាស័យដ្ឋានរបស់ក្រុមហ៊ុន';
+$lang['config_phone_required']='សូមបំពេញលេខទូរស័ព្ទរបស់ក្រុមហ៊ុន';
+$lang['config_default_tax_rate_required']='សូមបំពេញអត្រាពន្ធ%ដែលកំណត់ជាគោល';
+$lang['config_default_tax_rate_number']='អត្រាពន្ធ%ដែលកំណត់ជាគោល ត្រូវតែជាលេខដាច់ខាត';
+$lang['config_company_website_url']='គេហទំព័រនេះមិនមានលក្ខណៈត្រឹមត្រូវនោះទេ URL (http://...)';
+$lang['config_saved_successfully']='ការកំណត់ត្រូវបានរក្សាទុកដោយជោគជ័យ';
+$lang['config_saved_unsuccessfully']='ការកំណត់មិនត្រូវបានរក្សាទុកក្នុងករណី demo modeទេ';
+$lang['config_return_policy_required']='សូមបំពេញពត៌មានក្នុងReturn policy';
+$lang['config_print_after_sale']='បោះពុម្ភវិក្កយបត្របន្ទាប់ពីលក់ទំនិញ';
+$lang['config_language'] = 'ភាសារ';
+$lang['config_timezone'] = 'ល្វែងម៉ោង';
+$lang['config_currency_symbol'] = 'និមិត្តសញ្ញារូបិយបណ្ណ';
+$lang['config_backup_database'] = 'ចម្លងទិន្នន័យទាំងអស់ទុក';
+$lang['config_mailchimp_api_key'] = 'Mailchimp API Key'; 
+$lang['config_number_of_items_per_page'] = 'ចំនួនធាតុបង្ហាញនៅក្នុងមួយទំព័រៗ';
+$lang['config_date_format'] = 'លក្ខណៈបង្ហាញថ្ងៃខែឆ្នាំ';
+$lang['config_time_format'] = 'លក្ខណៈម៉ោង';
+$lang['config_company_logo'] = 'និមិត្តសញ្ញាតំណាងក្រុមហ៊ុន';
+$lang['config_delete_logo'] = 'លុបនិមិត្តសញ្ញាតំណាងក្រុមហ៊ុន';
+$lang['config_track_cash'] = 'Track Cash In Register';
+$lang['config_optimize_database'] = 'បងើ្កនប្រសិទ្ធភាពទិន្នន័យ Database';
+$lang['config_database_optimize_successfully'] = 'បងើ្កនប្រសិទ្ធភាពទិន្នន័យ Database បានជោគជ័យ';
+$lang['config_payment_types'] = 'ប្រភេទក្នុងការបង់ប្រាក់';
+?>
