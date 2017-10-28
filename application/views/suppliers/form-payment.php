@@ -19,6 +19,7 @@ echo form_open('suppliers/savepayment/'.$person_info->person_id,array('id'=>'sup
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'amount',
+		'class'=>'form-control',
 		'id'=>'amount',
 		'value'=>'')
 	);?>
@@ -30,6 +31,7 @@ echo form_open('suppliers/savepayment/'.$person_info->person_id,array('id'=>'sup
 	<div class='form_field'>
 	<?php echo form_textarea(array(
 		'name'=>'comments',
+		'class'=>'form-control',
 		'id'=>'comments',
 		'value'=>$person_info->comments,
 		'rows'=>'5',
@@ -37,14 +39,15 @@ echo form_open('suppliers/savepayment/'.$person_info->person_id,array('id'=>'sup
 	);?>
 	</div>
 </div>
+<button type="submit" class="submit_button pull-right btn btn-primary" name="submit" id="submit"><i class="fa fa-save" aria-hidden="true"></i> <?= lang('common_submit') ?> </button>
 
-<?php
+<?php /*
 echo form_submit(array(
 	'name'=>'submit',
 	'id'=>'submit',
-	'value'=>lang('common_submit'),
+	'value'=> lang('common_submit'),
 	'class'=>'submit_button float_right')
-);
+); */
 ?>
 </fieldset>
 <?php 

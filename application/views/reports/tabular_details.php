@@ -57,7 +57,6 @@ if($export_excel == 1)
 		<td><small><?php echo $subtitle ?></small></td>
 	</tr>
 </table>
-<br />
 
 <table id="contents">
 	<tr>

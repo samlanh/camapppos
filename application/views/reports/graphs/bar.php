@@ -16,9 +16,10 @@ $.plot($("#chart"), [<?php echo json_encode($bar_data);?> ],
 {
 	series: 
 	{
-		color: '#cccccc',
-		bars: { show: true, barWidth: 0.6 }
+		color: '#56a8ff',
+		bars: { show: true, barWidth: 0.4 }
 	},
+
 	xaxis: {
 	    ticks: <?php echo json_encode($ticks);?>
 	  }

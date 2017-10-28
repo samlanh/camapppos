@@ -11,6 +11,7 @@ echo form_open('item_kits/save/'.$item_kit_info->item_kit_id,array('id'=>'item_k
 	<div class='form_field'>
 		<?php echo form_input(array(
 			'name'=>'item',
+			'class'=>'form-control',
 			'id'=>'item'
 		));?>
 	</div>
@@ -40,6 +41,7 @@ echo form_open('item_kits/save/'.$item_kit_info->item_kit_id,array('id'=>'item_k
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'item_kit_number',
+		'class'=>'form-control',
 		'id'=>'item_kit_number',
 		'value'=>$item_kit_info->item_kit_number)
 	);?>
@@ -51,6 +53,7 @@ echo form_open('item_kits/save/'.$item_kit_info->item_kit_id,array('id'=>'item_k
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'name',
+		'class'=>'form-control',
 		'id'=>'name',
 		'value'=>$item_kit_info->name)
 	);?>
@@ -62,6 +65,7 @@ echo form_open('item_kits/save/'.$item_kit_info->item_kit_id,array('id'=>'item_k
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'category',
+		'class'=>'form-control',
 		'id'=>'category',
 		'value'=>$item_kit_info->category)
 	);?>
@@ -74,6 +78,7 @@ echo form_open('item_kits/save/'.$item_kit_info->item_kit_id,array('id'=>'item_k
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'cost_price',
+		'class'=>'form-control',
 		'id'=>'cost_price',
 		'value'=>$item_kit_info->cost_price)
 	);?>
@@ -85,6 +90,7 @@ echo form_open('item_kits/save/'.$item_kit_info->item_kit_id,array('id'=>'item_k
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'unit_price',
+		'class'=>'form-control',
 		'id'=>'unit_price',
 		'value'=>$item_kit_info->unit_price)
 	);?>
@@ -139,6 +145,7 @@ echo form_open('item_kits/save/'.$item_kit_info->item_kit_id,array('id'=>'item_k
 	<?php echo form_textarea(array(
 		'name'=>'description',
 		'id'=>'description',
+		'class'=>'form-control',
 		'value'=>$item_kit_info->description,
 		'rows'=>'5',
 		'cols'=>'17')
@@ -146,14 +153,15 @@ echo form_open('item_kits/save/'.$item_kit_info->item_kit_id,array('id'=>'item_k
 	</div>
 </div>
 
+<button type="submit" class="submit_button pull-right btn btn-primary" name="submit" id="submit"><i class="fa fa-save" aria-hidden="true"></i> <?= lang('common_submit') ?> </button>
 
-<?php
+<?php /*
 echo form_submit(array(
 	'name'=>'submit',
 	'id'=>'submit',
 	'value'=>lang('common_submit'),
 	'class'=>'submit_button float_right')
-);
+); */
 ?>
 </fieldset>
 <?php

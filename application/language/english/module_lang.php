@@ -40,4 +40,6 @@ $lang['module_action_search_suppliers'] = 'Search suppliers';
 $lang['module_see_cost_price'] = 'See cost price';
 $lang['module_action_search_employees'] = 'Search employees';
 $lang['module_edit_sale_price'] = 'Edit Sale Price';
+
+$lang['module_dashboard']='Dashboard';
 ?>

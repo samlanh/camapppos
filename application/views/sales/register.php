@@ -1,42 +1,67 @@
-<div id='TB_load'><img src='<?php echo base_url()?>images/loading_animation.gif'/></div>
-<table>
-	<tr>
-		<td id="register_items_container">
-			<table id="title_section">
-				<tr>
-					<td id="title_icon">
-						<img src='<?php echo base_url()?>images/menubar/sales.png' alt='title icon' />
-					</td>
-					<td id="title">
-						<?php echo lang('sales_register'); ?>
-					</td>
-					<td id="register_wrapper">
-						<?php echo form_open("sales/change_mode",array('id'=>'mode_form')); ?>
+
+<div class="container" style=" padding-right: 0px; padding-left: 0px;">
+
+  <div class="row" style=" margin-right: 0px; margin-left: 0px;">
+
+	<div class="col-xs-12" style="padding-right: 0px; padding-left: 0px;">
+	
+	<div class="panel panel-default">
+
+		<div class="panel-heading clearfix">
+
+			<div class="col-xs-6 text-left">	
+
+	<img style="max-height: 30px;" src='<?php echo base_url()?>images/menubar/sales.png' alt='title icon' />
+				<b> <?php echo lang('sales_register'); ?> </b>	
+			</div>
+
+			<div class="col-xs-2 text-right">
+			</div>
+
+			<div class="col-xs-2 text-right">	
+			    <?php echo form_open("sales/change_mode",array('id'=>'mode_form')); ?>
 						<span><?php echo lang('sales_mode') ?></span>
 						<?php echo form_dropdown('mode',$modes,$mode,'id="mode"'); ?>
-						</form>
-					</td>
-					<td id="show_suspended_sales_button">
-						<?php 
+				</form>
+			  </div>
+			  <div class="col-xs-2 text-right">
+			
+			   	<?php 
 							/*echo anchor("sales/suspended/width~750",
 							"<div class='small_button'>".lang('sales_suspended_sales')."</div>",
 							array('class'=>'thickbox none','title'=>lang('sales_suspended_sales')));*/
-							echo anchor("sales/suspended", "<div class='small_button'>".lang('sales_suspended_sales')."</div>");
-						?>
-					</td>
-				</tr>
-			</table>
-			<div id="reg_item_search">
-				<?php echo form_open("sales/add",array('id'=>'add_item_form')); ?>
-					<?php echo form_input(array('name'=>'item','id'=>'item','size'=>'40', 'accesskey' => 'i'));?>
-					<div id="new_item_button_register" >
-						<?php echo anchor("items/view/-1/width~550",
-						"<div class='small_button'><span>".lang('sales_new_item')."</span></div>",
-						array('class'=>'thickbox none','title'=>lang('sales_new_item')));?>
-					</div>					
-				</form>
+					echo anchor("sales/suspended", "<div class='btn btn-info'>".lang('sales_suspended_sales')."</div>");
+				?>
+
+			   </div>
 			</div>
-			<div id="register_holder">
+		
+<div class="panel-body">
+	<div class="col-xs-10" style="padding-left: 0px; padding-right: 0px;">	
+
+	<?php echo form_open("sales/add",array('id'=>'add_item_form')); ?>
+	 <div class="col-xs-9" style="padding-left: 0px; padding-right: 0px;">
+   <div id="custom-search-input">
+        <div class="input-group"> 
+					<?php echo form_input(array('name'=>'item','id'=>'item','size'=>'40','class'=>'form-control', 'accesskey' => 'i'));?>
+				 <span class="input-group-btn">
+                        <button class="btn btn-info" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+      </div>
+      </div> 
+
+     </div>
+
+      <div class="col-xs-3" style="padding-left: 0px; padding-right: 0px;">
+      <?php echo anchor("items/view/-1/width~550",
+						"<div class='btn btn-primary pull-right'><i class='fa fa-plus'></i> <span>".lang('sales_new_item')."</span></div>",
+						array('class'=>'thickbox none','title'=>lang('sales_new_item')));?>
+      </div>
+   <?= form_close(); ?>
+
+<div id="register_holder">
 			<table id="register">
 				
 				<thead>
@@ -77,7 +102,7 @@
 												<td id="reg_item_stock" ><?php echo property_exists($cur_item_info, 'quantity') ? $cur_item_info->quantity : ''; ?></td>
 												
 												<?php if ($items_module_allowed && $this->Employee->has_module_action_permission('sales', 'edit_sale_price', $this->Employee->get_logged_in_employee_info()->person_id)){ ?>
-												<td id="reg_item_price"><?php echo form_input(array('name'=>'price','value'=>$item['price'],'size'=>'6', 'id' => 'price_'.$line));?></td>
+												<td id="reg_item_price"><?php echo form_input(array('name'=>'price','value'=>$item['price'],'size'=>'6',  'class'=>'form-control','id' => 'price_'.$line));?></td>
 												<?php }else{ ?>
 												<td id="reg_item_price"><?php echo $item['price']; ?></td>
 												<?php echo form_hidden('price',$item['price']); ?>
@@ -88,11 +113,11 @@
 													echo $item['quantity'];
 													echo form_hidden('quantity',$item['quantity']);
 													}else{
-													echo form_input(array('name'=>'quantity','value'=>$item['quantity'],'size'=>'2', 'id' => 'quantity_'.$line));
+													echo form_input(array('name'=>'quantity', 'class'=>'form-control','value'=>$item['quantity'],'size'=>'2', 'id' => 'quantity_'.$line));
 													}?>
 												</td>
 							
-												<td id="reg_item_discount"><?php echo form_input(array('name'=>'discount','value'=>$item['discount'],'size'=>'3', 'id' => 'discount_'.$line));?></td>
+												<td id="reg_item_discount"><?php echo form_input(array('name'=>'discount','value'=>$item['discount'],'size'=>'3', 'class'=>'form-control','id' => 'discount_'.$line));?></td>
 												<td id="reg_item_total"><?php echo to_currency($item['price']*$item['quantity']-$item['price']*$item['quantity']*$item['discount']/100); ?></td>
 											</tr>
 						
@@ -134,35 +159,40 @@
 					</tbody>
 				</table>
 			</div>
-			
-			<div id="reg_item_base"></div>
+
+	
+		</div>
+		
+   <div class="col-xs-2" style="padding: 0px;">
+       <div id="reg_item_base"></div>
 			<?php if ($this->config->item('track_cash')) { ?>
-			<div>
-				<?php echo anchor(site_url('sales/closeregister?continue=home'), lang('sales_close_register')); ?>
+			<div style="text-align: center;">
+				<?php echo anchor(site_url('sales/closeregister?continue=home'), lang('sales_close_register'),'class="btn btn-xs btn-danger clearfix"'); ?>
 			</div>
-			<?php } ?>
-		</td>
-		<td style="width:8px;"></td>
-		<td id="over_all_sale_container">
+		<?php } ?>
+
+
 			<div id="overall_sale">
 				
 				<div id="suspend_cancel">
+
 					<div id="suspend" <?php if(count($cart) > 0){ echo "style='visibility: visible;'";}?>>				
 						<?php
 						// Only show this part if there are Items already in the sale.
 						if(count($cart) > 0){ ?>
-								<div class='small_button' id='suspend_sale_button'> 
-									<span><?php echo lang('sales_suspend_sale');?></span>
+								<div class='btn btn-xs btn-warning pull-left' id='suspend_sale_button'> 
+								<?php echo lang('sales_suspend_sale');?>
 								</div>
 						<?php }	?>
 					</div>
+
 					<div id="cancel" <?php if(count($cart) > 0){  echo "style='visibility: visible;'";}?>>											
 						<?php
 						// Only show this part if there are Items already in the sale.
 						if(count($cart) > 0){ ?>
 							<?php echo form_open("sales/cancel_sale",array('id'=>'cancel_sale_form')); ?>
-								<div class='small_button' id='cancel_sale_button'>
-									<span><?php echo lang('sales_cancel_sale'); ?></span>
+								<div class='btn btn-xs btn-danger pull-right' id='cancel_sale_button'>
+									<?php echo lang('sales_cancel_sale'); ?>
 								</div>
 							</form>
 						<?php } ?>
@@ -173,17 +203,19 @@
 					<?php
 					if(isset($customer))
 					{
-						echo "<div id='customer_info_filled'>";
+						echo "<div id='customer_info_filled'>";							
 							echo '<div id="customer_name">'.character_limiter($customer, 25).'</div>';
 							echo '<div id="customer_email"></div>';
-							echo '<div id="customer_edit">'.anchor("customers/view/$customer_id/width~550", lang('common_edit'),  array('class'=>'thickbox none','title'=>lang('customers_update'))).'</div>';
-							echo '<div id="customer_remove">'.anchor("sales/delete_customer", lang('sales_detach'),array('id' => 'delete_customer')).'</div>';
+
+							echo '<div id="customer_edit" style="float:left;">'.anchor("customers/view/$customer_id/width~550", lang('common_edit'),  array('class'=>'thickbox none btn btn-xs btn-primary','title'=>lang('customers_update'))).'</div>';
+
+							echo '<div id="customer_remove" class="pull-right">'.anchor("sales/delete_customer", lang('sales_detach'),array('id' => 'delete_customer','class'=>'btn btn-xs btn-danger')).'</div>';
 						echo "</div>";
 					}
 					else
 					{ ?>
 						<div id='customer_info_empty'>
-							<?php echo form_open("sales/select_customer",array('id'=>'select_customer_form')); ?>
+							<?php echo form_open("sales/select_customer",array('id'=>'select_customer_form','autocomplete'=>'false')); ?>
 							<label id="customer_label" for="customer">
 								<?php echo lang('sales_select_customer'); ?>
 							</label>
@@ -283,7 +315,7 @@
 						<table id="amount_due">
 						<tr class="<?php if($payments_cover_total){ echo 'covered'; }?>">
 							<td>
-								<div class="float_left" style="font-size:.8em;"><?php echo lang('sales_amount_due'); ?>:</div>
+								<div class="float_left" style="font-size:.9em;"><?php echo lang('sales_amount_due'); ?>:</div>
 							</td>
 							<td style="text-align:right; ">
 								<div class="float_left" style="text-align:right;font-weight:bold;"><?php echo to_currency($amount_due); ?></div>
@@ -304,12 +336,12 @@
 								</tr>
 								<tr id="mpt_bottom">
 									<td id="tender" colspan="2">
-										<?php echo form_input(array('name'=>'amount_tendered','id'=>'amount_tendered','value'=>to_currency_no_money($amount_due),'size'=>'10', 'accesskey' => 'p'));	?>
+										<?php echo form_input(array('name'=>'amount_tendered','id'=>'amount_tendered','value'=>to_currency_no_money($amount_due),'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control'));	?>
 										<input type="hidden" id="amount_due_value" value="<?php echo $amount_due;?>">
 									</td>
 								</tr>
 							</table>
-							<div class='small_button' id='add_payment_button'>
+							<div class='btn btn-xs btn-success' id='add_payment_button'>
 								<span><?php echo lang('sales_add_payment'); ?></span>
 							</div>
 							</form>
@@ -339,27 +371,47 @@
 							echo '<label id="comment_label" for="comment">';
 							echo lang('common_comments');
 							echo ':</label><br/>';
-							echo form_textarea(array('name'=>'comment', 'id' => 'comment', 'value'=>$comment,'rows'=>'1',  'accesskey' => 'o'));
+							echo form_textarea(array('name'=>'comment', 'id' => 'comment', 'value'=>$comment,'rows'=>'1',  'accesskey' => 'o','style'=>'width: 100%;'));
 							
-							echo "<div class='small_button' id='finish_sale_button' style='float:left;margin-top:5px;'><span>".lang('sales_complete_sale')."</span></div>";
+							echo "<div class='btn btn-sm btn-success' id='finish_sale_button' style='width:100%; margin-top:5px;'><span>".lang('sales_complete_sale')."</span></div>";
 							}
 							?>
 						</div>
 					</form>
 					<?php }	?>
 				<?php } ?>
-
 			
-
+			</div><!-- END OVERALL-->	
 			
-			</div><!-- END OVERALL-->		
-		</td>
-	</tr>
-</table>
+		</div>
+
+		</div>
+				<div class="panel-footer ">
+						
+					</div>
+                </div>
+			</div>
+		</div>
+	</div>
+
+<div id="feedback_bar"></div>
+
+<div id='TB_load'><img src='<?php echo base_url()?>images/loading_animation.gif'/></div>
 
 <div id="feedback_bar"></div>
 
 <script type="text/javascript">
+
+ // Fix chrome's ignore on autocomplete=off
+ /*   $('input[autocomplete=off]').each(function(){
+        var copy = $(this).clone();
+        copy.val('');
+        copy.removeAttr('autocomplete');
+        copy.insertAfter($(this));
+        $(this).hide().removeAttr('required id class');
+    }); */
+
+
 <?php
 if(isset($error))
 {
@@ -493,17 +545,43 @@ $(document).ready(function()
     	}
     });
 
+//modify by bunthoeun start
+
 	$("#add_payment_button").click(function()
 	{
+		var mode =  $('#mode').val();
+
+		if(mode == 'sale'){
 		at = parseFloat($("#amount_tendered").val());
 		ad = parseFloat($("#amount_due_value").val());
 		if(at>0  && at <= ad){    	
 			$('#add_payment_form').ajaxSubmit({target: "#register_container", beforeSubmit: salesBeforeSubmit, success: salesSuccess});
-		}
+		 }
 		else{
 			alert(<?php echo json_encode(lang("sales_payment_over")); ?>);
+		 }
+
+		}else if(mode == 'return'){
+
+		at = parseFloat($("#amount_tendered").val());
+		ad = parseFloat($("#amount_due_value").val());
+
+		//condition return 
+		if(at < 0  && at >= ad){    	
+			$('#add_payment_form').ajaxSubmit({target: "#register_container", beforeSubmit: salesBeforeSubmit, success: salesSuccess});
+		 }
+		else{
+			alert(<?php echo json_encode(lang("sales_payment_over")); ?>);
+		 }
+
+		}else{
+			console.log('something went wrong');
 		}
+		
     });
+
+//modify by bunthoeun end
+
 
 	$("#payment_types").change(checkPaymentTypeGiftcard).ready(checkPaymentTypeGiftcard);
 	$('#mode').change(function()
@@ -565,6 +643,8 @@ function salesBeforeSubmit(formData, jqForm, options)
 	$("#TB_load").show();
 }
 
-function salesSuccess(responseText, statusText, xhr, $form){}
+function salesSuccess(responseText, statusText, xhr, $form){
+
+}
 
 </script>

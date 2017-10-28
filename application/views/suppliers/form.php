@@ -11,6 +11,7 @@ echo form_open('suppliers/save/'.$person_info->person_id,array('id'=>'supplier_f
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'company_name',
+		'class'=>'form-control',
 		'id'=>'company_name_input',
 		'value'=>$person_info->company_name)
 	);?>
@@ -23,18 +24,22 @@ echo form_open('suppliers/save/'.$person_info->person_id,array('id'=>'supplier_f
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'account_number',
+		'class'=>'form-control',
 		'id'=>'account_number',
 		'value'=>$person_info->account_number)
 	);?>
 	</div>
 </div>
-<?php
+
+<button type="submit" class="submit_button pull-right btn btn-primary" name="submit" id="submit"><i class="fa fa-save" aria-hidden="true"></i> <?= lang('common_submit') ?> </button>
+
+<?php /**
 echo form_submit(array(
 	'name'=>'submit',
 	'id'=>'submit',
 	'value'=>lang('common_submit'),
 	'class'=>'submit_button float_right')
-);
+); */
 ?>
 </fieldset>
 <?php 

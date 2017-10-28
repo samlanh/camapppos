@@ -21,6 +21,7 @@ class Summary_sales extends Report
 	{		
 		$this->db->select('sale_date, sum(subtotal) as subtotal, sum(total) as total, sum(tax) as tax,sum(profit) as profit');
 		$this->db->from('sales_items_temp');
+		
 		if ($this->params['sale_type'] == 'sales')
 		{
 			$this->db->where('quantity_purchased > 0');

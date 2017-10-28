@@ -784,6 +784,7 @@ class Reports extends Secure_area
 		$this->load->view("reports/graphs/bar",$data);
 	}
 	
+
 	function graphical_summary_payments($start_date, $end_date, $sale_type)
 	{
 		$this->load->model('reports/Summary_payments');
@@ -802,6 +803,7 @@ class Reports extends Secure_area
 		$this->load->view("reports/graphical",$data);
 	}
 	
+
 	//The actual graph data
 	function graphical_summary_payments_graph($start_date, $end_date, $sale_type)
 	{
@@ -825,6 +827,8 @@ class Reports extends Secure_area
 
 		$this->load->view("reports/graphs/bar",$data);
 	}
+
+	
 	function specific_customer_input()
 	{
 		$data = $this->_get_common_report_data();
@@ -1040,6 +1044,7 @@ class Reports extends Secure_area
 		$this->load->view("reports/specific_input",$data);
 	}
 	
+
 	function specific_supplier_store_accounts($start_date, $end_date, $supplier_id, $sale_type, $export_excel=0)
 	{
 		$this->load->model('reports/Specific_supplier_store_accounts');
@@ -1066,6 +1071,8 @@ class Reports extends Secure_area
 										array('data'=>$row['comment'], 'align' => 'left')
 									);
 		}
+
+
 		
 		$supplier_info = $this->Supplier->get_info($supplier_id);		
 		$data = array(
@@ -1079,6 +1086,10 @@ class Reports extends Secure_area
 		$this->load->view("reports/tabular",$data);
 	}
 	
+
+
+
+
 	function deleted_sales($start_date, $end_date, $sale_type, $export_excel=0)
 	{
 		$this->load->model('reports/Deleted_sales');

@@ -35,5 +35,6 @@ class Module_action extends CI_Model
 		$this->db->order_by("sort", "asc");
 		return $this->db->get();		
 	}
+	
 }
 ?>

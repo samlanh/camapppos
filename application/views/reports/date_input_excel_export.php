@@ -1,5 +1,18 @@
 <?php $this->load->view("partial/header"); ?>
-<div id="page_title" style="margin-bottom:8px;"><?php echo lang('reports_report_input'); ?></div>
+
+
+<div class="container" style=" padding-right: 0px; padding-left: 0px;">
+		<div class="row" style=" margin-right: 0px; margin-left: 0px;">
+		
+			<div class="col-xs-5 col-xs-offset-4"  style="padding-right: 5px; padding-left: 5px; margin-left: 30%">
+				<div class="panel panel-default">
+					<div class="panel-heading clearfix">
+						<?php echo lang('reports_report_input'); ?>
+					</div>
+					<div class="panel-body" style="padding: 15px;">
+					
+
+
 <?php
 if(isset($error))
 {
@@ -33,14 +46,25 @@ if(isset($error))
 		<input type="radio" name="export_excel" id="export_excel_no" value='0' checked='checked' /> <?php echo lang('common_no'); ?>
 	</div>
 
-<?php
+<button type="submit" class="submit_button pull-right btn btn-primary" name="generate_report" id="generate_report"><i class="fa fa-search" aria-hidden="true"></i> <?= lang('common_search') ?> </button>
+
+<?php /*
 echo form_button(array(
 	'name'=>'generate_report',
 	'id'=>'generate_report',
 	'content'=>lang('common_submit'),
 	'class'=>'submit_button')
-);
+); */
 ?>
+     	</div>
+					<div class="panel-footer ">
+					
+					</div>
+                </div>
+			</div>
+		</div>
+	</div>
+
 
 <?php $this->load->view("partial/footer"); ?>
 

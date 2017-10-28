@@ -16,8 +16,9 @@ class Config extends Secure_area
 		
 	function save()
 	{
-		if(!empty($_FILES["company_logo"]) && $_FILES["company_logo"]["error"] == UPLOAD_ERR_OK && ($_SERVER['HTTP_HOST'] !='demo.phppointofsale.com' && $_SERVER['HTTP_HOST'] !='demo.phppointofsalestaging.com'))
-		{
+		/** if(!empty($_FILES["company_logo"]) && $_FILES["company_logo"]["error"] == UPLOAD_ERR_OK && ($_SERVER['HTTP_HOST'] !='demo.phppointofsale.com' && $_SERVER['HTTP_HOST'] !='demo.phppointofsalestaging.com')) */
+		
+		if(!empty($_FILES["company_logo"]) && $_FILES["company_logo"]["error"] == UPLOAD_ERR_OK){
 			$allowed_extensions = array('png', 'jpg', 'jpeg', 'gif');
 			$extension = strtolower(end(explode('.', $_FILES["company_logo"]["name"])));
 			
@@ -66,6 +67,10 @@ class Config extends Secure_area
 		'additional_payment_types' => $this->input->post('additional_payment_types'),
 		'hide_suspended_sales_in_reports' => $this->input->post('hide_suspended_sales_in_reports') ? 1 : 0,
 		'speed_up_search_queries' => $this->input->post('speed_up_search_queries') ? 1 : 0,
+		'email_send'=>$this->input->post('email_send'),
+		'password_send'=>$this->input->post('password_send'),
+		'email_host'=>$this->input->post('email_host'),
+		'email_port'=>$this->input->post('email_port'),
 		);
 
 		if (isset($company_logo))
@@ -77,14 +82,15 @@ class Config extends Secure_area
 			$batch_save_data['company_logo'] = 0;
 		}
 		
-		if(($_SERVER['HTTP_HOST'] !='demo.phppointofsale.com' && $_SERVER['HTTP_HOST'] !='demo.phppointofsalestaging.com') && $this->Appconfig->batch_save($batch_save_data))
-		{
+	/*	if(($_SERVER['HTTP_HOST'] !='demo.phppointofsale.com' && $_SERVER['HTTP_HOST'] !='demo.phppointofsalestaging.com') && $this->Appconfig->batch_save($batch_save_data)) */
+
+		if($this->Appconfig->batch_save($batch_save_data)){
 			echo json_encode(array('success'=>true,'message'=>lang('config_saved_successfully')));
 		}
 		else
 		{
 			echo json_encode(array('success'=>false,'message'=>lang('config_saved_unsuccessfully')));
-		}
+		} 
 	}
 	
 	function backup()

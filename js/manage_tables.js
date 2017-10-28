@@ -1,6 +1,7 @@
 function checkbox_click(event)
 {
 	event.stopPropagation();
+	
 	do_email(enable_email.url);
 	if($(event.target).attr('checked'))
 	{
@@ -42,7 +43,7 @@ function enable_search(suggest_url,confirm_search_message)
 	{
 		event.preventDefault();
 
-		if(get_selected_values().length >0)
+		if(get_selected_values().length >  0)
 		{
 			if(!confirm(confirm_search_message))
 				return;
@@ -401,6 +402,7 @@ function enable_sorting(sort_url,table_columns, per_page)
 		enable_sorting.enabled=true;
 	}
 	var offset=0;
+
 	if($("#pagination").find('strong').text() > 0 )
 	{
 		offset = ($("#pagination").find('strong').text() - 1) * per_page;

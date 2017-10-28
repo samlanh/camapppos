@@ -24,6 +24,7 @@ class Sales extends Secure_area
 				$this->Sale->insert_register($cash_register);
 				
 				redirect(site_url('sales'));
+
 			} else if ($this->Sale->is_register_log_open()) {
 				$this->_reload(array(), false);
 			} else {
@@ -244,6 +245,8 @@ class Sales extends Secure_area
 		$this->_reload();
 	}
 
+
+	//finish sales
 	function complete()
 	{
 		$data['cart']=$this->sale_lib->get_cart();
@@ -291,6 +294,7 @@ class Sales extends Secure_area
 		$this->sale_lib->clear_all();
 	}
 	
+
 	function email_receipt($sale_id)
 	{
 		$sale_info = $this->Sale->get_info($sale_id)->row_array();
@@ -450,12 +454,13 @@ class Sales extends Secure_area
 		
 		return true;
 	}
+	
 	function reload()
 	{
 		$this->_reload();
 	}
 	
-	function _reload($data=array(), $is_ajax = true)
+	function _reload($database=array(), $is_ajax = true)
 	{
 		$person_info = $this->Employee->get_logged_in_employee_info();
 		$data['cart']=$this->sale_lib->get_cart();
@@ -552,25 +557,32 @@ class Sales extends Secure_area
 		$this->_reload(array('success' => lang('sales_successfully_suspended_sale')));
 	}
 	
+
+
 	function suspended()
 	{
 		$data = array();
-// 		$data['suspended_sales'] = $this->Sale->get_all_suspended()->result_array();
-// 		$data['sales_payments'] = $this->Sale->get_all_payments()->result_array();
-		$search =  $this->input->post("search");
+        $data['suspended_sales'] = $this->Sale->get_all_suspended()->result_array();
+       //change method by bunthoeun
+      //  $data['sales_payments'] = $this->Sale->get_all_payments()->result_array();
+	  $data['items_suspend'] = $this->Sale->get_all_sale_items_suspend()->result_array();
+		
+       $search =  $this->input->post("search");
 		
 		if(empty($search)){
-			$data['suspended_sales'] = $this->Sale->get_all_suspended()->result_array();
-			$data['sales_payments'] = $this->Sale->get_all_payments()->result_array();
+		$data['suspended_sales'] = $this->Sale->get_all_suspended()->result_array();
+      // $data['sales_payments'] = $this->Sale->get_all_payments()->result_array();	
 		}
 		else{
-			$data['suspended_sales'] = $this->Sale->get_suspended_sale_id($search)->result_array();
-			$data['sales_payments'] = $this->Sale->get_payments_sale_id($search)->result_array();
-		}
+		$data['suspended_sales'] = $this->Sale->get_suspended_sale_id($search)->result_array();
+       //$data['sales_payments'] = $this->Sale->get_payments_sale_id($search)->result_array();
+		} 
 		
 		$this->load->view('sales/suspended', $data);
 	}
 	
+
+
 	function unsuspend()
 	{
 		$sale_id = $this->input->post('suspended_sale_id');

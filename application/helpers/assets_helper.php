@@ -24,7 +24,8 @@ function get_css_files()
 	}
 	
 	$config =& get_config();
-	$_path = "css/all.css";
+	//$_path = "css/all.css";
+	$_path = "css/all_kh.css";
 	if($config['language'] === "khmer"){
 		$_path = "css/all_kh.css";
 	}	

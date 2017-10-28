@@ -10,6 +10,7 @@ echo form_open('items/bulk_update/',array('id'=>'item_form'));
 <?php echo form_label(lang('items_name').':', 'name',array('class'=>'wide')); ?>
 	<div class='form_field'>
 	<?php echo form_input(array(
+		'class'=>'form-control',
 		'name'=>'name',
 		'id'=>'name')
 	);?>
@@ -21,6 +22,7 @@ echo form_open('items/bulk_update/',array('id'=>'item_form'));
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'category',
+		'class'=>'form-control',
 		'id'=>'category')
 	);?>
 	</div>
@@ -29,7 +31,7 @@ echo form_open('items/bulk_update/',array('id'=>'item_form'));
 <div class="field_row clearfix">	
 <?php echo form_label(lang('items_supplier').':', 'supplier',array('class'=>'wide')); ?>
 	<div class='form_field'>
-	<?php echo form_dropdown('supplier_id', $suppliers, '');?>
+	<?php echo form_dropdown('supplier_id', $suppliers,'','class="form-control"');?>
 	</div>
 </div>
 
@@ -39,6 +41,7 @@ echo form_open('items/bulk_update/',array('id'=>'item_form'));
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'cost_price',
+		'class'=>'form-control',
 		'size'=>'8',
 		'id'=>'cost_price')
 	);?>
@@ -50,6 +53,7 @@ echo form_open('items/bulk_update/',array('id'=>'item_form'));
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'unit_price',
+		'class'=>'form-control',
 		'size'=>'8',
 		'id'=>'unit_price')
 	);?>
@@ -105,6 +109,7 @@ echo form_open('items/bulk_update/',array('id'=>'item_form'));
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'reorder_level',
+		'class'=>'form-control',
 		'id'=>'reorder_level')
 	);?>
 	</div>
@@ -115,6 +120,7 @@ echo form_open('items/bulk_update/',array('id'=>'item_form'));
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'location',
+		'class'=>'form-control',
 		'id'=>'location')
 	);?>
 	</div>
@@ -125,6 +131,7 @@ echo form_open('items/bulk_update/',array('id'=>'item_form'));
 	<div class='form_field'>
 	<?php echo form_textarea(array(
 		'name'=>'description',
+		'class'=>'form-control',
 		'id'=>'description',
 		'rows'=>'5',
 		'cols'=>'17')		
@@ -136,7 +143,7 @@ echo form_open('items/bulk_update/',array('id'=>'item_form'));
 
 <?php echo form_label(lang('items_allow_alt_desciption').':', 'allow_alt_description',array('class'=>'wide')); ?>
 	<div class='form_field'>
-	<?php echo form_dropdown('allow_alt_description', $allow_alt_desciption_choices);?>
+	<?php echo form_dropdown('allow_alt_description', $allow_alt_desciption_choices,'','class="form-control"');?>
 
 	</div>
 
@@ -148,19 +155,21 @@ echo form_open('items/bulk_update/',array('id'=>'item_form'));
 
 <?php echo form_label(lang('items_is_serialized').':', 'is_serialized',array('class'=>'wide')); ?>
 	<div class='form_field'>
-	<?php echo form_dropdown('is_serialized', $serialization_choices);?>
+	<?php echo form_dropdown('is_serialized', $serialization_choices,'','class="form-control"');?>
 
 	</div>
 
 </div>
 
-<?php
+<button type="submit" class="submit_button pull-right btn btn-primary" name="submit" id="submit"><i class="fa fa-save" aria-hidden="true"></i> <?= lang('common_submit') ?> </button>
+
+<?php /**
 echo form_submit(array(
 	'name'=>'submit',
 	'id'=>'submit',
 	'value'=>lang('common_submit'),
 	'class'=>'submit_button float_right')
-);
+); */
 ?>
 </fieldset>
 <?php 

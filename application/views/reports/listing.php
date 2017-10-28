@@ -1,14 +1,18 @@
 <?php $this->load->view("partial/header"); ?>
-<table id="title_bar">
-	<tr>
-		<td id="title_icon">
-			<img src='<?php echo base_url()?>images/menubar/reports.png' alt='<?php echo lang('reports_reports'); ?> - <?php echo lang('reports_welcome_message'); ?>' />
-		</td>
-		<td id="title"><?php echo lang('reports_reports'); ?></td>
-	</tr>
-</table>
 
-<ul id="report_list">
+<div class="container" style=" padding-right: 0px; padding-left: 0px;">
+		<div class="row" style=" margin-right: 0px; margin-left: 0px;">
+			<div class="col-xs-12"  style="padding-right: 5px; padding-left: 5px;">
+				<div class="panel panel-default">
+					<div class="panel-heading clearfix">
+					<img src='<?php echo base_url()?>images/menubar/reports.png' alt='<?php echo lang('reports_reports'); ?> - <?php echo lang('reports_welcome_message'); ?>' />
+		        
+		           <?php echo lang('reports_reports'); ?>
+
+					</div>
+					<div class="panel-body" style="padding: 15px;">
+
+<ul id="report_list" style="text-align: center;">
 	<li class="full"> 
 		<h3><?php echo lang('reports_customers'); ?></h3>
 		<ul>	
@@ -133,4 +137,14 @@
 		</ul>
 	</li>
 	</ul>
+					</div>
+					<div class="panel-footer ">
+					
+					</div>
+                </div>
+			</div>
+
+		</div>
+	</div>
+
 <?php $this->load->view("partial/footer"); ?>

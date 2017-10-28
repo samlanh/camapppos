@@ -16,8 +16,8 @@ class JoinDraw {
 	const ALIGN_TOP			= 1;
 	const ALIGN_CENTER		= 2;
 
-	const POSITION_RIGHT		= 0;
-	const POSITION_BOTTOM		= 1;
+	const POSITION_RIGHT	= 0;
+	const POSITION_BOTTOM	= 1;
 	const POSITION_LEFT		= 2;
 	const POSITION_TOP		= 3;
 

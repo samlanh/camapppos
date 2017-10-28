@@ -9,15 +9,23 @@
 <table width='50%' align='center' cellpadding='20'>
 <tr>
 <?php 
-for($k=0;$k<count($items);$k++)
+$count = 0;
+
+foreach($items as $item)
 {
-	$item = $items[$k];
 	$barcode = $item['id'];
 	$text = $item['name'];
 	
-	$style = ($k == count($items) -1) ? 'text-align:center;font-size: 10pt;' : 'text-align:center;font-size: 10pt;page-break-after: always;';
-	echo "<div style='$style'>".$this->Appconfig->get('company')."<br /><img src='".site_url('barcode')."?barcode=$barcode&text=$text&scale=$scale' /></div>";
+	if ($count % 5 == 0 and $count!=0)
+	{
+		echo '</tr><tr>';
+	}
+	//echo "<td align='center'>".$this->Appconfig->get('company')."<br />
+ 	echo "<td align='center'><img src='".site_url('barcode/label')."?barcode=$barcode&text=$text&scale=$scale' /></td>";	   
+	$count++;
+	
 }
+
 ?>
 </tr>
 </table>

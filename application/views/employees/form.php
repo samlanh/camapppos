@@ -15,6 +15,7 @@ echo form_open('employees/save/'.$person_info->person_id,array('id'=>'employee_f
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'username',
+		'class'=>'form-control',
 		'id'=>'username',
 		'value'=>$person_info->username));?>
 	</div>
@@ -29,6 +30,7 @@ $password_label_attributes = $person_info->person_id == "" ? array('class'=>'req
 	<div class='form_field'>
 	<?php echo form_password(array(
 		'name'=>'password',
+		'class'=>'form-control',
 		'id'=>'password'
 	));?>
 	</div>
@@ -40,6 +42,7 @@ $password_label_attributes = $person_info->person_id == "" ? array('class'=>'req
 	<div class='form_field'>
 	<?php echo form_password(array(
 		'name'=>'repeat_password',
+		'class'=>'form-control',
 		'id'=>'repeat_password'
 	));?>
 	</div>
@@ -59,7 +62,9 @@ foreach($all_modules->result() as $module)
 <?php echo form_checkbox("permissions[]",$module->module_id,$this->Employee->has_module_permission($module->module_id,$person_info->person_id),  "class='module_checkboxes'"); ?>
 <span class="medium"><?php echo $this->lang->line('module_'.$module->module_id);?>:</span>
 <span class="small"><?php echo $this->lang->line('module_'.$module->module_id.'_desc');?></span>
-	<ul>
+	
+<br/>
+<ul style="display: -webkit-inline-box;">
 	<?php
 	foreach($this->Module_action->get_module_actions($module->module_id)->result() as $module_action)
 	{
@@ -77,13 +82,16 @@ foreach($all_modules->result() as $module)
 }
 ?>
 </ul>
-<?php
+
+<button type="submit" class="submit_button pull-right btn btn-primary" name="submit" id="submit"><i class="fa fa-save" aria-hidden="true"></i> <?= lang('common_submit') ?> </button>
+
+<?php /*
 echo form_submit(array(
 	'name'=>'submit',
 	'id'=>'submit',
 	'value'=>lang('common_submit'),
 	'class'=>'submit_button float_right')
-);
+); */
 
 ?>
 </fieldset>
@@ -135,7 +143,7 @@ $(document).ready(function()
 			username:
 			{
 				required:true,
-				minlength: 5
+				minlength: 4
 			},
 			
 			password:
@@ -148,7 +156,7 @@ $(document).ready(function()
 				<?php
 				}
 				?>
-				minlength: 8
+				minlength: 6
 			},	
 			repeat_password:
 			{

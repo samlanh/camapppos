@@ -4,7 +4,7 @@ echo form_open('items/save_inventory/'.$item_info->item_id,array('id'=>'item_for
 <fieldset id="inv_item_basic_info">
 <legend><?php echo lang("items_basic_information"); ?></legend>
 
-<table align="center" border="0" bgcolor="#CCCCCC">
+<table align="center" border="0">
 <div class="field_row clearfix">
 <tr>
 <td>	
@@ -89,14 +89,22 @@ echo form_open('items/save_inventory/'.$item_info->item_id,array('id'=>'item_for
 <?php 
 echo form_close();
 ?>
-<table border="0" align="center">
-<tr bgcolor="#FF0033" align="center" style="font-weight:bold"><td colspan="4">Inventory Data Tracking</td></tr>
-<tr align="center" style="font-weight:bold"><td width="15%">Date</td><td width="25%">Employee</td><td width="15%">In/Out Qty</td><td width="45%">Remarks</td></tr>
+<table border="0" align="center" id="inv_tracking">
+<tr align="center" style="font-weight:bold">
+<th colspan="4">Inventory Data Tracking</th>
+</tr>
+
+<tr align="center" style="font-weight:bold">
+<td width="15%" id="inv_tracking_header">Date</td>
+<td width="25%" id="inv_tracking_header">Employee</td>
+<td width="15%" id="inv_tracking_header">In/Out Qty</td>
+<td width="45%" id="inv_tracking_header">Remarks</td>
+</tr>
 <?php
 foreach($this->Inventory->get_inventory_data_for_item($item_info->item_id)->result_array() as $row)
 {
 ?>
-<tr bgcolor="#CCCCCC" align="center">
+<tr align="center">
 <td><?php echo $row['trans_date'];?></td>
 <td><?php
 	$person_id = $row['trans_user'];

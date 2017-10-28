@@ -1,10 +1,11 @@
 <?php
 echo form_open_multipart('customers/do_excel_import/',array('id'=>'item_form'));
 ?>
-<div id="required_fields_message"><?php echo lang('customers_mass_import_from_excel'); ?></div>
+<div id="required_fields_message"> <?php echo lang('customers_mass_import_from_excel'); ?></div>
 <ul id="error_message_box"></ul>
-<b><a href="<?php echo site_url('customers/excel'); ?>"><?php echo lang('customers_download_excel_import_template'); ?></a></b>
+<b><a href="<?php echo site_url('customers/excel'); ?>"><i class="fa fa-download"></i>  <?php echo lang('customers_download_excel_import_template'); ?></a></b>
 <fieldset id="item_basic_info">
+
 <legend><?php echo lang('customers_import'); ?></legend>
 
 <div class="field_row clearfix">	
@@ -18,14 +19,16 @@ echo form_open_multipart('customers/do_excel_import/',array('id'=>'item_form'));
 	</div>
 </div>
 
-<?php
+<?php /*
 echo form_submit(array(
 	'name'=>'submitf',
 	'id'=>'submitf',
 	'value'=>lang('common_submit'),
 	'class'=>'submit_button float_right')
-);
+); */
 ?>
+<button type="submit" class="submit_button pull-right btn btn-primary" name="submitf" id="submitf"><i class="fa fa-save" aria-hidden="true"></i> <?= lang('common_submit') ?> </button>
+
 </fieldset>
 <?php 
 echo form_close();

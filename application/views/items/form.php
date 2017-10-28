@@ -11,6 +11,7 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'item_number',
+		'class'=>'form-control',
 		'id'=>'item_number',
 		'value'=>$item_info->item_number)
 	);?>
@@ -22,6 +23,7 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'name',
+		'class'=>'form-control',
 		'id'=>'name',
 		'value'=>$item_info->name)
 	);?>
@@ -33,6 +35,7 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'category',
+		'class'=>'form-control',
 		'id'=>'category',
 		'value'=>$item_info->category)
 	);?>
@@ -42,7 +45,7 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 <div class="field_row clearfix">
 <?php echo form_label(lang('items_supplier').':', 'supplier',array('class'=>'required wide')); ?>
 	<div class='form_field'>
-	<?php echo form_dropdown('supplier_id', $suppliers, $selected_supplier);?>
+	<?php echo form_dropdown('supplier_id', $suppliers, $selected_supplier,'class="form-control"');?>
 	</div>
 </div>
 
@@ -56,6 +59,7 @@ if ($this->Employee->has_module_action_permission('items','see_cost_price', $thi
 	<?php echo form_input(array(
 		'name'=>'cost_price',
 		'size'=>'8',
+		'class'=>'form-control',
 		'id'=>'cost_price',
 		'value'=>$item_info->cost_price)
 	);?>
@@ -74,6 +78,7 @@ else
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'unit_price',
+		'class'=>'form-control',
 		'size'=>'8',
 		'id'=>'unit_price',
 		'value'=>$item_info->unit_price)
@@ -87,6 +92,7 @@ else
     <div class='form_field'>
     <?php echo form_input(array(
         'name'=>'promo_price',
+        'class'=>'form-control',
         'size'=>'8',
         'id'=>'unit_price',
         'value'=>$item_info->promo_price)
@@ -111,7 +117,7 @@ else
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'tax_names[]',
-		'id'=>'tax_name_1',
+		'id'=>'tax_name_1',		
 		'size'=>'8',
 		'value'=> isset($item_tax_info[0]['name']) ? $item_tax_info[0]['name'] : $this->config->item('default_tax_1_name'))
 	);?>
@@ -156,6 +162,7 @@ else
 	<?php echo form_input(array(
 		'name'=>'quantity',
 		'id'=>'quantity',
+		'class'=>'form-control',
 		'value'=>$item_info->quantity)
 	);?>
 	</div>
@@ -168,17 +175,19 @@ else
 			// add by sovann for measurement of items
 			$measure = array('items_measure_m'=>lang('items_measure_m'),'items_measure_kg'=>lang('items_measure_kg'));
 			$seleted_measure = $item_info->measure;
-			echo form_dropdown('measure',$measure, $seleted_measure, 'id="measure"');  
+			echo form_dropdown('measure',$measure, $seleted_measure, 'id="measure" class="form-control"');  
 		?>
 	</div>
 </div>
 
 <div class="field_row clearfix">
+
 <?php echo form_label(lang('items_reorder_level').':', 'reorder_level',array('class'=>'required wide')); ?>
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'reorder_level',
 		'id'=>'reorder_level',
+		'class'=>'form-control',
 		'value'=>$item_info->reorder_level)
 	);?>
 	</div>
@@ -189,6 +198,7 @@ else
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'location',
+		'class'=>'form-control',
 		'id'=>'location',
 		'value'=>$item_info->location)
 	);?>
@@ -201,6 +211,7 @@ else
 	<?php echo form_textarea(array(
 		'name'=>'description',
 		'id'=>'description',
+		'class'=>'form-control',
 		'value'=>$item_info->description,
 		'rows'=>'5',
 		'cols'=>'17')
@@ -212,7 +223,7 @@ else
 <?php echo form_label(lang('items_allow_alt_desciption').':', 'allow_alt_description',array('class'=>'wide')); ?>
 	<div class='form_field'>
 	<?php echo form_checkbox(array(
-		'name'=>'allow_alt_description',
+		'name'=>'allow_alt_description',		
 		'id'=>'allow_alt_description',
 		'value'=>1,
 		'checked'=>($item_info->allow_alt_description)? 1  :0)
@@ -224,7 +235,7 @@ else
 <?php echo form_label(lang('items_is_serialized').':', 'is_serialized',array('class'=>'wide')); ?>
 	<div class='form_field'>
 	<?php echo form_checkbox(array(
-		'name'=>'is_serialized',
+		'name'=>'is_serialized',		
 		'id'=>'is_serialized',
 		'value'=>1,
 		'checked'=>($item_info->is_serialized)? 1 : 0)
@@ -232,13 +243,15 @@ else
 	</div>
 </div>
 
+<button type="submit" class="submit_button pull-right btn btn-primary" name="submit" id="submit"><i class="fa fa-save" aria-hidden="true"></i> <?= lang('common_submit') ?> </button>
 <?php
+/*
 echo form_submit(array(
 	'name'=>'submit',
 	'id'=>'submit',
 	'value'=>lang('common_submit'),
 	'class'=>'submit_button float_right')
-);
+); */
 ?>
 </fieldset>
 <?php

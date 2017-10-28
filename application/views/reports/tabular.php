@@ -72,6 +72,7 @@ if($export_excel == 1)
 	</tr>
 </table>
 <div id="feedback_bar"></div>
+
 <?php $this->load->view("partial/footer"); ?>
 
 <script type="text/javascript" language="javascript">

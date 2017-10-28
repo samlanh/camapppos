@@ -12,6 +12,7 @@ echo form_open('giftcards/save/'.$giftcard_info->giftcard_id,array('id'=>'giftca
 	<?php echo form_input(array(
 		'name'=>'giftcard_number',
 		'size'=>'8',
+		'class'=>'form-control',
 		'id'=>'giftcard_number',
 		'value'=>$giftcard_info->giftcard_number)
 	);?>
@@ -24,6 +25,7 @@ echo form_open('giftcards/save/'.$giftcard_info->giftcard_id,array('id'=>'giftca
 	<?php echo form_input(array(
 		'name'=>'value',
 		'size'=>'8',
+		'class'=>'form-control',
 		'id'=>'value',
 		'value'=>$giftcard_info->value)
 	);?>
@@ -33,17 +35,19 @@ echo form_open('giftcards/save/'.$giftcard_info->giftcard_id,array('id'=>'giftca
 <div class="field_row clearfix">
 <?php echo form_label(lang('giftcards_customer_name').':', 'customer_id',array('class'=>'wide')); ?>
 	<div class='form_field'>
-		<?php echo form_dropdown('customer_id', $customers, $giftcard_info->customer_id, 'id="customer_id"');?>
+		<?php echo form_dropdown('customer_id', $customers, $giftcard_info->customer_id, 'id="customer_id" class="form-control"');?>
 	</div>
 </div>
 
-<?php
+<button type="submit" class="submit_button pull-right btn btn-primary" name="submit" id="submit"><i class="fa fa-save" aria-hidden="true"></i> <?= lang('common_submit') ?> </button>
+
+<?php /*
 echo form_submit(array(
 	'name'=>'submit',
 	'id'=>'submit',
 	'value'=>lang('common_submit'),
 	'class'=>'submit_button float_right')
-);
+); */
 ?>
 </fieldset>
 <?php

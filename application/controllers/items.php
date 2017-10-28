@@ -11,13 +11,41 @@ class Items extends Secure_area implements iData_controller
 	//change text to check line endings
 	//new line endings
 
+	public function configPagination($base_url,$total_rows,$per_page)
+{		
+	    $config['base_url']=$base_url;
+		$config['total_rows']=$total_rows;
+		$config['per_page']=$per_page;
+	    $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['num_tag_open'] = '<li class="page-item">';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['next_tag_open'] = '<li class="page-item">';
+        $config['next_tagl_close'] = '</a></li>';
+        $config['prev_tag_open'] = '<li class="page-item">';
+        $config['prev_tagl_close'] = '</li>';
+        $config['first_tag_open'] = '<li class="page-item disabled">';
+        $config['first_tagl_close'] = '</li>';
+        $config['last_tag_open'] = '<li class="page-item">';
+        $config['last_tagl_close'] = '</a></li>';
+        $config['attributes'] = array('class' => 'page-link');
+
+        return $config;
+
+         }
+
 	function index()
 	{		
 		$this->check_action_permission('search');
+
 		$config['base_url'] = site_url('items/sorting');
 		$config['total_rows'] = $this->Item->count_all();
 		$config['per_page'] = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
-		$this->pagination->initialize($config);
+		
+
+		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
 		$data['pagination'] = $this->pagination->create_links();
 		$data['controller_name']=strtolower(get_class());
 		$data['form_width']=$this->get_form_width();
@@ -43,7 +71,9 @@ class Items extends Secure_area implements iData_controller
 		}
 		$config['base_url'] = site_url('items/sorting');
 		$config['per_page'] = $per_page; 
-		$this->pagination->initialize($config);
+
+		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
+
 		$data['pagination'] = $this->pagination->create_links();
 		$data['manage_table']=get_items_manage_table_data_rows($table_data,$this);
 		echo json_encode(array('manage_table' => $data['manage_table'], 'pagination' => $data['pagination']));	
@@ -65,7 +95,7 @@ class Items extends Secure_area implements iData_controller
 		$config['base_url'] = site_url('items/search');
 		$config['total_rows'] = $this->Item->search_count_all($search);
 		$config['per_page'] = $per_page ;
-		$this->pagination->initialize($config);				
+		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));				
 		$data['pagination'] = $this->pagination->create_links();
 		$data['manage_table']=get_items_manage_table_data_rows($search_data,$this);
 		echo json_encode(array('manage_table' => $data['manage_table'], 'pagination' => $data['pagination']));
@@ -175,7 +205,8 @@ class Items extends Secure_area implements iData_controller
 			$result[] = array('name' =>$item_info->name.': '.to_currency($item_info->unit_price), 'id'=> number_pad($item_id, 11));
 		}
 
-		$data['items'] = $result;
+				
+	    $data['items'] = $result;
 		$data['scale'] = 2;
 		$this->load->view("barcode_sheet", $data);
 	}
@@ -191,6 +222,7 @@ class Items extends Secure_area implements iData_controller
 
 			$result[] = array('name' =>$item_info->name.': '.to_currency($item_info->unit_price), 'id'=> number_pad($item_id, 11));
 		}
+	
 
 		$data['items'] = $result;
 		$data['scale'] = 1;

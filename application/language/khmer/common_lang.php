@@ -1,6 +1,6 @@
 ﻿<?php
 $lang['common_common']='ទូទៅ';
-$lang['common_submit']='ដាក់សំណើរ';
+$lang['common_submit']='រក្សាទុក';
 $lang['common_or']='ឬក៏';
 $lang['common_powered_by']='នាំមកជូនដោយ';
 $lang['common_welcome']='សូមស្វាគមន៍';
@@ -17,7 +17,7 @@ $lang['common_state']='ឈ្មោះរដ្ឋ';
 $lang['common_zip']='Zip';
 $lang['common_country']='ឈ្មោះប្រទេស';
 $lang['common_comments']='មតិយោបល់ផ្សេងៗ';
-$lang['common_edit']='កែសម្រួល';
+$lang['common_edit']='កែប្រែ';
 $lang['common_search']='ស្វែងរក';
 $lang['common_delete']='លុបចោល';
 $lang['common_view_recent_sales']='បង្ហាញអំពីការលក់បច្ចុប្បន្ន';

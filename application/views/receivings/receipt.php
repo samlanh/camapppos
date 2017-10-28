@@ -31,11 +31,11 @@ if (isset($error_message))
 
 	<table id="receipt_items">
 	<tr>
-	<th style="width:50%;text-align:center;"><?php echo lang('items_item'); ?></th>
-	<th style="width:17%;text-align:center;"><?php echo lang('common_price'); ?></th>
-	<th style="width:16%;text-align:center;"><?php echo lang('sales_quantity'); ?></th>
-	<th style="width:16%;text-align:center;"><?php echo lang('sales_discount'); ?></th>
-	<th style="width:17%;text-align:right;"><?php echo lang('sales_total'); ?></th>
+	<th style="width:50%;text-align:center; font-weight: bold;"><?php echo lang('items_item'); ?></th>
+	<th style="width:17%;text-align:center; font-weight: bold;"><?php echo lang('common_price'); ?></th>
+	<th style="width:16%;text-align:center; font-weight: bold;"><?php echo lang('sales_quantity'); ?></th>
+	<th style="width:16%;text-align:center; font-weight: bold;"><?php echo lang('sales_discount'); ?></th>
+	<th style="width:17%;text-align:right; font-weight: bold;"><?php echo lang('sales_total'); ?></th>
 	</tr>
 	<?php
 	foreach(array_reverse($cart, true) as $line=>$item)
@@ -48,12 +48,14 @@ if (isset($error_message))
 		<td style='text-align:center;'><?php echo $item['discount']; ?></td>
 		<td style='text-align:right;'><?php echo to_currency($item['price']*$item['quantity']-$item['price']*$item['quantity']*$item['discount']/100); ?></td>
 		</tr>
-	    <tr>
 
+	    <tr style="border-bottom: 1px solid #fff4e2;">
 	    <td colspan="2" align="center"><?php echo $item['description']; ?></td>
 		<td colspan="2" ><?php echo $item['serialnumber']; ?></td>
 		<td colspan="1"><?php echo '---'; ?></td>
+		
 	    </tr>
+	    
 	<?php
 	}
 	?>	
@@ -83,7 +85,7 @@ if (isset($error_message))
 	}
 	?>
 	</table>
-
+    <hr>
 	<div id="sale_return_policy">
 	<?php echo nl2br($this->config->item('return_policy')); ?>
 	</div>
@@ -92,6 +94,7 @@ if (isset($error_message))
 	</div>
 </div>
 <?php $this->load->view("partial/footer"); ?>
+
 
 <?php if ($this->Appconfig->get('print_after_sale'))
 {

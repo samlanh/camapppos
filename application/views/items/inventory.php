@@ -33,7 +33,7 @@ echo form_open('items/save_inventory/'.$item_info->item_id,array('id'=>'item_for
 <td>	
 	<?php $iname = array (
 		'name'=>'name',
-		'id'=>'name',
+		'id'=>'name',		
 		'value'=>$item_info->name,
 		'style'       => 'border:none',
 		'readonly' => 'readonly'
@@ -50,7 +50,7 @@ echo form_open('items/save_inventory/'.$item_info->item_id,array('id'=>'item_for
 	<?php $cat = array (
 		
 		'name'=>'category',
-		'id'=>'category',
+		'id'=>'category',		
 		'value'=>$item_info->category,
 		'style'       => 'border:none',
 		'readonly' => 'readonly'
@@ -86,6 +86,7 @@ echo form_open('items/save_inventory/'.$item_info->item_id,array('id'=>'item_for
 	<div class='form_field'>
 	<?php echo form_input(array(
 		'name'=>'newquantity',
+		'class'=>'form-control',
 		'id'=>'newquantity'
 		)
 	);?>
@@ -97,19 +98,23 @@ echo form_open('items/save_inventory/'.$item_info->item_id,array('id'=>'item_for
 	<div class='form_field'>
 	<?php echo form_textarea(array(
 		'name'=>'trans_comment',
+		'class'=>'form-control',
 		'id'=>'trans_comment',
 		'rows'=>'3',
 		'cols'=>'17')		
 	);?>
 	</div>
 </div>
-<?php
+
+<button type="submit" class="submit_button pull-right btn btn-primary" name="submit" id="submit"><i class="fa fa-save" aria-hidden="true"></i> <?= lang('common_submit') ?> </button>
+
+<?php /*
 echo form_submit(array(
 	'name'=>'submit',
 	'id'=>'submit',
 	'value'=>lang('common_submit'),
 	'class'=>'submit_button float_right')
-);
+); */
 ?>
 </fieldset>
 <?php 

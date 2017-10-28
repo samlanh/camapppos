@@ -1,5 +1,6 @@
 <?php
 require_once ("person_controller.php");
+
 class Customers extends Person_controller
 {
 	function __construct()
@@ -10,24 +11,39 @@ class Customers extends Person_controller
 	
 	function index()
 	{
+
 		$this->check_action_permission('search');
+
 		$config['base_url'] = site_url('customers/sorting');
+
 		$config['total_rows'] = $this->Customer->count_all();
 		$config['per_page'] = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
-		$this->pagination->initialize($config);
+
+
+			$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
+			
 		$data['pagination'] = $this->pagination->create_links();
-		$data['controller_name']=strtolower(get_class());
+
+		$data['controller_name']=strtolower(get_class());		
+
 		$data['form_width']=$this->get_form_width();
+
 		$data['per_page'] = $config['per_page'];
+
+		
+
 		$data['manage_table']=get_people_manage_table($this->Customer->get_all($data['per_page']),$this);
-		$this->load->view('people/manage',$data);
+       $this->load->view('people/manage',$data);
+
+
 	}
 	
 	function sorting()
 	{
 		$this->check_action_permission('search');
 		$search=$this->input->post('search');
-		$per_page=$this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20;
+		$per_page = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
+
 		if ($search)
 		{
 			$config['total_rows'] = $this->Customer->search_count_all($search);
@@ -36,15 +52,18 @@ class Customers extends Person_controller
 		else
 		{
 			$config['total_rows'] = $this->Customer->count_all();
-			$table_data = $this->Customer->get_all($per_page,$this->input->post('offset') ? $this->input->post('offset') : 0, $this->input->post('order_col') ? $this->input->post('order_col') : 'last_name' ,$this->input->post('order_dir') ? $this->input->post('order_dir'): 'asc');
+			$table_data = $this->Customer->get_all($per_page, $this->input->post('offset') ? $this->input->post('offset') : 0, $this->input->post('order_col') ? $this->input->post('order_col') : 'last_name' ,$this->input->post('order_dir') ? $this->input->post('order_dir'): 'asc');
 		}
+
 		$config['base_url'] = site_url('customers/sorting');
 		$config['per_page'] = $per_page; 
-		$this->pagination->initialize($config);
+
+		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
+
 		$data['pagination'] = $this->pagination->create_links();
+
 		$data['manage_table']=get_people_manage_table_data_rows($table_data,$this);
 		echo json_encode(array('manage_table' => $data['manage_table'], 'pagination' => $data['pagination']));	
-		
 	}
 	
 	/*
@@ -54,12 +73,13 @@ class Customers extends Person_controller
 	{
 		$this->check_action_permission('search');
 		$search=$this->input->post('search');
-		$per_page=$this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20;
+		$per_page= $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
 		$search_data=$this->Customer->search($search,$per_page,$this->input->post('offset') ? $this->input->post('offset') : 0, $this->input->post('order_col') ? $this->input->post('order_col') : 'last_name' ,$this->input->post('order_dir') ? $this->input->post('order_dir'): 'asc');
 		$config['base_url'] = site_url('customers/search');
 		$config['total_rows'] = $this->Customer->search_count_all($search);
 		$config['per_page'] = $per_page ;
-		$this->pagination->initialize($config);				
+		
+		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));			
 		$data['pagination'] = $this->pagination->create_links();
 		$data['manage_table']=get_people_manage_table_data_rows($search_data,$this);
 		echo json_encode(array('manage_table' => $data['manage_table'], 'pagination' => $data['pagination']));
@@ -102,6 +122,7 @@ class Customers extends Person_controller
 		'zip'=>$this->input->post('zip'),
 		'country'=>$this->input->post('country'),
 		'comments'=>$this->input->post('comments')
+		
 		);
 		$customer_data=array(
 		'company_name' => $this->input->post('company_name'),
@@ -268,5 +289,36 @@ class Customers extends Person_controller
 	{			
 		return 550;
 	}
+
+public function configPagination($base_url,$total_rows,$per_page)
+{		
+	    $config['base_url']=$base_url;
+		$config['total_rows']=$total_rows;
+		$config['per_page']=$per_page;
+	    $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['num_tag_open'] = '<li class="page-item">';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['next_tag_open'] = '<li class="page-item">';
+        $config['next_tagl_close'] = '</a></li>';
+        $config['prev_tag_open'] = '<li class="page-item">';
+        $config['prev_tagl_close'] = '</li>';
+        $config['first_tag_open'] = '<li class="page-item disabled">';
+        $config['first_tagl_close'] = '</li>';
+        $config['last_tag_open'] = '<li class="page-item">';
+        $config['last_tagl_close'] = '</a></li>';
+        $config['attributes'] = array('class' => 'page-link');
+
+        return $config;
+
+     //   $this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
+
+  }
+
+ 
 }
+
+
 ?>

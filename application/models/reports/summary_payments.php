@@ -19,24 +19,26 @@ class Summary_payments extends Report
 		$this->db->select('sale_id, SUM(total) as total', false);
 		$this->db->from('sales_items_temp');
 		$this->db->group_by('sale_id');
-			
+
 		foreach($this->db->get()->result_array() as $sale_total_row)
 		{
 			$sales_totals[$sale_total_row['sale_id']] = $sale_total_row['total'];
 		}
-
+		
 		$this->db->select('sales_payments.sale_id, sales_payments.payment_type, payment_amount', false);
 		$this->db->from('sales_payments');
 		$this->db->join('sales', 'sales.sale_id=sales_payments.sale_id');
 		$this->db->where('date(sale_time) BETWEEN "'. $this->params['start_date']. '" and "'. $this->params['end_date'].'"');
+
 		if ($this->params['sale_type'] == 'sales')
 		{
 			$this->db->where('payment_amount > 0');
 		}
+		
 		elseif ($this->params['sale_type'] == 'returns')
 		{
 			$this->db->where('payment_amount < 0');
-		}
+		}	
 		
 		$this->db->where($this->db->dbprefix('sales').'.deleted', 0);
 		$this->db->order_by('sale_id, payment_type');
@@ -47,13 +49,16 @@ class Summary_payments extends Report
         	$payments_by_sale[$row['sale_id']][] = $row;
 		}
 		
-		$payment_data = array();
 		
+
+		$payment_data = array();
+
 		foreach($payments_by_sale as $sale_id => $payment_rows)
-		{
-			$total_sale_balance = $sales_totals[$sale_id];
-			
-			foreach($payment_rows as $row)
+		{		
+		  
+	      $total_sale_balance = $sales_totals[$sale_id];					
+
+			foreach($payment_rows as $key => $row)
 			{
 				$payment_amount = $row['payment_amount'] <= $total_sale_balance ? $row['payment_amount'] : $total_sale_balance;
 				
@@ -67,11 +72,14 @@ class Summary_payments extends Report
 					$payment_data[$row['payment_type']]['payment_amount'] += $payment_amount;
 				}
 				
-				$total_sale_balance-=$payment_amount;
+				$total_sale_balance -= $payment_amount;
 			}
+			
+		
 		}
 		
 		return $payment_data;
+
 	}
 	
 	public function getSummaryData()

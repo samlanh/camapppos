@@ -6,6 +6,34 @@ class Employees extends Person_controller
 	{
 		parent::__construct('employees');
 	}
+
+	public function configPagination($base_url,$total_rows,$per_page)
+{		
+	    $config['base_url']=$base_url;
+		$config['total_rows']=$total_rows;
+		$config['per_page']=$per_page;
+	    $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['num_tag_open'] = '<li class="page-item">';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['next_tag_open'] = '<li class="page-item">';
+        $config['next_tagl_close'] = '</a></li>';
+        $config['prev_tag_open'] = '<li class="page-item">';
+        $config['prev_tagl_close'] = '</li>';
+        $config['first_tag_open'] = '<li class="page-item disabled">';
+        $config['first_tagl_close'] = '</li>';
+        $config['last_tag_open'] = '<li class="page-item">';
+        $config['last_tagl_close'] = '</a></li>';
+        $config['attributes'] = array('class' => 'page-link');
+
+        return $config;
+
+     //   $this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
+
+  }
+
 	
 	function index()
 	{
@@ -13,7 +41,7 @@ class Employees extends Person_controller
 		$config['base_url'] = site_url('employees/sorting');
 		$config['total_rows'] = $this->Employee->count_all();
 		$config['per_page'] = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
-		$this->pagination->initialize($config);
+		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
 		$data['pagination'] = $this->pagination->create_links();
 		$data['controller_name']=strtolower(get_class());
 		$data['form_width']=$this->get_form_width();
@@ -39,7 +67,7 @@ class Employees extends Person_controller
 		}
 		$config['base_url'] = site_url('employees/sorting');
 		$config['per_page'] = $per_page; 
-		$this->pagination->initialize($config);
+		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
 		$data['pagination'] = $this->pagination->create_links();
 		$data['manage_table']=get_people_manage_table_data_rows($table_data,$this);
 		echo json_encode(array('manage_table' => $data['manage_table'], 'pagination' => $data['pagination']));
@@ -75,10 +103,6 @@ class Employees extends Person_controller
 	}
 	
 	
-	
-	
-	
-	
 	/*
 	Returns employee table data rows. This will be called with AJAX.
 	*/
@@ -91,7 +115,7 @@ class Employees extends Person_controller
 		$config['base_url'] = site_url('employees/search');
 		$config['total_rows'] = $this->Employee->search_count_all($search);
 		$config['per_page'] = $per_page ;
-		$this->pagination->initialize($config);				
+		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));				
 		$data['pagination'] = $this->pagination->create_links();
 		$data['manage_table']=get_people_manage_table_data_rows($search_data,$this);
 		echo json_encode(array('manage_table' => $data['manage_table'], 'pagination' => $data['pagination']));

@@ -16,7 +16,7 @@ class Item extends CI_Model
 	/*
 	Returns all the items
 	*/
-	function get_all($limit=10000, $offset=0,$col='name',$order='asc')
+	function get_all($limit=10000, $offset=0,$col='item_id',$order='DESC')
 	{
 		$this->db->from('items');
 		$this->db->where('deleted',0);
@@ -89,7 +89,7 @@ class Item extends CI_Model
 	{
 		$this->db->from('items');
 		$this->db->where_in('item_id',$item_ids);
-		$this->db->order_by("item_id", "asc");
+		$this->db->order_by("item_id", "DESC");
 		return $this->db->get();
 	}
 
@@ -149,7 +149,7 @@ class Item extends CI_Model
 		$this->db->from('items');
 		$this->db->like('name', $search, $this->config->item('speed_up_search_queries') ? 'after' : 'both');
 		$this->db->where('deleted',0);
-		$this->db->order_by("name", "asc");
+		$this->db->order_by("item_id", "DESC");
 		$by_name = $this->db->get();
 		foreach($by_name->result() as $row)
 		{
@@ -181,7 +181,7 @@ class Item extends CI_Model
 		$this->db->from('items');
 		$this->db->like('location', $search, $this->config->item('speed_up_search_queries') ? 'after' : 'both');
 		$this->db->where('deleted',0);
-		$this->db->order_by("name", "asc");
+		$this->db->order_by("item_id", "DESC");
 		$by_name = $this->db->get();
 		foreach($by_name->result() as $row)
 		{
@@ -204,7 +204,7 @@ class Item extends CI_Model
 		$this->db->from('items');
 		$this->db->where('deleted',0);
 		$this->db->like('name', $search, $this->config->item('speed_up_search_queries') ? 'after' : 'both');
-		$this->db->order_by("name", "asc");
+		$this->db->order_by("item_id", "DESC");
 		$by_name = $this->db->get();
 		foreach($by_name->result() as $row)
 		{
@@ -252,7 +252,7 @@ class Item extends CI_Model
 	Preform a search on items
 	*/
 	
-	function search($search, $limit=20,$offset=0,$column='name',$orderby='asc')
+	function search($search, $limit=20,$offset=0,$column='item_id',$orderby='DESC')
 	{
 		if ($this->config->item('speed_up_search_queries'))
 		{

@@ -3,9 +3,11 @@ class Sale extends CI_Model
 {
 	public function get_info($sale_id)
 	{
+
 		$this->db->from('sales');
 		$this->db->where('sale_id',$sale_id);
 		return $this->db->get();
+
 	}
 	
 	function get_cash_sales_total_for_shift($shift_start, $shift_end)
@@ -182,7 +184,7 @@ class Sale extends CI_Model
 				$splitpayment = explode( ':', $payment['payment_type'] );
 				$cur_giftcard_value = $this->Giftcard->get_giftcard_value( $splitpayment[1] );
 				if(!$suspended)
-				$this->Giftcard->update_giftcard_value( $splitpayment[1], $cur_giftcard_value - $payment['payment_amount'] );
+				$this->Giftcard->update_giftcard_value( $splitpayment[1], $cur_giftcard_value - $payment['payment_amount']);
 			}
 
 			$sales_payments_data = array
@@ -396,7 +398,7 @@ class Sale extends CI_Model
 		foreach($this->db->get()->result_array() as $sale_item_row)
 		{
 			$cur_item_info = $this->Item->get_info($sale_item_row['item_id']);	
-			$item_data = array('quantity'=>$cur_item_info->quantity - $sale_item_row['quantity_purchased']);
+			$item_data = array('quantity' => $cur_item_info->quantity - $sale_item_row['quantity_purchased']);
 			$this->Item->save($item_data,$sale_item_row['item_id']);
 		
 			$sale_remarks ='POS '.$sale_id;
@@ -586,6 +588,23 @@ class Sale extends CI_Model
 		return $this->db->query($sql);
 		
 	}
+
+//add method by bunthoeun
+	function get_all_sale_items_suspend(){
+		$sql = "SELECT 
+		`sale_id`,
+        `item_id`,  
+		`quantity_purchased`,  
+		`item_unit_price`,
+		`discount_percent`
+		FROM
+				   ".$this->db->dbprefix('sales_items')."
+				ORDER BY sale_id DESC";
+		//echo $sql; exit;
+		return $this->db->query($sql);
+		
+	}
+
 	
 	function get_all_suspended()
 	{

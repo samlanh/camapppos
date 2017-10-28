@@ -17,7 +17,7 @@ class Customer extends Person
 	/*
 	Returns all the customers
 	*/
-	function get_all($limit=10000, $offset=0,$col='last_name',$order='asc')
+	function get_all($limit=10000, $offset=0,$col='phppos_people.person_id',$order='DESC')
 	{
 		$people=$this->db->dbprefix('people');
 		$customers=$this->db->dbprefix('customers');
@@ -214,7 +214,7 @@ class Customer extends Person
 	/*
 	Get search suggestions to find customers
 	*/
-	function get_customer_search_suggestions($search,$limit=25)
+	function get_customer_search_suggestions($search,$limit=25,$column="phppos_people.person_id",$orderby="DESC")
 	{
 		$suggestions = array();
 		
@@ -233,7 +233,7 @@ class Customer extends Person
 			last_name LIKE '%".$this->db->escape_like_str($search)."%' or 
 			CONCAT(`first_name`,' ',`last_name`) LIKE '%".$this->db->escape_like_str($search)."%') and deleted=0");			
 		}
-		$this->db->order_by("last_name", "asc");		
+		$this->db->order_by($column,$orderby);		
 		$by_name = $this->db->get();
 		foreach($by_name->result() as $row)
 		{
@@ -284,7 +284,7 @@ class Customer extends Person
 	/*
 	Preform a search on customers
 	*/
-	function search($search, $limit=20,$offset=0,$column='last_name',$orderby='asc')
+	function search($search, $limit=20,$offset=0,$column='phppos_people.person_id',$orderby='DESC')
 	{
 			
 		if ($this->config->item('speed_up_search_queries'))

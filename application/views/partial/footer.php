@@ -1,6 +1,8 @@
+<!--
 </div>
 </div>
-	
+-->
+
 	<table id="footer_info">
 		<tr>
 			<td id="menubar_footer">
@@ -56,7 +58,7 @@
 		<tr>
 			<td id="footer_cred">
 				<?php echo lang('common_please_visit_my'); ?> 
-					<a href="http://www.vssservice.com.com" target="_blank">
+					<a href="#" target="_blank">
 						<?php echo lang('common_website'); ?>
 					</a> 
 				<?php echo lang('common_learn_about_project'); ?>.
@@ -66,5 +68,10 @@
 			</td>
 		</tr>
 	</table>
+
+<script type="text/javascript">
+string = "&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;";
+string.replace("&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;&#65279;", "");
+</script>
 </body>
 </html>

@@ -18,6 +18,7 @@ class Item_kit extends CI_Model
 	*/
 	function get_all($limit=10000, $offset=0,$col='name',$ord='asc')
 	{
+		//delete = 0 not delete
 		$this->db->from('item_kits');
 		$this->db->where('deleted',0);
 		$this->db->order_by($col, $ord);

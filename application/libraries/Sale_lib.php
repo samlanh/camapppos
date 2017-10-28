@@ -12,7 +12,6 @@ class Sale_lib
 	{
 		if($this->CI->session->userdata('cart') === false)
 			$this->set_cart(array());
-
 		return $this->CI->session->userdata('cart');
 	}
 
@@ -167,6 +166,7 @@ class Sale_lib
 
 		return $this->CI->session->userdata('sale_mode');
 	}
+	
 
 	function set_mode($mode)
 	{

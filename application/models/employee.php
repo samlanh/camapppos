@@ -17,7 +17,7 @@ class Employee extends Person
 	/*
 	Returns all the employees
 	*/
-	function get_all($limit=10000, $offset=0,$col='last_name',$order='asc')
+	function get_all($limit=10000, $offset=0,$col='phppos_people.person_id',$order='DESC')
 	{	
 		$employees=$this->db->dbprefix('employees');
 		$people=$this->db->dbprefix('people');
@@ -414,7 +414,7 @@ class Employee extends Person
 		$query = $this->db->get_where('employees', array('username' => $username,'password'=>md5($password), 'deleted'=>0), 1);
 		if ($query->num_rows() ==1)
 		{
-			$row=$query->row();
+			$row = $query->row();
 			$this->session->set_userdata('person_id', $row->person_id);
 			return true;
 		}
