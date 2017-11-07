@@ -124,4 +124,8 @@ $lang['reports_id'] = 'ID';
 $lang['reports_debit'] = 'Debit';
 $lang['reports_credit'] = 'Credit';
 $lang['reports_balance'] = 'Balance';
+
+$lang['reports_total_income'] = 'Total Income';
+$lang['reports_total_expense'] = 'Total Expense';
+
 ?>

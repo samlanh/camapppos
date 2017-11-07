@@ -113,4 +113,8 @@ $lang['sales_suspended_not_found'] = 'There are no transaction in the list';
 $lang['sales_suspended_clear_search'] = 'Refresh';
 $lang['sales_payment_over'] = "Please check your payment againt!";
 $lang['sales_store_account'] = "Store account";
+$lang['sales_total_to_dollar'] = "Total Dollar";
+$lang['sales_total_to_reil'] = "Total Reil";
+$lang['sales_exchange_rate'] = "Exchange​ Rate";
+
 ?>

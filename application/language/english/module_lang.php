@@ -42,4 +42,15 @@ $lang['module_action_search_employees'] = 'Search employees';
 $lang['module_edit_sale_price'] = 'Edit Sale Price';
 
 $lang['module_dashboard']='Dashboard';
+
+$lang['module_exchanges'] = 'Exchange Rate';
+$lang['module_exchanges_desc']=' Add, Update, Delete Exchange';
+$lang['module_action_search_exchanges']='Search Exchange Rate';
+
+$lang['module_incomes'] = 'Income';
+$lang['module_incomes_desc']=' Add, Update, Delete Income';
+
+$lang['module_expenses'] = 'Expense';
+$lang['module_expenses_desc']=' Add, Update, Delete Expense';
+
 ?>
