@@ -20,6 +20,24 @@ class Sale_lib
 		$this->CI->session->set_userdata('cart',$cart_data);
 	}
 
+	function get_receive_payment_sale()
+	{
+		if(!$this->CI->session->userdata('receive_payment_sale'))
+			$this->set_receive_payment_sale(0);
+
+		return $this->CI->session->userdata('receive_payment_sale');
+	}
+
+	function set_receive_payment_sale($amount)
+	{
+		$this->CI->session->set_userdata('receive_payment_sale',$amount);
+	}
+	function clear_receive_payment_sale()
+	{
+		$this->CI->session->unset_userdata('receive_payment_sale');
+	}
+
+
 	//Alain Multiple Payments
 	function get_payments()
 	{
@@ -505,6 +523,8 @@ class Sale_lib
 	{
 		$this->CI->session->unset_userdata('suspended_sale_id');
 	}
+
+
 	function delete_item($line)
 	{
 		$items=$this->get_cart();
@@ -536,6 +556,7 @@ class Sale_lib
 		$this->empty_payments();
 		$this->delete_customer();
 		$this->delete_suspended_sale_id();
+		$this->clear_receive_payment_sale();
 	}
 
 	function get_taxes($sale_id = false)
@@ -633,7 +654,7 @@ class Sale_lib
 		$total = 0;
 		foreach($this->get_cart() as $item)
 		{
-            $total+=($item['price']*$item['quantity']-$item['price']*$item['quantity']*$item['discount']/100);
+            $total+=($item['price']*$item['quantity']-$item['price']*$item['quantity'] * $item['discount']/100);
 		}
 
 		foreach($this->get_taxes($sale_id) as $tax)
