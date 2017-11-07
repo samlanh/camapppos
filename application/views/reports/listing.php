@@ -155,14 +155,14 @@
 		</ul>
 	</li>
 
-	<li class="one">
+	<li class="second">
 		<h3>Income Expense</h3>
 		<ul>
-			<li>&nbsp;</li>					
+			<li style="background: #f2f2f2;">&nbsp;</li>					
 			<li class="detailed"><a href="<?php echo site_url('reports/summary_income_expense');?>">
 				Income Expense Summary
 			</a></li>	
-			<li>&nbsp;</li>			
+				
 		</ul>
 	</li>
 
