@@ -58,7 +58,7 @@ INSERT INTO `phppos_app_config` (`key`, `value`) VALUES
 ('language', 'english'),
 ('mailchimp_api_key', ''),
 ('number_of_items_per_page', '20'),
-('password_send', '14111993ABC'),
+('password_send', '123456'),
 ('phone', '555-555-5555'),
 ('print_after_sale', '1'),
 ('return_policy', 'Thanks You!'),
