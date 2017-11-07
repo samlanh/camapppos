@@ -784,7 +784,6 @@ class Reports extends Secure_area
 		$this->load->view("reports/graphs/bar",$data);
 	}
 	
-
 	function graphical_summary_payments($start_date, $end_date, $sale_type)
 	{
 		$this->load->model('reports/Summary_payments');
@@ -803,7 +802,6 @@ class Reports extends Secure_area
 		$this->load->view("reports/graphical",$data);
 	}
 	
-
 	//The actual graph data
 	function graphical_summary_payments_graph($start_date, $end_date, $sale_type)
 	{
@@ -827,8 +825,6 @@ class Reports extends Secure_area
 
 		$this->load->view("reports/graphs/bar",$data);
 	}
-
-	
 	function specific_customer_input()
 	{
 		$data = $this->_get_common_report_data();
@@ -1044,7 +1040,6 @@ class Reports extends Secure_area
 		$this->load->view("reports/specific_input",$data);
 	}
 	
-
 	function specific_supplier_store_accounts($start_date, $end_date, $supplier_id, $sale_type, $export_excel=0)
 	{
 		$this->load->model('reports/Specific_supplier_store_accounts');
@@ -1071,8 +1066,6 @@ class Reports extends Secure_area
 										array('data'=>$row['comment'], 'align' => 'left')
 									);
 		}
-
-
 		
 		$supplier_info = $this->Supplier->get_info($supplier_id);		
 		$data = array(
@@ -1086,10 +1079,6 @@ class Reports extends Secure_area
 		$this->load->view("reports/tabular",$data);
 	}
 	
-
-
-
-
 	function deleted_sales($start_date, $end_date, $sale_type, $export_excel=0)
 	{
 		$this->load->model('reports/Deleted_sales');
@@ -1289,148 +1278,6 @@ class Reports extends Secure_area
 
 		$this->load->view("reports/tabular_details",$data);
 	}
-
-	function specific_income_expense_input()
-	{
-		$data = $this->_get_common_report_data();
-		
-		$this->load->view("reports/date_input_income_expense",$data);
-	}
-
-	function detailed_income($start_date, $end_date, $export_excel=0)
-	{
-		$this->load->model('reports/Detailed_incomes');
-		$model = $this->Detailed_incomes;
-		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date));
-
-		$this->Income->create_income_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date));
-		
-		$headers = $model->getDataColumns();
-		
-		$report_data = $model->getData();
-
-	
-		$details_data = array();
-			
-			foreach($report_data['details'] as $key => $drow)
-			{
-				$details_data[$key] = array(
-					array('data'=>$drow['payment_id'], 'align'=> 'left'), 
-					array('data'=>$drow['income_date'], 'align'=> 'left'),
-					array('data'=>$drow['income_title'], 'align'=> 'left'),
-					array('data'=>$drow['type_money'], 'align'=> 'right'), 
-					array('data'=>$drow['check_paper'], 'align'=> 'left'),
-					array('data'=>to_currency($drow['total_income']), 'align'=> 'left')
-					);
-			}
-
-		$data = array(
-			"title" =>'Income Report',
-			"subtitle" => date(get_date_format(), strtotime($start_date)) .'-'.date(get_date_format(), strtotime($end_date)),
-			"headers" => $model->getDataColumns(),		
-			"data" => $details_data,
-			"summary_data" => $model->getSummaryData(),
-			"export_excel"=>$export_excel
-		);
-
-		$this->load->view("reports/tabular_income_expense",$data);
-	}
-
-
-	function detailed_expense($start_date, $end_date, $export_excel=0)
-	{
-		$this->load->model('reports/Detailed_expenses');
-		$model = $this->Detailed_expenses;
-		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date));
-
-		$this->Expense->create_expense_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date));
-		
-		
-		
-		$report_data = $model->getData();
-
-	
-		$details_data = array();
-			
-			foreach($report_data['details'] as $key => $drow)
-			{
-				$details_data[$key] = array(
-					array('data'=>$drow['payment_id'], 'align'=> 'left'), 
-					array('data'=>$drow['expense_date'], 'align'=> 'left'),
-					array('data'=>$drow['expense_title'], 'align'=> 'left'),
-					array('data'=>$drow['type_money'], 'align'=> 'right'), 
-					array('data'=>$drow['check_paper'], 'align'=> 'left'),
-					array('data'=>to_currency($drow['total_expense']), 'align'=> 'left')
-					);
-			}
-
-		$data = array(
-			"title" =>'Expense Report',
-			"subtitle" => date(get_date_format(), strtotime($start_date)) .'-'.date(get_date_format(), strtotime($end_date)),
-			"headers" => $model->getDataColumns(),		
-			"data" => $details_data,
-			"summary_data" => $model->getSummaryData(),
-			"export_excel"=>$export_excel
-		);
-
-		$this->load->view("reports/tabular_income_expense",$data);
-	}
-
-	function summary_income_expense($start_date, $end_date, $export_excel=0)
-	{
-		$this->load->model('reports/Detailed_income_expense');
-		$model = $this->Detailed_income_expense;
-		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date));
-
-		$this->Income->create_income_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date));
-		
-		$this->Expense->create_expense_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date));
-		
-		$report_data = $model->getData();
-	
-		$details_data_income = array();
-			
-			foreach($report_data['details_income'] as $key => $drow)
-			{
-				$details_data_income[$key] = array(					
-					array('data'=>$drow['payment_id'], 'align'=> 'left'), 
-					array('data'=>$drow['income_date'], 'align'=> 'left'),
-					array('data'=>$drow['income_title'], 'align'=> 'left'),
-					array('data'=>$drow['type_money'], 'align'=> 'right'), 
-					array('data'=>$drow['check_paper'], 'align'=> 'left'),
-					array('data'=>to_currency($drow['total_income']), 'align'=> 'left')
-					);
-			}
-
-			$details_data_expense = array();
-
-			foreach($report_data['details_expense'] as $key => $drow)
-			{
-				$details_data_expense[$key] = array(
-					array('data'=>$drow['payment_id'], 'align'=> 'left'), 
-					array('data'=>$drow['expense_date'], 'align'=> 'left'),
-					array('data'=>$drow['expense_title'], 'align'=> 'left'),
-					array('data'=>$drow['type_money'], 'align'=> 'right'), 
-					array('data'=>$drow['check_paper'], 'align'=> 'left'),
-					array('data'=>to_currency($drow['total_expense']), 'align'=> 'left')
-					);
-			}
-
-		$data = array(
-			"title" =>'Income Expense Report',
-			"subtitle" => date(get_date_format(), strtotime($start_date)) .'-'.date(get_date_format(), strtotime($end_date)),
-			"headers_income" => $model->getDataColumns(),		
-			"data_income" => $details_data_income,
-			"headers_expense" =>$model->getDataColumns(),		
-			"data_expense" => $details_data_expense,
-
-			"summary_data" => $model->getSummaryData(),
-			"export_excel"=>$export_excel
-		);
-
-		$this->load->view("reports/tabular_income_expense_summary",$data);
-	}
-
 	
 }
 ?>

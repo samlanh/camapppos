@@ -246,6 +246,11 @@ class Sales extends Secure_area
 	}
 
 
+	function set_receive_payment_sale()
+	{
+ 	  $this->sale_lib->set_receive_payment_sale($this->input->post('receive_payment_sale'));
+	}
+
 	//finish sales
 	function complete()
 	{
@@ -262,6 +267,7 @@ class Sales extends Secure_area
 		$data['payments']=$this->sale_lib->get_payments();
 		$data['amount_change']=$this->sale_lib->get_amount_due() * -1;
 		$data['employee']=$emp_info->first_name.' '.$emp_info->last_name;
+		$data['receive_payment_sale'] = $this->sale_lib->get_receive_payment_sale();
 
 		if($customer_id!=-1)
 		{
@@ -350,7 +356,8 @@ class Sales extends Secure_area
 		$data['payment_type']=$sale_info['payment_type'];
 		$data['amount_change']=$this->sale_lib->get_amount_due($sale_id) * -1;
 		$data['employee']=$emp_info->first_name.' '.$emp_info->last_name;
-
+		$data['receive_payment_sale'] = $this->sale_lib->get_receive_payment_sale();
+		
 		if($customer_id!=-1)
 		{
 			$cust_info=$this->Customer->get_info($customer_id);
@@ -461,7 +468,9 @@ class Sales extends Secure_area
 	}
 	
 	function _reload($database=array(), $is_ajax = true)
-	{
+	{	
+
+		$data['receive_payment_sale']=$this->sale_lib->get_receive_payment_sale();
 		$person_info = $this->Employee->get_logged_in_employee_info();
 		$data['cart']=$this->sale_lib->get_cart();
 		$data['modes']=array('sale'=>lang('sales_sale'),'return'=>lang('sales_return'));
