@@ -67,5 +67,16 @@ $route['reports/specific_supplier_store_accounts'] = "reports/specific_supplier_
 $route['reports/(deleted_sales)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4";
 $route['reports/(deleted_sales)'] = "reports/date_input_excel_export";
 
+
+$route['reports/detailed_income'] = "reports/specific_income_expense_input";
+$route['reports/(detailed_income)/(:any)/(:any)'] = "reports/$1/$2/$3";
+
+$route['reports/detailed_expense'] = "reports/specific_income_expense_input";
+$route['reports/(detailed_expense)/(:any)/(:any)'] = "reports/$1/$2/$3";
+
+$route['reports/summary_income_expense'] = "reports/specific_income_expense_input";
+$route['reports/(summary_income_expense)/(:any)/(:any)'] = "reports/$1/$2/$3";
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
