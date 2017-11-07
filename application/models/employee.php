@@ -345,7 +345,6 @@ class Employee extends Person
 	{
 		if ($this->config->item('speed_up_search_queries'))
 		{
-
 			$query = "
 				select *
 			from (
@@ -477,6 +476,7 @@ class Employee extends Person
 	function has_module_action_permission($module_id, $action_id, $person_id)
 	{
 		//if no module_id is null, allow access
+
 		if($module_id==null)
 		{
 			return true;
@@ -485,6 +485,7 @@ class Employee extends Person
 		$query = $this->db->get_where('permissions_actions', array('person_id' => $person_id,'module_id'=>$module_id,'action_id'=>$action_id), 1);
 		return $query->num_rows() == 1;
 	}
+	
 	
 	function get_employee_by_username_or_email($username_or_email)
 	{

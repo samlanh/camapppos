@@ -38,6 +38,24 @@ class Customer extends Person
 		return $this->db->count_all_results();
 	}
 	
+
+	function get_customer_fullname($customer_id=-1)
+	{
+		$this->db->from('customers');	
+		$this->db->join('people', 'people.person_id = customers.person_id');
+		$this->db->where('customers.person_id',$customer_id);
+		$query = $this->db->get();
+		
+		if($query->num_rows()==1)
+		{
+			return $query->row()->first_name.' '.$query->row()->last_name;
+		}
+		else
+		{
+			return '';
+		}
+	}
+
 	/*
 	Gets information about a particular customer
 	*/
