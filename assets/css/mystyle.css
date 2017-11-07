@@ -1,0 +1,185 @@
+#custom-search-input{
+    padding: 2px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+    max-width: 600px;
+}
+
+#custom-search-input input{
+    position: static;
+    border: 0;
+    box-shadow: none;
+
+}
+
+#custom-search-input button{
+    position: static;
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 3px 0 5px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 20px;
+}
+select{
+   height: 28px;
+}
+#inv_item_basic_info tbody{
+    font-size: 12px;
+}
+
+#item_basic_info label {
+    font-size: 12px;
+}
+
+#inv_tracking{
+  font-size: 12px;
+}
+#inv_tracking th{
+    padding: 2px;
+    background: #8d8dff;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    border-bottom: 1px solid red;
+}
+
+#inv_tracking td{
+  background: #f9fffc;
+  font-size: 12px;
+  border-bottom: 0.5px solid beige;
+}
+
+#inv_tracking td#inv_tracking_header{
+    padding: 5px;
+    background: antiquewhite;
+}
+#item_kit_items th{
+    padding: 2px;
+    font-size: 13px;
+    background: antiquewhite;
+}
+
+#receipt_items th {
+    border-bottom: 0.5px solid;
+    font-size: 9px;
+    padding-left: 3px;
+    padding-right: 3px;
+    white-space: nowrap;
+}
+
+#sortable_table td.innertable th{
+    color: black;
+    font-size: 0.7em;
+    background: #c5eaea;
+}
+input{
+   
+    height: 30px;
+    padding: 3px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+input[type="checkbox"]{
+    margin: 0px;
+}
+input#supplier {
+ 
+    height: 20px;
+    font-size: 11px;
+}
+input#customer {
+   
+    height: 20px;
+    font-size: 11px;
+}
+
+#amount_tendered{
+    margin: 0px;
+}
+
+.tablesorter th{
+    color: white;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    background: #029a8d;
+}
+
+#header-menu{
+  padding-right:0px;
+   margin-bottom: 20px;
+    font-size: 14px;    
+    background-color: #2e128a;
+    min-height: 64px;
+    border-bottom: 3px solid #0000ff;
+    
+ }
+ 
+#menu{
+
+  width:100%;  /*---Give our UL a width ---*/
+  list-style:none;  /*--- Makes the bullets go away ---*/
+  margin:0;  /*--- Take out any default margin on the UL tag ---*/
+  padding:0;  /*--- Take out any default padding on the UL tag ---*/
+  margin:0 auto;  /*--- Center the menu ---*/
+}
+ 
+#menu li{
+  float:left;  /*--- Make the list go horizontal 
+ margin-right: 10px;---*/
+}
+ 
+#menu li a{
+     /*--- background: #d6b400;---*/
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    display: block;
+    height: auto;
+    color: white;
+    padding: 8px 10px;
+    border-right: 1px solid #999;
+ }
+
+ #menu li a .fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 23px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#menu li a:hover{
+  text-decoration: none;
+  text-align: center; 
+  display: block;
+  height: auto;
+  color: lightblue;
+}
+
+.form-control:focus {
+  border-color: #66afe9;
+}
