@@ -431,7 +431,7 @@ td#pt_amount{border:medium none;padding-right:10px;text-align:right}
 #add_payment_button span{background:url("../images/pieces/add_payment.png") no-repeat scroll -10px -10px transparent;color:#fff;display:block;height:25px;margin:0 auto;padding-top:5px;text-align:center;width:200px;cursor:pointer;font-size: 14px;}
 */
 #add_payment_button{width: 100%}
-#make_payment #tender{text-align:right;text-align: right; padding-left: 7px; padding-right: 8px;}
+#make_payment #tender{text-align:right;text-align: right; padding-left:0px; padding-right: 0px;}
 #make_payment #tender input{border:1px solid #999;/*border-radius:4px 4px 4px 4px;*/font-size:1.5em;padding:2px 5px;text-align:right;}
 #comment_label{
 	font-size: 12px;
