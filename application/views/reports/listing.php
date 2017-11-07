@@ -136,6 +136,39 @@
 			<li class="detailed"><a href="<?php echo site_url('reports/specific_supplier_store_accounts');?>"><?php echo lang('reports_detailed_reports'); ?></a></li>			
 		</ul>
 	</li>
+
+	<li class="third">
+		<h3><?php echo lang('module_incomes'); ?></h3>
+		<ul>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>			
+			<li class="detailed"><a href="<?php echo site_url('reports/detailed_income');?>"><?php echo lang('reports_detailed_reports'); ?></a></li>			
+		</ul>
+	</li>
+
+	<li class="third">
+		<h3><?php echo lang('module_expenses'); ?></h3>
+		<ul>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>			
+			<li class="detailed"><a href="<?php echo site_url('reports/detailed_expense');?>"><?php echo lang('reports_detailed_reports'); ?></a></li>			
+		</ul>
+	</li>
+
+	<li class="one">
+		<h3>Income Expense</h3>
+		<ul>
+			<li>&nbsp;</li>					
+			<li class="detailed"><a href="<?php echo site_url('reports/summary_income_expense');?>">
+				Income Expense Summary
+			</a></li>	
+			<li>&nbsp;</li>			
+		</ul>
+	</li>
+
+
+
+
 	</ul>
 					</div>
 					<div class="panel-footer ">

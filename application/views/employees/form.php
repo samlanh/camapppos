@@ -5,7 +5,9 @@ echo form_open('employees/save/'.$person_info->person_id,array('id'=>'employee_f
 <ul id="error_message_box"></ul>
 <fieldset id="employee_basic_info">
 <legend><?php echo lang("employees_basic_information"); ?></legend>
+
 <?php $this->load->view("people/form_basic_info"); ?>
+
 </fieldset>
 
 <fieldset id="employee_login_info">

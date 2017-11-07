@@ -9,7 +9,7 @@
 	foreach(get_css_files() as $css_file)
 	{
 	?>
-	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url().$css_file['path'].'?'.APPLICATION_VERSION;?>" media="<?php echo $css_file['media'];?>" />
+		<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url().$css_file['path'].'?'.APPLICATION_VERSION;?>" media="<?php echo $css_file['media'];?>" />
 	<?php
 	}
 	?>	
@@ -30,7 +30,7 @@
 	<?php
 	}
 	?>	
-
+	<script type="text/javascript" src="<?= base_url('assets/js/script.js'); ?>"></script>
 	<script type="text/javascript">
 	Date.format = '<?php echo get_js_date_format(); ?>';
 	$.ajaxSetup ({
@@ -58,7 +58,7 @@ html {
 	}else{
 		?>
         .container {
-        min-height: 590px;
+        min-height: 515px;
 	    margin-top: 0px;
 	    width: 100%;
 	    max-width: none !important;    
@@ -68,67 +68,19 @@ html {
 
 ?>
 
+
 </style>
 </head>
 <body>
+<div id="menubar">
 
-
-<style type="text/css">
-  .active_menu{
-    background-color: blue;
-  }
-</style>
-<script type="text/javascript">
-  $(function () {
-    setNavigation();
-});
-
-function setNavigation() {
-    var path = window.location.href;    
-    path = path.replace(/\/$/, "");
-    path = decodeURIComponent(path);
-    
-    var arr = path.split('/');
-   var newlink = path.replace('/'+arr[6], '');
-
-   var arr2 = newlink.split('/');
-   var newlink2 = newlink.replace('/'+arr2[6], '');
-   
-    $("#menu li a").each(function () {      
-        var href = $(this).attr('href');        
-        if (path === href) {
-            $(this).closest('li').addClass('active_menu');
-        }else if(newlink == href){
-          $(this).closest('li').addClass('active_menu');
-        }else if(newlink2 == href){
-           $(this).closest('li').addClass('active_menu');
-        }
-    });
-}
-</script>
-
-<div class="row" style="margin: 0px;" id="menubar">
-    <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px;">
-       <div style="background-color: #016f96;min-height: 60px;max-height: 70px;"> 
-
-<ul id="menu">
-<?php 
-if($this->Appconfig->get('company_logo') > 0){
-?>
-<li>
- <a class='companylogo' style="height: 70px; max-height: 70px; margin-top: -11px; overflow: hidden;" href="<?php echo site_url(); ?>"><img src="<?= $this->Appconfig->get_logo_image(); ?>"></a>
-</li>
-<?php	
-}
-?>
-
- <li>
-     <a href="<?php echo site_url('home');?>" style="border-left: 1px solid #999;">
-                <i class="fa fa-home fa-2x" aria-hidden="true"></i><br/>                          
-            <b> <?php echo lang("module_dashboard") ?> </b>
-      </a>
- </li>
-<?php
+	<table id="menubar_container">
+		<tr id="menubar_navigation">
+			<td class="menu_item_home">			
+				<a class='companylogo' href="<?php echo site_url(); ?>"><img src="<?= $this->Appconfig->get_logo_image(); ?>">
+				</a>
+			</td>
+			<?php
 			$arr_icone = array(
 			'customers'=>'<i class="fa fa-users fa-2x" aria-hidden="true"></i><br/> ',
 
@@ -149,33 +101,22 @@ if($this->Appconfig->get('company_logo') > 0){
 
 			'giftcards'=>'<i class="fa fa-bell fa-2x" aria-hidden="true"></i><br>',
 
-			'exchanges'=>'<i class="fa fa-dollar fa-2x" aria-hidden="true"></i><br>',
-
-			'incomes'=>'<i class="fa fa-money fa-2x" aria-hidden="true"></i><br>',
-
-			'expenses'=>'<i class="fa fa-money fa-2x" aria-hidden="true"></i><br>',
-
 			'config'=>'<i class="fa fa-cog fa-2x" aria-hidden="true"></i><br>'
 			);
-
-	foreach($allowed_modules->result() as $module)
+			foreach($allowed_modules->result() as $module)
 			{
 			?>
-	     <li>
-          <a href="<?php echo site_url("$module->module_id");?>" style="border-left: 1px solid #999;">
-                <?php echo $arr_icone[$module->module_id]; ?>                            
-            <b> <?php echo lang("module_".$module->module_id) ?> </b>
-           </a>
-         </li>
-
+			<td class="menu_item menu_item_<?php echo $module->module_id;?>" >
+				<a href="<?php echo site_url("$module->module_id");?>" style="padding-top:10px;"><?php echo $arr_icone[$module->module_id]; ?><?php echo lang("module_".$module->module_id) ?></a>
+			</td>
 			<?php
 			}
 			?>
-</ul>
+		</tr>
 
-    </div>
-  </div> 
- </div> 
+	</table>
+</div>
+
 <!--
 <div id="content_area_wrapper">
 <div id="content_area">

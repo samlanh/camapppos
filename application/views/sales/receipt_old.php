@@ -88,8 +88,8 @@ if (isset($error_message))
 	{ ?>
 		<tr>
 		<td colspan="2" style="text-align:right;font-size:10px !important;"><?php echo lang('sales_payment'); ?></td>
-		<td colspan="1" style="text-align:right;font-size:10px !important;"><?php $splitpayment=explode(':',$payment['payment_type']); echo $splitpayment[0]; ?> </td>
-		<td colspan="3" style="text-align:right;font-size:10px !important;"><?php echo to_currency( $payment['payment_amount'] ); ?>  </td>
+		<td colspan="2" style="text-align:right;font-size:10px !important;"><?php $splitpayment=explode(':',$payment['payment_type']); echo $splitpayment[0]; ?> </td>
+		<td colspan="2" style="text-align:right;font-size:10px !important;"><?php echo to_currency( $payment['payment_amount'] ); ?>  </td>
 	    </tr>
 	<?php
 	}
@@ -139,7 +139,23 @@ if (isset($error_message))
 	<?php
 
 		}?>
-	
+	<?php if ($amount_change >= 0) {?>
+	<tr>
+		<td colspan="4" style='text-align:right;font-size:10px !important;'><?php echo lang('sales_change_due'); ?></td>
+		<td colspan="2" style='text-align:right;font-size:10px !important;'><?php echo to_currency($amount_change); ?></td>
+	</tr>
+	<?php
+	}
+	else
+	{
+	?>
+	<tr>
+		<td colspan="4" style='text-align:right;font-size:10px !important;'><?php echo lang('sales_amount_due'); ?></td>
+		<td colspan="2" style='text-align:right;font-size:10px !important;'><?php echo to_currency($amount_change * -1); ?></td>
+	</tr>	
+	<?php
+	} 
+	?>
 	</table>
 
 	<div id="sale_return_policy">

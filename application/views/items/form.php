@@ -173,7 +173,7 @@ else
 	<div class='form_field'>
 		<?php
 			// add by sovann for measurement of items
-			$measure = array('items_measure_m'=>lang('items_measure_m'),'items_measure_kg'=>lang('items_measure_kg'));
+			$measure = array('items_measure_unit'=>lang('items_measure_unit'),'items_measure_case'=>lang('items_measure_case'),'items_measure_m'=>lang('items_measure_m'),'items_measure_kg'=>lang('items_measure_kg'));
 			$seleted_measure = $item_info->measure;
 			echo form_dropdown('measure',$measure, $seleted_measure, 'id="measure" class="form-control"');  
 		?>
