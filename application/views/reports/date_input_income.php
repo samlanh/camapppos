@@ -34,6 +34,17 @@ if(isset($error))
 	</div>
 
 
+<?php echo form_label(lang('income_type'), 'income_type', array('class'=>'required')); ?>
+	<div>	
+		<?php echo form_dropdown('type',$bound_type,'', 'id="type"'); ?>
+	</div>
+	
+
+<div>
+		<?php echo lang('reports_export_to_excel'); ?>: <input type="radio" name="export_excel" id="export_excel_yes" value='1' /> <?php echo lang('common_yes'); ?>
+		<input type="radio" name="export_excel" id="export_excel_no" value='0' checked='checked' /> <?php echo lang('common_no'); ?>
+</div>
+	
 <button type="submit" class="submit_button pull-right btn btn-primary" name="generate_report" id="generate_report"><i class="fa fa-search" aria-hidden="true"></i> <?= lang('common_search') ?> </button>
 
 <?php /*
@@ -60,21 +71,28 @@ echo form_button(array(
 <script type="text/javascript" language="javascript">
 $(document).ready(function()
 {
+
 	$("#generate_report").click(function()
 	{		
-	
-		
+		var export_excel = 0;
+
+		var type = $('#type').val();
+
+		if ($("#export_excel_yes").attr('checked'))
+		{
+			export_excel = 1;
+		}
 		
 		if ($("#simple_radio").attr('checked'))
 		{
-			window.location = window.location+'/'+$("#report_date_range_simple option:selected").val()+'/all/0';
+		window.location = window.location+'/'+$("#report_date_range_simple option:selected").val() +'/'+type+'/'+export_excel;
 		}
 		else
 		{
 			var start_date = $("#start_year").val()+'-'+$("#start_month").val()+'-'+$('#start_day').val();
 			var end_date = $("#end_year").val()+'-'+$("#end_month").val()+'-'+$('#end_day').val();
-	
-			window.location = window.location+'/'+start_date + '/'+ end_date+'/all/0';
+		
+			window.location = window.location+'/'+start_date + '/'+ end_date+'/'+type+'/'+export_excel;
 		}
 	});
 	

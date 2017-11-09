@@ -84,6 +84,7 @@ class Incomes extends Secure_area {
 		$rows = array();
 		$row = array(lang('income_payment_id'),
 		 lang('income_date'),	
+		  lang('income_type'),
 		 lang('income_title'),
 		 lang('income_check_paper'),
 		 lang('income_type_money'),
@@ -95,7 +96,8 @@ class Incomes extends Secure_area {
 			
 			$row = array(
 				$r->payment_id,				
-				Date('d-M-Y',strtotime($r->income_date)),			
+				Date('d-M-Y',strtotime($r->income_date)),	
+				$r->income_type,		
 				$r->income_title,
 				$r->check_paper,
 				$r->type_money,
@@ -131,6 +133,13 @@ class Incomes extends Secure_area {
 	function suggest()
 	{
 		$suggestions = $this->Income->get_search_suggestions($this->input->get('term'),100);
+		echo json_encode($suggestions);
+	}
+
+
+	public function select_income_type()
+	{
+		$suggestions = $this->Income->get_income_type($this->input->get('term'),100);
 		echo json_encode($suggestions);
 	}
 
@@ -178,7 +187,8 @@ class Incomes extends Secure_area {
 	{
 		$this->check_action_permission('add_update');		
 		$data = array(		
-		'income_date'=>$this->input->post('income_date'),		
+		'income_date'=>$this->input->post('income_date'),
+		'income_type'=>$this->input->post('income_type'),	
 		'income_title'=>$this->input->post('income_title'),
 		'check_paper'=>$this->input->post('check_paper'),		
 		'type_money'=>$this->input->post('type_money'),

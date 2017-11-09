@@ -53,4 +53,9 @@ $lang['module_incomes_desc']=' Add, Update, Delete Income';
 $lang['module_expenses'] = 'Expense';
 $lang['module_expenses_desc']=' Add, Update, Delete Expense';
 
+$lang['module_expense_income_categories'] = 'Expense Income Category';
+$lang['module_expense_income_categories_desc'] = 'Add, Update, Delete Category';
+
+
+
 ?>

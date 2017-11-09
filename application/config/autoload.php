@@ -95,7 +95,7 @@ $autoload['config'] = array();
 |
 */
 
-$autoload['language'] = array('expense','income','exchange','common', 'config', 'customers', 'employees', 'error', 'items', 'login', 'module', 'reports', 'sales','suppliers','receivings','giftcards', 'item_kits');
+$autoload['language'] = array('expense_income_category','expense','income','exchange','common', 'config', 'customers', 'employees', 'error', 'items', 'login', 'module', 'reports', 'sales','suppliers','receivings','giftcards', 'item_kits');
 
 
 /*
@@ -108,7 +108,7 @@ $autoload['language'] = array('expense','income','exchange','common', 'config', 
 |
 */
 
-$autoload['model'] = array('Expense','Income','Exchange','Appconfig','Person','Customer','Employee','Module','Item', 'Item_taxes', 'Sale', 'Supplier','Inventory','Receiving','Giftcard', 'Item_kit', 'Item_kit_taxes', 'Item_kit_items', 'Appfile', 'Module_action');
+$autoload['model'] = array('Expense_income_category','Expense','Income','Exchange','Appconfig','Person','Customer','Employee','Module','Item', 'Item_taxes', 'Sale', 'Supplier','Inventory','Receiving','Giftcard', 'Item_kit', 'Item_kit_taxes', 'Item_kit_items', 'Appfile', 'Module_action');
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */

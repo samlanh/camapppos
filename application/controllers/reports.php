@@ -979,6 +979,7 @@ class Reports extends Secure_area
 
 		$this->load->view("reports/tabular_details",$data);
 	}
+
     function specific_supplier_input()
 	{
 		$data = $this->_get_common_report_data();
@@ -1292,18 +1293,34 @@ class Reports extends Secure_area
 
 	function specific_income_expense_input()
 	{
-		$data = $this->_get_common_report_data();
-		
+		$data = $this->_get_common_report_data();		
 		$this->load->view("reports/date_input_income_expense",$data);
 	}
 
-	function detailed_income($start_date, $end_date, $export_excel=0)
+	function specific_income_input()
 	{
+		$data = array();
+		$data = $this->_get_common_report_data();
+		$data['bound_type'] = $this->Income->get_bound_income_type();		
+		$this->load->view("reports/date_input_income",$data);
+	}
+
+		function specific_expense_input()
+	{
+		$data = array();
+		$data = $this->_get_common_report_data();
+		$data['bound_type'] = $this->Expense->get_bound_expense_type();		
+		$this->load->view("reports/date_input_expense",$data);
+	}
+
+	function detailed_income($start_date, $end_date,$type="all", $export_excel=0)
+	{
+		
 		$this->load->model('reports/Detailed_incomes');
 		$model = $this->Detailed_incomes;
-		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date));
+		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date,'income_type'=>rawurldecode($type)));
 
-		$this->Income->create_income_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date));
+		$this->Income->create_income_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date,'income_type'=>rawurldecode($type)));
 		
 		$headers = $model->getDataColumns();
 		
@@ -1315,8 +1332,9 @@ class Reports extends Secure_area
 			foreach($report_data['details'] as $key => $drow)
 			{
 				$details_data[$key] = array(
-					array('data'=>$drow['payment_id'], 'align'=> 'left'), 
+					array('data'=>$drow['payment_id'], 'align'=> 'left'), 					
 					array('data'=>$drow['income_date'], 'align'=> 'left'),
+					array('data'=>$drow['income_type'], 'align'=> 'left'), 
 					array('data'=>$drow['income_title'], 'align'=> 'left'),
 					array('data'=>$drow['type_money'], 'align'=> 'right'), 
 					array('data'=>$drow['check_paper'], 'align'=> 'left'),
@@ -1336,16 +1354,13 @@ class Reports extends Secure_area
 		$this->load->view("reports/tabular_income_expense",$data);
 	}
 
-
-	function detailed_expense($start_date, $end_date, $export_excel=0)
+	function detailed_expense($start_date, $end_date, $type="all", $export_excel=0)
 	{
 		$this->load->model('reports/Detailed_expenses');
 		$model = $this->Detailed_expenses;
-		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date));
+		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date,'expense_type'=>rawurldecode($type)));
 
-		$this->Expense->create_expense_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date));
-		
-		
+		$this->Expense->create_expense_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date,'expense_type'=>rawurldecode($type)));
 		
 		$report_data = $model->getData();
 
@@ -1357,6 +1372,7 @@ class Reports extends Secure_area
 				$details_data[$key] = array(
 					array('data'=>$drow['payment_id'], 'align'=> 'left'), 
 					array('data'=>$drow['expense_date'], 'align'=> 'left'),
+					array('data'=>$drow['expense_type'], 'align'=> 'left'),
 					array('data'=>$drow['expense_title'], 'align'=> 'left'),
 					array('data'=>$drow['type_money'], 'align'=> 'right'), 
 					array('data'=>$drow['check_paper'], 'align'=> 'left'),
@@ -1376,15 +1392,15 @@ class Reports extends Secure_area
 		$this->load->view("reports/tabular_income_expense",$data);
 	}
 
-	function summary_income_expense($start_date, $end_date, $export_excel=0)
+	function summary_income_expense($start_date, $end_date, $type="all", $export_excel=0)
 	{
 		$this->load->model('reports/Detailed_income_expense');
 		$model = $this->Detailed_income_expense;
 		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date));
 
-		$this->Income->create_income_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date));
+		$this->Income->create_income_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date,'income_type'=>$type));
 		
-		$this->Expense->create_expense_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date));
+		$this->Expense->create_expense_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date,'expense_type'=>$type));
 		
 		$report_data = $model->getData();
 	
@@ -1395,6 +1411,7 @@ class Reports extends Secure_area
 				$details_data_income[$key] = array(					
 					array('data'=>$drow['payment_id'], 'align'=> 'left'), 
 					array('data'=>$drow['income_date'], 'align'=> 'left'),
+					array('data'=>$drow['income_type'], 'align'=> 'left'),
 					array('data'=>$drow['income_title'], 'align'=> 'left'),
 					array('data'=>$drow['type_money'], 'align'=> 'right'), 
 					array('data'=>$drow['check_paper'], 'align'=> 'left'),
@@ -1409,6 +1426,7 @@ class Reports extends Secure_area
 				$details_data_expense[$key] = array(
 					array('data'=>$drow['payment_id'], 'align'=> 'left'), 
 					array('data'=>$drow['expense_date'], 'align'=> 'left'),
+					array('data'=>$drow['expense_type'], 'align'=> 'left'),
 					array('data'=>$drow['expense_title'], 'align'=> 'left'),
 					array('data'=>$drow['type_money'], 'align'=> 'right'), 
 					array('data'=>$drow['check_paper'], 'align'=> 'left'),

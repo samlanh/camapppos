@@ -55,6 +55,7 @@ class Expenses extends Secure_area {
 	}
 
 
+
 	function sorting()
 	{
 
@@ -84,7 +85,8 @@ class Expenses extends Secure_area {
 		$this->load->helper('report');
 		$rows = array();
 		$row = array(lang('expense_payment_id'),
-		 lang('expense_date'),		
+		 lang('expense_date'),	
+		 lang('expense_type'),	
 		 lang('expense_title'),
 		 lang('expense_check_paper'),
 		 lang('expense_type_money'),
@@ -125,6 +127,12 @@ class Expenses extends Secure_area {
 		$data['pagination'] = $this->pagination->create_links();
 		$data['manage_table']=get_expense_manage_table_data_rows($search_data,$this);
 		echo json_encode(array('manage_table' => $data['manage_table'], 'pagination' => $data['pagination']));
+	}
+
+	public function select_expense_type()
+	{
+		$suggestions = $this->Expense->get_expense_type($this->input->get('term'),100);
+		echo json_encode($suggestions);
 	}
 
 	/*
@@ -182,6 +190,7 @@ class Expenses extends Secure_area {
 		$this->check_action_permission('add_update');		
 		$data = array(		
 		'expense_date'=>$this->input->post('expense_date'),	
+		'expense_type'=>$this->input->post('expense_type'),	
 		'expense_title'=>$this->input->post('expense_title'),
 		'check_paper'=>$this->input->post('check_paper'),		
 		'type_money'=>$this->input->post('type_money'),
@@ -235,7 +244,7 @@ class Expenses extends Secure_area {
 		}
 		else
 		{
-			echo json_encode(array('success'=>false,'message'=>lang('expense_cannot_be_deleted')));
+		echo json_encode(array('success'=>false,'message'=>lang('expense_cannot_be_deleted')));
 		}
 	}
 	

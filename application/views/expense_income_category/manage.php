@@ -2,7 +2,7 @@
 <script type="text/javascript">
 $(document).ready(function()
 {
-	var table_columns = ["","payment_id","expense_date",'expense_type','expense_title','',''];
+	var table_columns = ["","reil",'dollar','date',''];
 	enable_sorting("<?php echo site_url("$controller_name/sorting"); ?>",table_columns, <?php echo $per_page; ?>);
     enable_select_all();
     enable_checkboxes();
@@ -13,8 +13,9 @@ $(document).ready(function()
 
 });
 
-function post_expense_form_submit(response)
+function post_exchange_form_submit(response)
 {
+
 
 	if(!response.success)
 	{
@@ -93,8 +94,9 @@ function post_expense_form_submit(response)
 						
 					</div>
             </div>
-	  </div>
-	  
+			</div>
+
+
 	<div class="col-xs-10" style="padding-right: 5px; padding-left: 5px;">
 				<div class="panel panel-default">
 			<div class="panel-heading clearfix">

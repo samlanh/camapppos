@@ -117,6 +117,53 @@ class Expense extends CI_Model
  	/*
 	Get search suggestions to find kits
 	*/
+
+	function get_expense_type($search,$limit=50)
+	{
+
+		$suggestions = array();
+		$this->db->from('expense');
+		$this->db->like('expense_type', $search);
+		$this->db->where('deleted',0);
+		$this->db->group_by('expense_type');
+		$this->db->order_by("id", "DESC");
+		$expense_type = $this->db->get();
+		foreach($expense_type->result() as $row)
+		{
+			$suggestions[]=array('label' => $row->expense_type);
+		}
+
+		//only return $limit suggestions
+		if(count($suggestions > $limit))
+		{
+			$suggestions = array_slice($suggestions, 0,$limit);
+		}
+		return $suggestions;
+
+	}
+
+
+	function get_bound_expense_type()
+	{
+
+		$suggestions = array();
+		$this->db->select('expense_type');
+		$this->db->from('expense');
+		$this->db->where('deleted',0);
+		$this->db->group_by('expense_type');
+		$this->db->order_by("id", "DESC");
+		$expense_type = $this->db->get();
+
+		$suggestions['all'] = 'All';
+		foreach($expense_type->result() as $row)
+		{
+			$suggestions[$row->expense_type]= $row->expense_type;
+		}
+
+		return $suggestions;
+		
+	}
+
 	function get_search_suggestions($search,$limit=25)
 	{
 		$suggestions = array();
@@ -227,7 +274,12 @@ class Expense extends CI_Model
 		
 		if (isset($params['start_date']) && isset($params['end_date']))
 		{
-			$where = 'WHERE expense_date BETWEEN "'.$params['start_date'].'" and "'.$params['end_date'].'"';
+			if($params['expense_type'] == 'all'){
+				$where = 'WHERE expense_date BETWEEN "'.$params['start_date'].'" and "'.$params['end_date'].'"';
+			}else{
+				$where = 'WHERE expense_date BETWEEN "'.$params['start_date'].'" and "'.$params['end_date'].'" and expense_type = "'.$params['expense_type'].'"';
+			}
+			
 		}
 		else
 		{
@@ -236,7 +288,7 @@ class Expense extends CI_Model
 		}
 		
 		$this->db->query("CREATE TEMPORARY TABLE ".$this->db->dbprefix('expense_temp')."
-		(SELECT deleted, date(expense_date) as expense_date, expense_title, check_paper, type_money, payment_id, total_expense, note FROM ".$this->db->dbprefix('expense')."
+		(SELECT deleted, date(expense_date) as expense_date, expense_type, expense_title, check_paper, type_money, payment_id, total_expense, note FROM ".$this->db->dbprefix('expense')."
 		$where
 		)");
 	}

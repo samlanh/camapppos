@@ -12,6 +12,7 @@ class Detailed_expenses extends Report
 		return  array(
 			array('data'=>lang('expense_payment_id'), 'align'=>'left'),
 			array('data'=>lang('expense_date'), 'align'=>'left'),
+			array('data'=>lang('expense_type'), 'align'=>'left'),
 			array('data'=>lang('expense_title'), 'align'=>'left'),
 			array('data'=>lang('expense_type_money'), 'align'=>'left'), 
 			array('data'=>lang('expense_check'), 'align'=>'left'), 
@@ -21,7 +22,7 @@ class Detailed_expenses extends Report
 	
 	public function getData()
 	{
-		$this->db->select('expense_date, expense_title,check_paper,type_money,payment_id,total_expense, note');
+		$this->db->select('expense_date, expense_type,expense_title,check_paper,type_money,payment_id,total_expense, note');
 		$this->db->from('expense_temp');
 
 		$this->db->where('deleted', 0);		

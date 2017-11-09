@@ -43,6 +43,51 @@ class Income extends CI_Model
 		return $query+1;
 	}
 
+	function get_income_type($search,$limit=50)
+	{
+
+		$suggestions = array();
+		$this->db->from('income');
+		$this->db->like('income_type', $search);
+		$this->db->where('deleted',0);
+		$this->db->group_by('income_type');
+		$this->db->order_by("id", "DESC");
+		$income_type = $this->db->get();
+		foreach($income_type->result() as $row)
+		{
+			$suggestions[]=array('label' => $row->income_type);
+		}
+
+		//only return $limit suggestions
+		if(count($suggestions > $limit))
+		{
+			$suggestions = array_slice($suggestions, 0,$limit);
+		}
+		return $suggestions;
+		
+	}
+
+	function get_bound_income_type()
+	{
+
+		$suggestions = array();
+		$this->db->select('income_type');
+		$this->db->from('income');
+		$this->db->where('deleted',0);
+		$this->db->group_by('income_type');
+		$this->db->order_by("id", "DESC");
+		$income_type = $this->db->get();
+
+		$suggestions['all'] = 'All';
+		foreach($income_type->result() as $row)
+		{
+			$suggestions[$row->income_type]= $row->income_type;
+		}
+
+		return $suggestions;
+		
+	}
+
 	/*
 	Gets information about a particular item kit
 	*/
@@ -226,7 +271,12 @@ class Income extends CI_Model
 		$where = '';		
 		if (isset($params['start_date']) && isset($params['end_date']))
 		{
-			$where = 'WHERE income_date BETWEEN "'.$params['start_date'].'" and "'.$params['end_date'].'"';
+			if($params['income_type'] == 'all'){
+				$where = 'WHERE income_date BETWEEN "'.$params['start_date'].'" and "'.$params['end_date'].'"';
+			}else{
+				$where = 'WHERE income_date BETWEEN "'.$params['start_date'].'" and "'.$params['end_date'].'" and income_type = "'.$params['income_type'].'"';
+			}
+			
 		}
 		else
 		{
@@ -235,7 +285,7 @@ class Income extends CI_Model
 		}
 		
 		$this->db->query("CREATE TEMPORARY TABLE ".$this->db->dbprefix('income_temp')."
-		(SELECT deleted, date(income_date) as income_date, income_title, check_paper, type_money, payment_id, total_income, note FROM ".$this->db->dbprefix('income')."
+		(SELECT deleted, date(income_date) as income_date,income_type, income_title, check_paper, type_money, payment_id, total_income, note FROM ".$this->db->dbprefix('income')."
 		$where
 		)");
 	}

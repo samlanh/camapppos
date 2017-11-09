@@ -17,6 +17,20 @@ echo form_open('expenses/save/'.$expense_info->id, array('id'=>'expense_form'));
 <div class="row">
 
 <div class="col-xs-6">
+		<div class="field_row clearfix">
+<?php echo form_label(lang('expense_type').' :', 'expense_type',array('class'=>'required wide')); ?>
+	<div class='form_field'>
+	<?php echo form_input(array(
+		'name'=>'expense_type',
+		'class'=>'form-control',
+		'id'=>'expense_type',
+		'value'=>$expense_info->expense_type)
+	);?>
+	</div>
+  </div>
+</div>
+
+<div class="col-xs-6">
 	 <div class="field_row clearfix">
 <?php echo form_label(lang('expense_payment_id').' :', 'payment_id',array('class'=>'required wide')); ?>
 	<div class='form_field'>
@@ -29,6 +43,7 @@ echo form_open('expenses/save/'.$expense_info->id, array('id'=>'expense_form'));
 	</div>
   </div>
 </div>
+
 
  <div class="col-xs-6">
 		<div class="field_row clearfix">
@@ -54,6 +69,10 @@ echo form_open('expenses/save/'.$expense_info->id, array('id'=>'expense_form'));
 </div>
 
 
+</div>
+<div class="row">
+
+
  <div class="col-xs-6">
   	<div class="field_row clearfix">
 <?php echo form_label(lang('expense_date').':', 'expense_date',array('class'=>'required wide')); ?>
@@ -67,9 +86,6 @@ echo form_open('expenses/save/'.$expense_info->id, array('id'=>'expense_form'));
   </div>       
  </div>
 </div>
-
-</div>
-<div class="row">
 
 <div class="col-xs-6">
    <div class="field_row clearfix">
@@ -145,7 +161,6 @@ $(document).ready(function()
      
     });
 
-
 	var submitting = false;
 
 	$('#expense_form').validate({
@@ -197,16 +212,16 @@ $(document).ready(function()
 	});
 
 
-	$("#customer_search").autocomplete({
-		source: '<?php echo site_url("expenses/customer_search"); ?>',
+
+	$("#expense_type").autocomplete({
+		source: '<?php echo site_url("expenses/select_expense_type"); ?>',
 		delay: 10,
 		autoFocus: false,
 		minLength: 0,
 		select: function(event, ui)
 		{	
-			$("#customer_selected").html(ui.item.label);
-			$("#customer_id").val(ui.item.value);
-			//$('#select_customer_form').ajaxSubmit({target: "#register_container", beforeSubmit: salesBeforeSubmit, success: salesSuccess});
+			$("#expense_type").val(ui.item.label);			
+			
 		}
 	});
 

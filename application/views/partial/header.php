@@ -151,6 +151,8 @@ if($this->Appconfig->get('company_logo') > 0){
 
 			'exchanges'=>'<i class="fa fa-dollar fa-2x" aria-hidden="true"></i><br>',
 
+			'expense_income_categories'=>'<i class="fa fa-list fa-2x" aria-hidden="true"></i><br>',
+
 			'incomes'=>'<i class="fa fa-money fa-2x" aria-hidden="true"></i><br>',
 
 			'expenses'=>'<i class="fa fa-money fa-2x" aria-hidden="true"></i><br>',

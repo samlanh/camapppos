@@ -16,6 +16,20 @@ echo form_open('incomes/save/'.$income_info->id, array('id'=>'income_form'));
 
 <div class="row">
 
+ <div class="col-xs-6">
+		<div class="field_row clearfix">
+<?php echo form_label(lang('income_type').' :', 'income_type',array('class'=>'required wide')); ?>
+	<div class='form_field'>
+	<?php echo form_input(array(
+		'name'=>'income_type',
+		'class'=>'form-control',
+		'id'=>'income_type',
+		'value'=>$income_info->income_type)
+	);?>
+	</div>
+  </div>
+</div>
+
 <div class="col-xs-6">
 	 <div class="field_row clearfix">
 <?php echo form_label(lang('income_payment_id').' :', 'payment_id',array('class'=>'required wide')); ?>
@@ -53,6 +67,9 @@ echo form_open('incomes/save/'.$income_info->id, array('id'=>'income_form'));
   </div>
 </div>
 
+</div>
+<div class="row">
+
  <div class="col-xs-6">
   	<div class="field_row clearfix">
 <?php echo form_label(lang('income_date').':', 'income_date',array('class'=>'required wide')); ?>
@@ -66,9 +83,6 @@ echo form_open('incomes/save/'.$income_info->id, array('id'=>'income_form'));
   </div>       
  </div>
 </div>
-
-</div>
-<div class="row">
 
 <div class="col-xs-6">
    <div class="field_row clearfix">
@@ -195,16 +209,14 @@ $(document).ready(function()
 	});
 
 
-	$("#customer_search").autocomplete({
-		source: '<?php echo site_url("incomes/customer_search"); ?>',
+	$("#income_type").autocomplete({
+		source: '<?php echo site_url("incomes/select_income_type"); ?>',
 		delay: 10,
 		autoFocus: false,
 		minLength: 0,
 		select: function(event, ui)
 		{	
-			$("#customer_selected").html(ui.item.label);
-			$("#customer_id").val(ui.item.value);
-			//$('#select_customer_form').ajaxSubmit({target: "#register_container", beforeSubmit: salesBeforeSubmit, success: salesSuccess});
+			$("#income_type").val(ui.item.label);			
 		}
 	});
 

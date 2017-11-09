@@ -538,7 +538,8 @@ function get_income_manage_table($income, $controller )
 	
 	$headers = array('<input type="checkbox" id="select_all" />',	
 	lang('income_payment_id'),
-	lang('income_date'),	
+	lang('income_date'),
+	lang('income_type'),	
 	lang('income_title'),
 	lang('income_total'),
 	'Action', 
@@ -600,8 +601,9 @@ function get_income_data_row($income, $controller)
 	$table_data_row.="<td width='3%'><input type='checkbox' id='income_$income->id' value='".$income->id."'/></td>";
 	$table_data_row.='<td width="10%">'.$income->payment_id.'</td>';	
 	$table_data_row.='<td width="10%">'.Date('d-M-Y',strtotime($income->income_date)).'</td>';
-	$table_data_row.='<td width="35%">'.$income->income_title.'</td>';
-	$table_data_row.='<td width="15%">'.to_currency($income->total_income).'</td>';
+	$table_data_row.='<td width="15%">'.$income->income_type.'</td>';
+	$table_data_row.='<td width="25%">'.$income->income_title.'</td>';
+	$table_data_row.='<td width="10%">'.to_currency($income->total_income).'</td>';
 	$table_data_row.='<td width="5%" class="rightmost">'.anchor($controller_name."/view/$income->id/width~$width", '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.lang('common_edit'),array('class'=>'thickbox btn btn-xs btn-primary text-center','title'=>lang($controller_name.'_update'))).'</td>';
 	$table_data_row.='</tr>';
 	return $table_data_row;
@@ -620,6 +622,7 @@ function get_expense_manage_table($expense, $controller )
 	$headers = array('<input type="checkbox" id="select_all" />',	
 	lang('expense_payment_id'),
 	lang('expense_date'),	
+	lang('expense_type'),
 	lang('expense_title'),
 	lang('expense_total'),
 	'Action', 
@@ -680,13 +683,86 @@ function get_expense_data_row($expense, $controller)
 	$table_data_row='<tr>';
 	$table_data_row.="<td width='3%'><input type='checkbox' id='expense_$expense->id' value='".$expense->id."'/></td>";
 	$table_data_row.='<td width="10%">'.$expense->payment_id.'</td>';	
-	$table_data_row.='<td width="10%">'.Date('d-M-Y',strtotime($expense->expense_date)).'</td>';	
-	$table_data_row.='<td width="35%">'.$expense->expense_title.'</td>';
-	$table_data_row.='<td width="15%">'.to_currency($expense->total_expense).'</td>';
+	$table_data_row.='<td width="10%">'.Date('d-M-Y',strtotime($expense->expense_date)).'</td>';
+	$table_data_row.='<td width="15%">'.$expense->expense_type.'</td>';
+	$table_data_row.='<td width="25%">'.$expense->expense_title.'</td>';
+	$table_data_row.='<td width="10%">'.to_currency($expense->total_expense).'</td>';
 	$table_data_row.='<td width="5%" class="rightmost">'.anchor($controller_name."/view/$expense->id/width~$width", '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.lang('common_edit'),array('class'=>'thickbox btn btn-xs btn-primary text-center','title'=>lang($controller_name.'_update'))).'</td>';
 	$table_data_row.='</tr>';
 	return $table_data_row;
 }
 
 
+
+
+function get_expense_income_categories_manage_table($expense_income_categories, $controller )
+{
+	$CI =& get_instance();
+	
+	$table='<table class="tablesorter table table-bordered" id="sortable_table">';
+	
+	$headers = array('<input type="checkbox" id="select_all" />',	
+	'Name',
+	'Action', 
+	);
+	
+	$table.='<thead><tr>';
+	$count = 0;
+	foreach($headers as $header)
+	{
+		$count++;
+		
+		if ($count == 1)
+		{
+			$table.="<th class='leftmost'>$header</th>";
+		}
+		elseif ($count == count($headers))
+		{
+			$table.="<th class='rightmost'>$header</th>";
+		}
+		else
+		{
+			$table.="<th>$header</th>";		
+		}
+	}
+	$table.='</tr></thead><tbody>';
+	$table.=get_expense_income_categories_manage_table_data_rows($expense_income_categories, $controller);
+	$table.='</tbody></table>';
+	return $table;
+}
+
+function get_expense_income_categories_manage_table_data_rows($expense_income_categories, $controller)
+{
+	$CI =& get_instance();
+	$table_data_rows='';
+	
+	foreach($expense_income_categories->result() as $dataRow)
+	{
+		$table_data_rows.=get_expense_income_categories_data_row($dataRow, $controller);
+	}
+	
+	if($expense_income_categories->num_rows()==0)
+	{
+		$table_data_rows.="<tr><td colspan='11'><div class='warning_message' style='padding:7px;'>".lang('expense_income_category_no_to_display')."</div></tr></tr>";
+	}
+	
+	return $table_data_rows;
+}
+
+
+function get_expense_income_categories_data_row($dataRow,$controller)
+{
+
+	$CI =& get_instance();
+	
+	$controller_name=strtolower(get_class($CI));
+	$width = $controller->get_form_width();
+
+	$table_data_row='<tr>';
+	$table_data_row.="<td width='3%'><input type='checkbox' id='categories_$dataRow->id' value='".$dataRow->id."'/></td>";
+	$table_data_row.='<td width="15%">'.$dataRow->name.'</td>';
+	$table_data_row.='<td width="5%" class="rightmost">'.anchor($controller_name."/view/$dataRow->id/width~$width", '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.lang('common_edit'),array('class'=>'thickbox btn btn-xs btn-primary text-center','title'=>lang($controller_name.'_update'))).'</td>';
+	$table_data_row.='</tr>';
+	return $table_data_row;
+}
 ?>

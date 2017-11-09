@@ -64,18 +64,18 @@ $route['reports/specific_customer'] = "reports/specific_customer_input";
 $route['reports/specific_employee'] = "reports/specific_employee_input";
 $route['reports/specific_supplier'] = "reports/specific_supplier_input";
 $route['reports/specific_supplier_store_accounts'] = "reports/specific_supplier_store_accounts_input";
+
 $route['reports/(deleted_sales)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4";
 $route['reports/(deleted_sales)'] = "reports/date_input_excel_export";
 
+$route['reports/detailed_income'] = "reports/specific_income_input";
+$route['reports/(detailed_income)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4";
 
-$route['reports/detailed_income'] = "reports/specific_income_expense_input";
-$route['reports/(detailed_income)/(:any)/(:any)'] = "reports/$1/$2/$3";
-
-$route['reports/detailed_expense'] = "reports/specific_income_expense_input";
-$route['reports/(detailed_expense)/(:any)/(:any)'] = "reports/$1/$2/$3";
+$route['reports/detailed_expense'] = "reports/specific_expense_input";
+$route['reports/(detailed_expense)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4";
 
 $route['reports/summary_income_expense'] = "reports/specific_income_expense_input";
-$route['reports/(summary_income_expense)/(:any)/(:any)'] = "reports/$1/$2/$3";
+$route['reports/(summary_income_expense)/(:any)/(:any)/(:any)'] = "reports//$1/$2/$3/$4";
 
 
 /* End of file routes.php */

@@ -13,6 +13,7 @@ class Detailed_income_expense extends Report
 		return  array(
 			array('data'=>lang('income_payment_id'), 'align'=>'left'),
 			array('data'=>lang('income_date'), 'align'=>'left'),
+			array('data'=>lang('income_type'), 'align'=>'left'),
 			array('data'=>lang('income_title'), 'align'=>'left'),
 			array('data'=>lang('income_type_money'), 'align'=>'left'), 
 			array('data'=>lang('income_check'), 'align'=>'left'), 
@@ -25,13 +26,13 @@ class Detailed_income_expense extends Report
 	{
 		$data = array();
 
-		$this->db->select('income_date, income_title,check_paper,type_money,payment_id,total_income,note');
+		$this->db->select('income_date, income_type,income_title,check_paper,type_money,payment_id,total_income,note');
 		$this->db->from('income_temp');
 		$this->db->where('deleted', 0);		
 		$this->db->order_by('income_date');		
 		$data['details_income'] = $this->db->get()->result_array();
 
-		$this->db->select('expense_date, expense_title,check_paper,type_money,payment_id,total_expense, note');
+		$this->db->select('expense_date, expense_type, expense_title,check_paper,type_money,payment_id,total_expense, note');
 		$this->db->from('expense_temp');
 		$this->db->where('deleted', 0);		
 		$this->db->order_by('expense_date');		
