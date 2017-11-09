@@ -9,7 +9,6 @@ class Item extends CI_Model
 		$this->db->from('items');
 		$this->db->where('item_id',$item_id);
 		$query = $this->db->get();
-
 		return ($query->num_rows()==1);
 	}
 

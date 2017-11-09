@@ -40,6 +40,9 @@ class Item_kits extends Secure_area implements iData_controller
 		$config['base_url'] = site_url('item_kits/sorting');
 		$config['total_rows'] = $this->Item_kit->count_all();
 		$config['per_page'] = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
+
+		$data['total_rows'] = $this->Item_kit->count_all();
+		
 		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
 		$data['pagination'] = $this->pagination->create_links();
 		$data['controller_name']=strtolower(get_class());

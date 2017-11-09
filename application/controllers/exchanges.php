@@ -42,6 +42,7 @@ class Exchanges extends Secure_area {
 		$config['base_url'] = site_url('exchanges/sorting');
 		$config['total_rows'] = $this->Exchange->count_all();
 		$config['per_page'] = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
+		$data['total_rows'] = $this->Exchange->count_all();
 		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
 		$data['pagination'] = $this->pagination->create_links();
 		$data['controller_name']=strtolower(get_class());

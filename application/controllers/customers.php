@@ -19,6 +19,7 @@ class Customers extends Person_controller
 		$config['total_rows'] = $this->Customer->count_all();
 		$config['per_page'] = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
 
+		$data['total_rows'] = $this->Customer->count_all();
 
 			$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
 			

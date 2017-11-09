@@ -41,6 +41,9 @@ class Suppliers extends Person_controller
 		$config['total_rows'] = $this->Supplier->count_all();
 		$config['per_page'] = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
 		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
+
+		$data['total_rows'] = $this->Supplier->count_all();
+		
 		$data['pagination'] = $this->pagination->create_links();
 		$data['controller_name']=strtolower(get_class());
 		$data['form_width']=$this->get_form_width();

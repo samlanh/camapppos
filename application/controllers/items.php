@@ -43,7 +43,7 @@ class Items extends Secure_area implements iData_controller
 		$config['base_url'] = site_url('items/sorting');
 		$config['total_rows'] = $this->Item->count_all();
 		$config['per_page'] = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
-		
+		$data['total_rows'] =  $this->Item->count_all();
 
 		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
 		$data['pagination'] = $this->pagination->create_links();
@@ -97,6 +97,7 @@ class Items extends Secure_area implements iData_controller
 		$config['per_page'] = $per_page ;
 		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));				
 		$data['pagination'] = $this->pagination->create_links();
+		
 		$data['manage_table']=get_items_manage_table_data_rows($search_data,$this);
 		echo json_encode(array('manage_table' => $data['manage_table'], 'pagination' => $data['pagination']));
 	}

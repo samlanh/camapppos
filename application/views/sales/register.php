@@ -241,17 +241,32 @@
 							<td class="left"><?php echo lang('sales_items_in_cart'); ?>:</td>
 							<td class="right"><?php echo $items_in_cart; ?></td>
 						</tr>
-						<?php foreach($payments as $payment) {?>
+						<?php
+						$total_giftcard_free = 0;
+
+						 foreach($payments as $payment) {
+
+							?>
 							<?php if (strpos($payment['payment_type'], lang('sales_giftcard'))!== FALSE) {?>
 						<tr>
-							<td class="left"><?php echo $payment['payment_type']. ' '.lang('sales_balance') ?>:</td>
-							<td class="right"><?php echo to_currency($this->Giftcard->get_giftcard_value(end(explode(':', $payment['payment_type']))) - $payment['payment_amount']);?></td>
-						</tr>
-							<?php }?>
-						<?php }?>
+							<td class="left"><?php echo $payment['payment_type'].' '.lang('sales_balance') ?>: </td>
+							<td class="right" style="white-space: nowrap;">
+							<?php echo to_currency($this->Giftcard->get_giftcard_value(end(explode(':', $payment['payment_type']))) - $payment['payment_amount']);	
+							?>
+							</td>
+						</tr>					
+							<?php
+							$total_giftcard_free +=  $payment['payment_amount'];
+							 }?>
+
+						<?php }
+				
+						?>
 						<tr>
+						<input type="hidden" name="total_giftcard_free" id="total_giftcard_free" value="<?= $total_giftcard_free < $subtotal? $total_giftcard_free : 0  ?>">
+
 							<td class="left"><?php echo lang('sales_sub_total'); ?>:</td>
-							<td class="right"><?php echo to_currency($subtotal); ?></td>
+							<td class="right" style="display: inline-table;"><?php echo to_currency($subtotal); ?></td>
 						</tr>
 						<?php foreach($taxes as $name=>$value) { ?>
 						<tr>
@@ -289,12 +304,10 @@
 							<?php echo to_currency($exchange_to_dollar).' = '.to_number_money_reil($exchange_to_reil); ?>
 							</td>
 						</tr>
-					</table>
-					
+					</table>					
 
 				</div>
 				
-
 
 				<?php
 				// Only show this part if there are Items already in the sale.
@@ -325,15 +338,23 @@
 								?>
 								<tr>
 								<td id="pt_delete"><?php echo anchor("sales/delete_payment/".rawurlencode($payment_id),'['.lang('common_delete').']', array('class' => 'delete_payment'));?></td>
-				
-				
+								
 								<td id="pt_type"><?php echo  $payment['payment_type']    ?> </td>
-								<td id="pt_amount"><?php echo  to_currency($payment['payment_amount'])  ?>  </td>
-				
+								<td id="pt_amount"><?php echo  to_currency($payment['payment_amount']);
+
+								
+								
+								?>  
+
+
+								</td>				
 				
 								</tr>
 								</form>
+
+
 								<?php
+
 								}
 								?>
 							</tbody>
@@ -365,7 +386,7 @@
 						
 								<tr id="mpt_bottom">
 									<td id="tender" colspan="2">
-									<label style="float: left;">Dollar</label>
+									<label style="float: left;" id="amount_tendered_text">Dollar</label>
 										<?php echo form_input(array('name'=>'amount_tendered','id'=>'amount_tendered','value'=>to_currency_no_money($amount_due),'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control'));	?>
 										<input type="hidden" id="amount_due_value" value="<?php echo $amount_due;?>">
 									</td>
@@ -415,7 +436,7 @@
 								<tr id="mpt_bottom">
 									<td id="tender" colspan="2">
 									<label style="float: left;font-size: 12px;">Exchange Reil</label>
-										<?php echo form_input(array('name'=>'exchange_sale_to_reil','id'=>'exchange_sale_to_reil','value'=>$receive_payment_sale=="0"? 0 : ($receive_payment_sale - $total)*$exchange_to_reil,'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control','readonly'=>true)); ?>
+										<?php echo form_input(array('name'=>'exchange_sale_to_reil','id'=>'exchange_sale_to_reil','value'=>$receive_payment_sale=="0"? 0 : ($receive_payment_sale - ($total - $total_giftcard_free))*$exchange_to_reil,'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control','readonly'=>true)); ?>
 									
 									</td>
 								</tr>
@@ -423,7 +444,7 @@
 								<tr id="mpt_bottom">
 									<td id="tender" colspan="2">
 									<label style="float: left; font-size: 12px;">Exchange Dollar</label>
-										<?php echo form_input(array('name'=>'exchange_sale_to_dollar','id'=>'exchange_sale_to_dollar','value'=>$receive_payment_sale=="0"?0 : $receive_payment_sale - $total,'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control','readonly'=>true)); ?>
+										<?php echo form_input(array('name'=>'exchange_sale_to_dollar','id'=>'exchange_sale_to_dollar','value'=>$receive_payment_sale=="0"?0 : $receive_payment_sale - ($total-$total_giftcard_free),'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control','readonly'=>true)); ?>
 									
 									</td>
 								</tr>
@@ -454,7 +475,7 @@
 		</div>
 				<div class="panel-footer ">
 						
-
+<?= var_dump($this->session->all_userdata()) ?>
 					</div>
                 </div>
 			</div>
@@ -501,15 +522,17 @@ if (isset($success))
 $(document).ready(function()
 {
 	$('#amount_tendered_reil_exchange').keydown(function () {
-		var amount_tendered_reil_exchange = $('#amount_tendered_reil_exchange').val();	
+		var amount_tendered_reil_exchange = $('#amount_tendered_reil_exchange').val();			
 		var exchange_reil = <?= $exchange_to_reil ?>;
-		var total_exchange_to_dollar = parseFloat(amount_tendered_reil_exchange).toFixed(2) / parseFloat(exchange_reil).toFixed(2);
+		var total_exchange_to_dollar = (parseFloat(amount_tendered_reil_exchange).toFixed(2) / parseFloat(exchange_reil).toFixed(2));
 		$('#amount_tendered_dollar_exchange').val(parseFloat(total_exchange_to_dollar).toFixed(2));
+		
 		exchange_sale_total();
 	})
 
 	$('#amount_tendered_dollar_exchange').keydown(function () {
-		var amount_tendered_dollar_exchange = $('#amount_tendered_dollar_exchange').val();	
+		var amount_tendered_dollar_exchange = $('#amount_tendered_dollar_exchange').val();
+	
 		var exchange_reil = <?= $exchange_to_reil ?>;
 		var total_exchange_to_riel = amount_tendered_dollar_exchange*exchange_reil;		
 		$('#amount_tendered_reil_exchange').val(parseFloat(total_exchange_to_riel).toFixed(2));	
@@ -517,14 +540,17 @@ $(document).ready(function()
 	})
 	
 	function exchange_sale_total(){
-
-		var total_sale = <?= $total ?>;
+		
+		var total_giftcard_free = $('#total_giftcard_free').val();
+		var total_sale = <?= $total ?> - total_giftcard_free;
 		var exchange_reil = <?= $exchange_to_reil ?>;
+
 		var amount_tendered_reil_exchange = $('#amount_tendered_reil_exchange').val();
 		var amount_tendered_dollar_exchange = $('#amount_tendered_dollar_exchange').val();
 
 		var exchange_sale_to_reil = amount_tendered_reil_exchange - (total_sale * exchange_reil);
 		$('#exchange_sale_to_reil').val(parseFloat(exchange_sale_to_reil).toFixed(2));	
+
 
 		var exchange_sale_to_dollar = amount_tendered_dollar_exchange - total_sale;
 		$('#exchange_sale_to_dollar').val(parseFloat(exchange_sale_to_dollar).toFixed(2));
@@ -655,9 +681,14 @@ $(document).ready(function()
 
 	$("#add_payment_button").click(function()
 	{
-		var mode =  $('#mode').val();
 
-		if(mode == 'sale'){
+		if($("#payment_types").val() == <?php echo json_encode(lang('sales_giftcard')); ?>){
+			$('#add_payment_form').ajaxSubmit({target: "#register_container", beforeSubmit: salesBeforeSubmit, success: salesSuccess});
+		}else{
+
+      var mode =  $('#mode').val();
+
+	  if(mode == 'sale'){
 
 		at = parseFloat($("#amount_tendered").val());
 		ad = parseFloat($("#amount_due_value").val());
@@ -685,6 +716,9 @@ $(document).ready(function()
 		}else{
 			console.log('something went wrong');
 		}
+
+		}
+			
 		
     });
 
@@ -735,12 +769,15 @@ function checkPaymentTypeGiftcard()
 	if ($("#payment_types").val() == <?php echo json_encode(lang('sales_giftcard')); ?>)
 	{
 		$("#amount_tendered_label").html(<?php echo json_encode(lang('sales_giftcard_number')); ?>);
+		$("#amount_tendered_text").html(<?php echo json_encode(lang('sales_giftcard_number')); ?>);
 		$("#amount_tendered").val('');
 		$("#amount_tendered").focus();
 	}
 	else
-	{
-		$("#amount_tendered_label").html(<?php echo json_encode(lang('sales_amount_tendered')); ?>);		
+	{	
+		$("#amount_tendered").val($('#amount_due_value').val());
+		$("#amount_tendered_label").html(<?php echo json_encode(lang('sales_amount_tendered')); ?>);
+		$("#amount_tendered_text").html("Amount USD");		
 	}
 }
 

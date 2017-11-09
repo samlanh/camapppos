@@ -100,6 +100,7 @@ function post_income_form_submit(response)
 				<div class="panel panel-default">
 			<div class="panel-heading clearfix">
 			<div class="col-xs-9">
+			<h5> Totals : <b class="text-primary"><?= $total_rows ?></b> </h5>
 			</div>
 
 			<div class="col-xs-3">

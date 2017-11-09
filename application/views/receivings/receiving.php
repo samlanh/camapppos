@@ -219,7 +219,7 @@ else
 
 		</div>
 				<div class="panel-footer ">
-						
+			<?= var_dump($this->session->all_userdata()) ?>	
 					</div>
                 </div>
 			</div>

@@ -108,8 +108,8 @@ function post_person_form_submit(response)
 				<div class="panel panel-default">
 			<div class="panel-heading clearfix">
 			<div class="col-xs-9">
+			<h5> Totals : <b class="text-primary"><?= $total_rows ?></b> </h5>
 			</div>
-
 
 			<div class="col-xs-3">
 			<?php echo form_open("$controller_name/search",array('id'=>'search_form','class'=>'form-horizontal pull-right')); ?>
