@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['sales_giftcard_number']='លេខសំគាល់ ប័ណ្ណបញ្ចុះតំលៃ';
 $lang['sales_giftcard']='ប័ណ្ណបញ្ចុះតំលៃ';
 $lang['sales_register']='Sales Register';

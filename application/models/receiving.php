@@ -46,6 +46,7 @@ class Receiving extends CI_Model
 
 		$this->db->insert('receivings',$receivings_data);
 		$receiving_id = $this->db->insert_id();
+		
 		if($payment_type === lang('sales_store_account')){
 			$amount = $this->input->post('amount_tendered');
 			$balance = $this->Supplier->get_current_balence($supplier_id);
@@ -75,14 +76,22 @@ class Receiving extends CI_Model
 				'serialnumber'=>$item['serialnumber'],
 				'quantity_purchased'=>$item['quantity'],
 				'discount_percent'=>$item['discount'],
+				//old price
 				'item_cost_price' => $cur_item_info->cost_price,
+				//new price
 				'item_unit_price'=>$item['price']
 			);
 
 			$this->db->insert('receivings_items',$receivings_items_data);
 
+			//method total new cost after discount : (new_qty * new_price) - ((new_qty * new_price * discount_percent)/100 )
+			$total_new_price = $item['quantity'] * $item['price'];
+			$total_new_price_after_discount = $total_new_price - (($total_new_price * $item['discount'])/100);
+			// average cost : ((old_cost * old_qty) + new_total_cost_after_discount) / (old_qty + new_qty)
+			$average_new_cost = (($cur_item_info->cost_price*$cur_item_info->quantity) + $total_new_price_after_discount) / ($cur_item_info->quantity + $item['quantity']); 
 			//Update stock quantity
-			$item_data = array('quantity'=>$cur_item_info->quantity + $item['quantity']);
+			$item_data = array('quantity'=>$cur_item_info->quantity + $item['quantity'],'cost_price'=>$average_new_cost);
+			
 			$this->Item->save($item_data,$item['item_id']);
 			
 			$qty_recv = $item['quantity'];
@@ -99,6 +108,8 @@ class Receiving extends CI_Model
 
 			$supplier = $this->Supplier->get_info($supplier_id);
 		}
+
+
 		$this->db->trans_complete();
 		
 		if ($this->db->trans_status() === FALSE)

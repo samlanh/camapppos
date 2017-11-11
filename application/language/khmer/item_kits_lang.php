@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['item_kits_name'] = 'ឈ្មោះមុខទំនិញនានារបស់ Kit';
 $lang['item_kits_description'] = 'បរិយាយអំពី Kitនិមួយៗ';
 $lang['item_kits_no_item_kits_to_display'] = 'មិនមាន kit ក្នុងការបង្ហាញទេ';

@@ -100,7 +100,7 @@ class Employees extends Person_controller
 			$rows[] = $row;
 		}
 		
-		$content = array_to_csv($rows);
+		$content = chr(239).chr(187).chr(191).array_to_csv($rows);
 		force_download('employees_export' . '.csv', $content);
 		exit;
 	}

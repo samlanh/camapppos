@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['receivings_register']='មុខទំនិញដែលទទួលចូល';
 $lang['receivings_mode']='Receiving Mode';
 $lang['receivings_receiving']='ទទួលទំនិញ';

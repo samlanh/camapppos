@@ -241,6 +241,7 @@ class Sale_lib
 		$insertkey=$maxkey+1;
 
         $today =  date('Y-m-d');
+        
         $price_to_use=( isset($this->CI->Item->get_info($item_id)->start_date) && isset($this->CI->Item->get_info($item_id)->end_date) && isset($this->CI->Item->get_info($item_id)->promo_price)  && ( $this->CI->Item->get_info($item_id)->start_date <= $today) && ($this->CI->Item->get_info($item_id)->end_date >= $today) ?  $this->CI->Item->get_info($item_id)->promo_price :  $this->CI->Item->get_info($item_id)->unit_price);
 
 		//array/cart records are identified by $insertkey and item_id is just another field.

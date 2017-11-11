@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+$lang['common.scan_barcode']='Scan Barcode នៅទីនេះ ....';
 $lang['common_common']='ទូទៅ';
 $lang['common_submit']='រក្សាទុក';
 $lang['common_or']='ឬក៏';
@@ -54,4 +55,9 @@ $lang['common_pay_title'] = 'បន្ថែមការបង់ប្រាក
 $lang['common_amount'] = 'ចំនួន';
 $lang['common_amount_required'] = 'សូមបំពេញចំនួនទឹកប្រាក់ដែល​បង់  និង បញ្ចូលបានតែលេខ';
 $lang['common_balance_to_pay'] = 'ចំនួនទឹកប្រាក់ដែល​បង់';
+
+$lang['common_total'] = 'សរុប';
+$lang['common_payment'] = 'បង់ប្រាក់';
+$lang['common_action'] = 'សកម្មភាព';
+
 ?>

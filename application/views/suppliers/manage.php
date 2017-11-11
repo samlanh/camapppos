@@ -80,11 +80,14 @@ function post_person_form_submit(response)
 				?>
 				</li>
 
-				<?php if ($this->Employee->has_module_action_permission($controller_name, 'delete', $this->Employee->get_logged_in_employee_info()->person_id)) {?>	
+				<!-- 	
 				<li>
 				<a class="email email_inactive" href="<?php echo current_url(). '#'; ?>" id="email"><i class="fa fa-envelope-o" aria-hidden="true"></i> <?php echo $this->lang->line("common_email");?></a>
 				</li>
-
+				-->
+				
+				<?php if ($this->Employee->has_module_action_permission($controller_name, 'delete', $this->Employee->get_logged_in_employee_info()->person_id)) {?>	
+			
 				<li>
 				<?php echo anchor("$controller_name/delete",'<i class="fa fa-trash-o" aria-hidden="true"></i> '.$this->lang->line("common_delete"),array('id'=>'delete', 'class'=>'delete_inactive')); ?>
 				</li>
@@ -105,7 +108,7 @@ function post_person_form_submit(response)
 				<div class="panel panel-default">
 			<div class="panel-heading clearfix">
 			<div class="col-xs-9">
-			<h5> Totals : <b class="text-primary"><?= $total_rows ?></b> </h5>
+			<h5> <?= lang('common_total') ?> : <b class="text-primary"><?= $total_rows ?></b> </h5>
 			</div>
 
 			<div class="col-xs-3">
@@ -142,4 +145,5 @@ function post_person_form_submit(response)
 	</div>
 
 <div id="feedback_bar"></div>
+<div id='TB_load'><img src='<?php echo base_url()?>images/loading_animation.gif'/></div>
 <?php $this->load->view("partial/footer"); ?>

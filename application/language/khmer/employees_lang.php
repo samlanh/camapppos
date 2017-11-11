@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['employees_employee']='និយោជិក';
 $lang['employees_new']='និយោជិកថ្មី';
 $lang['employees_update']='បន្ថែមពត៌មានថ្មីរបស់និយោជិក';

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['reports_reports'] = 'របាយការណ៍';
 $lang['reports_report'] = 'របាយការណ៍';
 $lang['reports_welcome_message'] = 'សូមស្វាគមន៍ការមកកាន់ផ្ទាំងបញ្ជារបាយការណ៍។  សូមជ្រើសរើសរបាយការណ៍ណាមួយដែលអ្នកចង់មើល។';

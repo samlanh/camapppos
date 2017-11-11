@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['customers_new']='អតិថិជនថ្មី';
 $lang['customers_customer']='អតិថិជន';
 $lang['customers_update']='បន្ថែមពត៌មានថ្មីរបស់អតិថិជន';

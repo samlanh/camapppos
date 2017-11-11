@@ -61,12 +61,14 @@ function post_person_form_submit(response)
 				}	
 				?>
 				</li>
+				<!--
 				 <li> 
 				<a class="email email_inactive" href="<?php echo current_url(). '#'; ?>" id="email"><i class="fa fa-envelope" aria-hidden="true"></i> <?php echo lang("common_email");?></a>		
 				</li>
+				-->
 				<li> 
 				<?php if ($controller_name =='customers') {?>
-				<?php echo anchor("$controller_name/excel_import/width~$form_width",'<i class="fa fa-download" aria-hidden="true"></i> '.
+				<?php echo anchor("$controller_name/excel_import/width~$form_width",'<i class="fa fa-upload" aria-hidden="true"></i> '.
 				lang('common_excel_import'),
 				array('class'=>'thickbox none import','title'=>lang('customers_import_customers_from_excel')));
 				} ?>
@@ -74,7 +76,7 @@ function post_person_form_submit(response)
 				<li> 
 				<?php
 				if ($controller_name == 'customers' || $controller_name == 'employees') {	
-					echo anchor("$controller_name/excel_export",'<i class="fa fa-upload" aria-hidden="true"></i> '.
+					echo anchor("$controller_name/excel_export",'<i class="fa fa-download" aria-hidden="true"></i> '.
 					lang('common_excel_export'),
 					array('class'=>'none import'));
 				}
@@ -108,7 +110,7 @@ function post_person_form_submit(response)
 				<div class="panel panel-default">
 			<div class="panel-heading clearfix">
 			<div class="col-xs-9">
-			<h5> Totals : <b class="text-primary"><?= $total_rows ?></b> </h5>
+			<h5> <?= lang('common_total') ?> : <b class="text-primary"><?= $total_rows ?></b> </h5>
 			</div>
 
 			<div class="col-xs-3">
@@ -148,4 +150,5 @@ function post_person_form_submit(response)
 
 
 <div id="feedback_bar"></div>
+<div id='TB_load'><img src='<?php echo base_url()?>images/loading_animation.gif'/></div>
 <?php $this->load->view("partial/footer"); ?>

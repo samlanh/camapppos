@@ -110,7 +110,7 @@ class Expenses extends Secure_area {
 			$rows[] = $row;		
 		}
 		
-		$content = array_to_csv($rows);
+		$content = chr(239).chr(187).chr(191).array_to_csv($rows);
 		force_download('expense_export' . '.csv', $content);
 		exit;
 	}

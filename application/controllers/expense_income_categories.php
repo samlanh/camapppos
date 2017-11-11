@@ -3,13 +3,12 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once ("secure_area.php");
 
-class Exchanges extends Secure_area {
+class Expense_income_categories extends Secure_area {
 
 	function __construct()
 	{
 		// add exchanges module permission
-		parent::__construct('exchanges');
-		
+		parent::__construct('expense_income_categories');		
 	}
 
 	public function configPagination($base_url,$total_rows,$per_page)
@@ -39,17 +38,17 @@ class Exchanges extends Secure_area {
 	function index()
 	{
 		
-		$config['base_url'] = site_url('exchanges/sorting');
-		$config['total_rows'] = $this->Exchange->count_all();
+		$config['base_url'] = site_url('expense_income_categories/sorting');
+		$config['total_rows'] = $this->Expense_income_category->count_all();
 		$config['per_page'] = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
-		$data['total_rows'] = $this->Exchange->count_all();
+		$data['total_rows'] = $this->Expense_income_category->count_all();
 		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
 		$data['pagination'] = $this->pagination->create_links();
 		$data['controller_name']=strtolower(get_class());
 		$data['form_width']=$this->get_form_width();
 		$data['per_page'] = $config['per_page'];
-		$data['manage_table']=get_exchange_rate_manage_table($this->Exchange->get_all($data['per_page']),$this);
-		$this->load->view('exchange/manage',$data);
+		$data['manage_table']=get_expense_income_categories_manage_table($this->Expense_income_category->get_all($data['per_page']),$this);
+		$this->load->view('expense_income_category/manage',$data);
 
 	}
 
@@ -61,44 +60,41 @@ class Exchanges extends Secure_area {
 		$per_page=$this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20;
 		if ($search)
 		{
-			$config['total_rows'] = $this->Exchange->search_count_all($search);
-			$table_data = $this->Exchange->search($search,$per_page,$this->input->post('offset') ? $this->input->post('offset') : 0, $this->input->post('order_col') ? $this->input->post('order_col') : 'name' ,$this->input->post('order_dir') ? $this->input->post('order_dir'): 'asc');
+			$config['total_rows'] = $this->Expense_income_category->search_count_all($search);
+			$table_data = $this->Expense_income_category->search($search,$per_page,$this->input->post('offset') ? $this->input->post('offset') : 0, $this->input->post('order_col') ? $this->input->post('order_col') : 'name' ,$this->input->post('order_dir') ? $this->input->post('order_dir'): 'asc');
 		}
 		else
 		{
-			$config['total_rows'] = $this->Exchange->count_all();
-			$table_data = $this->Exchange->get_all($per_page,$this->input->post('offset') ? $this->input->post('offset') : 0, $this->input->post('order_col') ? $this->input->post('order_col') : 'name' ,$this->input->post('order_dir') ? $this->input->post('order_dir'): 'asc');
+			$config['total_rows'] = $this->Expense_income_category->count_all();
+			$table_data = $this->Expense_income_category->get_all($per_page,$this->input->post('offset') ? $this->input->post('offset') : 0, $this->input->post('order_col') ? $this->input->post('order_col') : 'name' ,$this->input->post('order_dir') ? $this->input->post('order_dir'): 'asc');
 		}
 		$config['base_url'] = site_url('item_kits/sorting');
 		$config['per_page'] = $per_page; 
 		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
 		$data['pagination'] = $this->pagination->create_links();
-		$data['manage_table']=get_exchange_rate_manage_table_data_rows($table_data,$this);
+		$data['manage_table']=get_expense_income_categories_manage_table_data_rows($table_data,$this);
 		echo json_encode(array('manage_table' => $data['manage_table'], 'pagination' => $data['pagination']));	
 	}
 	
 	/* added for excel expert */
 	function excel_export() {
-		$data = $this->Exchange->get_all()->result_object();
+		$data = $this->Expense_income_category->get_all()->result_object();
 		$this->load->helper('report');
 		$rows = array();
-		$row = array("Dollar", "Reil", "Date");
+		$row = array("Name");
 		$rows[] = $row;
 		
 		foreach ($data as $r) {
 			
 			$row = array(
-				$r->dollar,
-				$r->reil,
-				Date('d-M-Y',strtotime($r->date)),
-				
+				$r->name,					
 			);
 			
 			$rows[] = $row;		
 		}
 		
 		$content = chr(239).chr(187).chr(191).array_to_csv($rows);
-		force_download('exchange_rate_export' . '.csv', $content);
+		force_download('expense_income_export' . '.csv', $content);
 		exit;
 	}
 
@@ -107,13 +103,13 @@ class Exchanges extends Secure_area {
 	
 		$search=$this->input->post('search');
 		$per_page=$this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20;
-		$search_data=$this->Exchange->search($search,$per_page,$this->input->post('offset') ? $this->input->post('offset') : 0, $this->input->post('order_col') ? $this->input->post('order_col') : 'id' ,$this->input->post('order_dir') ? $this->input->post('order_dir'): 'DESC');
-		$config['base_url'] = site_url('exchange/search');
-		$config['total_rows'] = $this->Exchange->search_count_all($search);
+		$search_data=$this->Expense_income_category->search($search,$per_page,$this->input->post('offset') ? $this->input->post('offset') : 0, $this->input->post('order_col') ? $this->input->post('order_col') : 'id' ,$this->input->post('order_dir') ? $this->input->post('order_dir'): 'DESC');
+		$config['base_url'] = site_url('expense_income_categories/search');
+		$config['total_rows'] = $this->Expense_income_category->search_count_all($search);
 		$config['per_page'] = $per_page ;
 		$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));				
 		$data['pagination'] = $this->pagination->create_links();
-		$data['manage_table']=get_exchange_rate_manage_table_data_rows($search_data,$this);
+		$data['manage_table']=get_expense_income_categories_manage_table_data_rows($search_data,$this);
 		echo json_encode(array('manage_table' => $data['manage_table'], 'pagination' => $data['pagination']));
 	}
 
@@ -122,79 +118,60 @@ class Exchanges extends Secure_area {
 	*/
 	function suggest()
 	{
-		$suggestions = $this->Exchange->get_search_suggestions($this->input->get('term'),100);
+		$suggestions = $this->Expense_income_category->get_search_suggestions($this->input->get('term'),100);
 		echo json_encode($suggestions);
 	}
 
 	function get_row()
 	{
-		$exchange_id = $this->input->post('row_id');
-		$data_row=get_exchange_rate_data_row($this->Exchange->get_info($exchange_id),$this);
+		$id = $this->input->post('row_id');
+		$data_row=get_expense_income_categories_data_row($this->Expense_income_category->get_info($id),$this);
 		echo $data_row;
 	}
 
-	function view($exchange_id=-1)
+	function view($id=-1)
 	{
 
 		$this->check_action_permission('add_update');	
 
 		$this->load->helper('report');
 
-        $data = array();
-        $data['months'] = get_months();
-        $data['days'] = get_days();
-        $data['years'] = get_years();
+		$data['expense_income_category_info']=$this->Expense_income_category->get_info($id);	
 
-		$data['exchange_info']=$this->Exchange->get_info($exchange_id);
-
-		 if($exchange_id==-1)
-        {
-        	$data['selected_year']=0;
-        	$data['selected_month']=0;
-        	$data['selected_day']=0;
-     
-        }
-        else
-        {
-        	list($data['selected_year'],$data['selected_month'],$data['selected_day'])=explode('-',$data['exchange_info']->date);        
- 		}
-
-		$this->load->view("exchange/form",$data);
+		$this->load->view("expense_income_category/form",$data);
 	}
 	
-	function save($exchange_id=-1)
+	function save($id=-1)
 	{
 		$this->check_action_permission('add_update');		
 		$data = array(
-		'reil'=>$this->input->post('reil'),
-		'dollar'=>$this->input->post('dollar'),		
-		'date'=>$this->input->post('date')
+		'name'=>$this->input->post('name'),
+		
 		);
 		
-		if($this->Exchange->save($data, $exchange_id))
+		if($this->Expense_income_category->save($data, $id))
 		{
 			//New Exchange
-			if($exchange_id==-1)
+			if($id==-1)
 			{
 				echo json_encode(array('success'=>true,'message'=>lang('exchange_successful_adding').' '.
-				$data['reil'],'id'=>$exchange_id));
-				$exchange_id = $exchange_id;
+				$data['name'],'id'=>$id));
+				$id = $id;
 			}
 			else //previous item
 			{
 				echo json_encode(array('success'=>true,'message'=>lang('exchange_successful_updating').' '.
-				$data['reil'], 'id' => $exchange_id));
+				$data['name'], 'id' => $id));
 			}
 		
 		}
 		else//failure
 		{
 			echo json_encode(array('success'=>false,'message'=>lang('exchange_error_adding_updating').' '.
-			$data['reil'],'id'=>-1));
+			$data['name'],'id'=>-1));
 		}
 
-	}
-	
+	}	
 
 	function delete()
 	{
@@ -202,18 +179,16 @@ class Exchanges extends Secure_area {
 
 		$exchange_to_delete=$this->input->post('ids');
 
-		if($this->Exchange->delete_list($exchange_to_delete))
+		if($this->Expense_income_category->delete_list($exchange_to_delete))
 		{
-			echo json_encode(array('success'=>true,'message'=>lang('exchange_rate_successful_deleted').' '.
-			count($exchange_to_delete).' '.lang('exchange_rate_one_or_multiple')));
+			echo json_encode(array('success'=>true,'message'=>lang('expense_income_categories_successful_deleted').' '.
+			count($exchange_to_delete).' '.lang('expense_income_categories_one_or_multiple')));
 		}
 		else
 		{
-			echo json_encode(array('success'=>false,'message'=>lang('exchange_rate_cannot_be_deleted')));
+			echo json_encode(array('success'=>false,'message'=>lang('expense_income_categories_cannot_be_deleted')));
 		}
 	}
-	
-	
 	
 	/*
 	get the width for the add/edit form

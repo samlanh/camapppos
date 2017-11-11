@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['suppliers_new']='អ្នកផ្គត់ផ្គង់ថ្មី';
 $lang['suppliers_supplier']='អ្នកផ្គត់ផ្គង់';
 $lang['suppliers_update']='បន្ថែមពត៌មានថ្មីរបស់អ្នកផ្គត់ផ្គង់';

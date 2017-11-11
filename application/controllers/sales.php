@@ -42,6 +42,7 @@ class Sales extends Secure_area
 			redirect(site_url('home'));
 			return;
 		}
+
 		$cash_register = $this->Sale->get_current_register_log();
 		$continueUrl = $this->input->get('continue');
 		if ($this->input->post('closing_amount') != '') {
@@ -178,7 +179,7 @@ class Sales extends Secure_area
 		$data=array();
 		$mode = $this->sale_lib->get_mode();
 		$item_id_or_number_or_item_kit_or_receipt = $this->input->post("item");
-		$quantity = $mode=="sale" ? 1:-1;
+		$quantity = $mode == "sale" ? 1:-1;
 
 		if($this->sale_lib->is_valid_receipt($item_id_or_number_or_item_kit_or_receipt) && $mode=='return')
 		{

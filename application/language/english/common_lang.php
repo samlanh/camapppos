@@ -1,4 +1,5 @@
 <?php
+$lang['common.scan_barcode']='Scan Barcode Here ....';
 $lang['common_common']='common';
 $lang['common_submit']='Submit';
 $lang['common_or']='OR';
@@ -54,4 +55,7 @@ $lang['common_pay_title'] = 'Add your payments to supplier';
 $lang['common_amount'] = 'Amount';
 $lang['common_amount_required'] = 'Amount is a required field and number only';
 $lang['common_balance_to_pay'] = 'Balance to pay';
+$lang['common_total'] = 'Totals';
+$lang['common_payment'] = 'Payment';
+$lang['common_action'] = 'Action';
 ?>

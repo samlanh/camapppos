@@ -26,7 +26,7 @@
 
  <div id="custom-search-input">
    <div class="input-group">            
-	<?php echo form_input(array('name'=>'item','id'=>'item','class'=>'form-control', 'size'=>'30'));?>
+	<?php echo form_input(array('name'=>'item','id'=>'item','class'=>'form-control', 'size'=>'30','style'=>'border: 1px solid;','placeholder'=>lang('common.scan_barcode')));?>
 	 <span class="input-group-btn">
                         <button class="btn btn-info" type="button">
                             <i class="glyphicon glyphicon-search"></i>
@@ -218,9 +218,7 @@ else
 		</div>
 
 		</div>
-				<div class="panel-footer ">
-	
-
+				<div class="panel-footer ">	
 	
 					</div>
                 </div>

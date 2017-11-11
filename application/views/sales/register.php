@@ -43,7 +43,7 @@
 	 <div class="col-xs-9" style="padding-left: 0px; padding-right: 0px;">
    <div id="custom-search-input">
         <div class="input-group"> 
-					<?php echo form_input(array('name'=>'item','id'=>'item','size'=>'40','class'=>'form-control', 'accesskey' => 'i'));?>
+					<?php echo form_input(array('name'=>'item','id'=>'item','size'=>'40','class'=>'form-control', 'accesskey' => 'i','style'=>'border: 1px solid;','placeholder'=>lang('common.scan_barcode')));?>
 				 <span class="input-group-btn">
                         <button class="btn btn-info" type="button">
                             <i class="glyphicon glyphicon-search"></i>
@@ -489,16 +489,6 @@
 
 <script type="text/javascript">
 
- // Fix chrome's ignore on autocomplete=off
- /*   $('input[autocomplete=off]').each(function(){
-        var copy = $(this).clone();
-        copy.val('');
-        copy.removeAttr('autocomplete');
-        copy.insertAfter($(this));
-        $(this).hide().removeAttr('required id class');
-    }); */
-
-
 <?php
 if(isset($error))
 {
@@ -634,8 +624,6 @@ $(document).ready(function()
 		$.post('<?php echo site_url("sales/set_receive_payment_sale");?>', {receive_payment_sale: $('#amount_tendered_dollar_exchange').val()});
 	});
 
-
-
     $('#customer').blur(function()
     {
     	$(this).attr('value',<?php echo json_encode(lang('sales_start_typing_customer_name')); ?>);
@@ -765,6 +753,7 @@ function post_person_form_submit(response)
 
 function checkPaymentTypeGiftcard()
 {
+
 	if ($("#payment_types").val() == <?php echo json_encode(lang('sales_giftcard')); ?>)
 	{
 		$("#amount_tendered_label").html(<?php echo json_encode(lang('sales_giftcard_number')); ?>);

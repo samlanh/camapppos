@@ -86,7 +86,7 @@ public function configPagination($base_url,$total_rows,$per_page)
 			$rows[] = $row;
 		}
 		
-		$content = array_to_csv($rows);
+		$content = chr(239).chr(187).chr(191).array_to_csv($rows);
 		force_download('giftcards_export' . '.csv', $content);
 		exit;
 	}

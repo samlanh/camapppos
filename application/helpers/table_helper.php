@@ -12,7 +12,7 @@ function get_people_manage_table($people,$controller)
 	lang('common_last_name'),
 	lang('common_email'),
 	lang('common_phone_number'),
-	'Action');
+	lang('common_action'));
 	$table.='<thead><tr>';
 
 	$count = 0;
@@ -97,8 +97,8 @@ function get_supplier_manage_table($suppliers,$controller)
 	lang('common_email'),
 	lang('common_phone_number'),
 	lang('common_amount'),
-	'Payment',
-	'Action');
+	lang('common_payment'),
+	lang('common_action'));
 	$table.='<thead><tr>';
 
 	$count = 0;
@@ -192,7 +192,7 @@ function get_items_manage_table($items,$controller)
 	$CI->lang->line('items_tax_percents'),
 	$CI->lang->line('items_quantity'),
 	$CI->lang->line('items_inventory'),
-	'Action'
+	lang('common_action')
 	));
 	
 	$table.='<thead><tr>';
@@ -287,7 +287,7 @@ function get_giftcards_manage_table( $giftcards, $controller )
 	lang('giftcards_giftcard_number'),
 	lang('giftcards_card_value'),
 	lang('giftcards_customer_name'),
-	'Action', 
+	lang('common_action'), 
 	);
 	
 	$table.='<thead><tr>';
@@ -371,7 +371,7 @@ function get_exchange_rate_manage_table($exchange_rate, $controller )
 	lang('exchange_dollar'),
 	lang('exchange_reil'),
 	lang('exchange_date'),
-	'Action', 
+	lang('common_action'), 
 	);
 	
 	$table.='<thead><tr>';
@@ -448,7 +448,7 @@ function get_item_kits_manage_table( $item_kits, $controller )
 	lang('item_kits_description'),
 	lang('items_unit_price'),
 	lang('items_tax_percents'),
-	'Action', 
+	lang('common_action'), 
 	);
 	
 	$table.='<thead><tr>';
@@ -542,7 +542,7 @@ function get_income_manage_table($income, $controller )
 	lang('income_type'),	
 	lang('income_title'),
 	lang('income_total'),
-	'Action', 
+	lang('common_action'), 
 	);
 	
 	$table.='<thead><tr>';
@@ -625,7 +625,7 @@ function get_expense_manage_table($expense, $controller )
 	lang('expense_type'),
 	lang('expense_title'),
 	lang('expense_total'),
-	'Action', 
+	lang('common_action'), 
 	);
 	
 	$table.='<thead><tr>';
@@ -703,7 +703,7 @@ function get_expense_income_categories_manage_table($expense_income_categories, 
 	
 	$headers = array('<input type="checkbox" id="select_all" />',	
 	'Name',
-	'Action', 
+	lang('common_action'), 
 	);
 	
 	$table.='<thead><tr>';

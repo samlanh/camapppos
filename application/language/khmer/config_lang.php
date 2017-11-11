@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['config_info']='ពត៌មានទិន្នន័យដែលបានរក្សាទុក';
 $lang['config_company']='ឈ្មោះក្រុមហ៊ុន';
 $lang['config_address']='អាស័យដ្ឋានក្រុមហ៊ុន';

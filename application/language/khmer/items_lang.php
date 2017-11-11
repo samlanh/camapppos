@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['items_item_number']='លេខសម្ងាត់ទំនិញ UPC/EAN/ISBN';
 $lang['items_retrive_item_info']='បង្ហាញពត៌មានទំនិញ';
 $lang['items_description']='បរិយាយ';

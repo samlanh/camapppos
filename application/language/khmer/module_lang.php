@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['module_home']='ទំព័រដើម';
 
 $lang['module_customers']='អតិថិជន';
@@ -32,4 +32,18 @@ $lang['module_item_kits']='ទំនិញកញ្ចប់';
 $lang['module_item_kits_desc']='កត់ត្រាបន្ថែម បន្ថែមពត៌មាន លុប និងស្វែងរក Item Kits';
 
 $lang['module_dashboard']='ផ្ទាំងគ្រប់គ្រង';
+
+$lang['module_exchanges'] = 'អត្រា​ប្តូ​រ​ប្រាក់';
+$lang['module_exchanges_desc']=' បន្ថែម, ធ្វើបច្ចុប្បន្នភាព, លុបការផ្លាស់ប្តូរ';
+$lang['module_action_search_exchanges']='ស្វែងរកអត្រាប្តូរប្រាក់';
+
+$lang['module_incomes'] = 'ចំណូល';
+$lang['module_incomes_desc']='បន្ថែម, ធ្វើបច្ចុប្បន្នភាព, លុបប្រាក់ចំណូល';
+
+$lang['module_expenses'] = 'ចំណាយ';
+$lang['module_expenses_desc']='បន្ថែម, ធ្វើបច្ចុប្បន្នភាព, លុបចំណាយ';
+
+$lang['module_expense_income_categories'] = 'ប្រភេទចំណូល';
+$lang['module_expense_income_categories_desc'] = 'បន្ថែម, ធ្វើឱ្យទាន់សម័យ, លុបប្រភេទ';
+
 ?>

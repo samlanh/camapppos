@@ -153,6 +153,8 @@ function &DB($params = '', $active_record_override = NULL)
 		$DB->query('SET SESSION sql_mode="STRICT_ALL_TABLES"');
 	}
 
+	$DB->simple_query('SET NAMES \'utf8\''); //just add this line here, and that is all I have to do?
+
 	return $DB;
 }
 

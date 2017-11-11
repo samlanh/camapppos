@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['giftcards_giftcard_number']='លេខសំគាល់Giftcard';
 $lang['giftcards_card_value']='តម្លៃ';
 $lang['giftcards_basic_information']='ពត៌មានអំពីGiftcard';

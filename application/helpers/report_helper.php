@@ -103,7 +103,8 @@ function arr_to_csv_line($arr) {
 	}
 	return implode(",", $line);
 }
-function array_to_csv($arr) {
+
+function array_to_csv($arr) {	
 	$lines = array();
 	foreach ($arr as $v) {
 		$lines[] = arr_to_csv_line($v);

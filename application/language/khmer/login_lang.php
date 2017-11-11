@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['login_login']='ចុះឈ្មោះចូល';
 $lang['login_username']='ឈ្មោះអ្នក ប្រើបា្រស់';
 $lang['login_password']='លេខសម្ងាត់';

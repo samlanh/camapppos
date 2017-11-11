@@ -254,7 +254,10 @@ class Items extends Secure_area implements iData_controller
 
 	function save($item_id=-1)
 	{
-		$this->check_action_permission('add_update');		
+		$this->check_action_permission('add_update');	
+
+
+
 		$item_data = array(
 		'name'=>$this->input->post('name'),
 		'description'=>$this->input->post('description'),
@@ -265,7 +268,7 @@ class Items extends Secure_area implements iData_controller
 		'unit_price'=>$this->input->post('unit_price'),
         //Alain Promo price start
         'promo_price'=>$this->input->post('promo_price') ? $this->input->post('promo_price') : 0.00,
-        'start_date'=>$this->input->post('hdn_start_date') ? $this->input->post('hdn_start_date') : '1969-01-01'   ,
+        'start_date'=>$this->input->post('hdn_start_date') ? $this->input->post('hdn_start_date') : '1969-01-01',
         'end_date'=>$this->input->post('hdn_end_date') ? $this->input->post('hdn_end_date') : '1969-01-01',
         //Alain Promo price end
 		'quantity'=>$this->input->post('quantity'),
@@ -276,9 +279,10 @@ class Items extends Secure_area implements iData_controller
 		'is_serialized'=>$this->input->post('is_serialized') ? $this->input->post('is_serialized') : 0
 		);
 
+	//	echo var_dump($item_data);
+
 		$employee_id=$this->Employee->get_logged_in_employee_info()->person_id;
 		$cur_item_info = $this->Item->get_info($item_id);
-
 
 		if($this->Item->save($item_data,$item_id))
 		{
@@ -436,6 +440,21 @@ class Items extends Secure_area implements iData_controller
 		force_download($name, $data);
 	}
 
+
+		public function ExportCSV(){
+		    $this->load->dbutil();
+		    $delimiter = ",";
+		    $newline = "\r\n";
+		    $slash = "∕";
+		    $filename = "item.csv";
+		    $query = "select * from phppos_items";
+		    $result = $this->db->query($query);
+		    $data = chr(239) . chr(187) . chr(191) .$this->dbutil->csv_from_result($result, $delimiter, $newline);               
+		    force_download($filename, $data);
+		}    
+
+
+
 	/* added for excel expert */
 	function excel_export() {
 		$data = $this->Item->get_all()->result_object();
@@ -487,7 +506,9 @@ class Items extends Secure_area implements iData_controller
 			$rows[] = $row;
 		}
 
-		$content = array_to_csv($rows);
+	
+		$content = chr(239).chr(187).chr(191).array_to_csv($rows);
+
 		force_download('items_export.csv', $content);
 		exit;
 	}

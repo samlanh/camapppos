@@ -100,7 +100,7 @@ function post_income_form_submit(response)
 				<div class="panel panel-default">
 			<div class="panel-heading clearfix">
 			<div class="col-xs-9">
-			<h5> Totals : <b class="text-primary"><?= $total_rows ?></b> </h5>
+			<h5> <?= lang('common_total') ?> : <b class="text-primary"><?= $total_rows ?></b> </h5>
 			</div>
 
 			<div class="col-xs-3">
@@ -137,4 +137,5 @@ function post_income_form_submit(response)
 	</div>
 
 <div id="feedback_bar"></div>
+<div id='TB_load'><img src='<?php echo base_url()?>images/loading_animation.gif'/></div>
 <?php $this->load->view("partial/footer"); ?>

@@ -201,7 +201,8 @@
 	<div class='form-group'>
 	<?php echo form_dropdown('language', array(
 		'english'  => 'English'
-		/** , 'khmer'    => 'Khmer' ,'indonesia'    => 'Indonesia',
+		 , 'khmer'    => 'Khmer' ,
+		 /*'indonesia'    => 'Indonesia',
 		'spanish'   => 'Spanish', 
 		'french'    => 'French' */),
 		$this->config->item('language'),'class="form-control"');
