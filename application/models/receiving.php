@@ -39,7 +39,6 @@ class Receiving extends CI_Model
 		'comment'=>$comment
 		);
 		
-		
 
 		//Run these queries as a transaction, we want to make sure we do all or nothing
 		$this->db->trans_start();
@@ -82,16 +81,38 @@ class Receiving extends CI_Model
 				'item_unit_price'=>$item['price']
 			);
 
-			$this->db->insert('receivings_items',$receivings_items_data);
+			$this->db->insert('receivings_items',$receivings_items_data);			
+
+		if($item['quantity']  > 0){
 
 			//method total new cost after discount : (new_qty * new_price) - ((new_qty * new_price * discount_percent)/100 )
 			$total_new_price = $item['quantity'] * $item['price'];
 			$total_new_price_after_discount = $total_new_price - (($total_new_price * $item['discount'])/100);
-			// average cost : ((old_cost * old_qty) + new_total_cost_after_discount) / (old_qty + new_qty)
-			$average_new_cost = (($cur_item_info->cost_price*$cur_item_info->quantity) + $total_new_price_after_discount) / ($cur_item_info->quantity + $item['quantity']); 
+
+				// average cost : ((old_cost * old_qty) + new_total_cost_after_discount) / (old_qty + new_qty)
+			$average_new_cost = (($cur_item_info->cost_price * $cur_item_info->quantity) + $total_new_price_after_discount) / ($cur_item_info->quantity + $item['quantity']);
+
+		}else{
+		
+		//method total new cost after discount : (new_qty * new_price) - ((new_qty * new_price * discount_percent)/100 )
+
+			// items qty is minus +
+			$total_new_price = $item['quantity'] * $item['price'];
+			// items qty is minus + 
+			$total_new_price_after_discount = $total_new_price - (($total_new_price * $item['discount'])/100);
+
+		// return method ((current_qty * current_cost) - (qty_return * cost_return)) / current_qty - qty_return 
+
+		// items qty is minus +
+		$qty_after_return = $cur_item_info->quantity + $item['quantity'];
+
+		$average_new_cost = (($cur_item_info->quantity * $cur_item_info->cost_price) + $total_new_price_after_discount) / $qty_after_return;
+
+		}
+			
 			//Update stock quantity
 			$item_data = array('quantity'=>$cur_item_info->quantity + $item['quantity'],'cost_price'=>$average_new_cost);
-			
+
 			$this->Item->save($item_data,$item['item_id']);
 			
 			$qty_recv = $item['quantity'];

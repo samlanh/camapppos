@@ -346,6 +346,7 @@
 	</div>
 </div>
 
+<!--
 <div class="col-xs-3">	
 <?php echo form_label(lang('config_mailchimp_api_key').':', 'mailchimp_api_key',array('class'=>'wide')); ?>
 	<div class='form-group'>
@@ -356,6 +357,7 @@
 		'value'=>$this->config->item('mailchimp_api_key')));?>
 	</div>
 </div>
+-->
 
 <div class="col-xs-3">	
 <?php echo form_label(lang('config_number_of_items_per_page').':', 'number_of_items_per_page',array('class'=>'wide required')); ?>
