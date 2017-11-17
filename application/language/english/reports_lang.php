@@ -127,5 +127,9 @@ $lang['reports_balance'] = 'Balance';
 
 $lang['reports_total_income'] = 'Total Income';
 $lang['reports_total_expense'] = 'Total Expense';
+$lang['reports_detailed_owed_report'] = 'Report Detail Payment Owed';
+$lang['reports_total_amount'] = 'Total Amount';
+$lang['reports_payment_amount'] = 'Paid Amount';
+$lang['reports_remain_balance'] = 'Remain Balance';
 
 ?>

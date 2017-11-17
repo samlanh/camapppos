@@ -157,6 +157,8 @@ if($this->Appconfig->get('company_logo') > 0){
 
 			'expenses'=>'<i class="fa fa-money fa-2x" aria-hidden="true"></i><br>',
 
+			'payoweds'=>'<i class="fa fa-dollar fa-2x" aria-hidden="true"></i><br>',
+
 			'config'=>'<i class="fa fa-cog fa-2x" aria-hidden="true"></i><br>'
 			);
 

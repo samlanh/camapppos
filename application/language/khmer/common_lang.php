@@ -59,5 +59,6 @@ $lang['common_balance_to_pay'] = 'ចំនួនទឹកប្រាក់ដ�
 $lang['common_total'] = 'សរុប';
 $lang['common_payment'] = 'បង់ប្រាក់';
 $lang['common_action'] = 'សកម្មភាព';
+$lang['common_income_expense']= 'ចំនូល​ ចំណាយ';
 
 ?>

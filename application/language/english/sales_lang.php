@@ -116,5 +116,6 @@ $lang['sales_store_account'] = "Store account";
 $lang['sales_total_to_dollar'] = "Total Dollar";
 $lang['sales_total_to_reil'] = "Total Reil";
 $lang['sales_exchange_rate'] = "Exchange​ Rate";
-
+$lang['sales_owed'] = "Owed";
+$lang['sales_payment_owed'] = "Pay Owed";
 ?>

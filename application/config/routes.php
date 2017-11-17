@@ -75,7 +75,14 @@ $route['reports/detailed_expense'] = "reports/specific_expense_input";
 $route['reports/(detailed_expense)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4";
 
 $route['reports/summary_income_expense'] = "reports/specific_income_expense_input";
-$route['reports/(summary_income_expense)/(:any)/(:any)/(:any)'] = "reports//$1/$2/$3/$4";
+$route['reports/(summary_income_expense)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4";
+
+$route['reports/detailed_payoweds'] = "reports/specific_payoweds_input";
+$route['reports/(detailed_payoweds)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4";
+
+$route['reports/payowed_summary'] = "reports/specific_payoweds_input";
+$route['reports/(payowed_summary)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4";
+
 
 
 /* End of file routes.php */

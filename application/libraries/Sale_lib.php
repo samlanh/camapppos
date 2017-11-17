@@ -185,7 +185,6 @@ class Sale_lib
 		return $this->CI->session->userdata('sale_mode');
 	}
 	
-
 	function set_mode($mode)
 	{
 		$this->CI->session->set_userdata('sale_mode',$mode);

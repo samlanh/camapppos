@@ -8,17 +8,14 @@ class Customers extends Person_controller
 		parent::__construct('customers');
 	}
 	
-	
 	function index()
 	{
 
 		$this->check_action_permission('search');
-
 		$config['base_url'] = site_url('customers/sorting');
-
 		$config['total_rows'] = $this->Customer->count_all();
 		$config['per_page'] = $this->config->item('number_of_items_per_page') ? (int)$this->config->item('number_of_items_per_page') : 20; 
-
+		
 		$data['total_rows'] = $this->Customer->count_all();
 
 			$this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
@@ -91,8 +88,8 @@ class Customers extends Person_controller
 	*/
 	function suggest()
 	{
-		$suggestions = $this->Customer->get_search_suggestions($this->input->get('term'),100);
-		echo json_encode($suggestions);
+	$suggestions = $this->Customer->get_search_suggestions($this->input->get('term'),100);
+	echo json_encode($suggestions);
 	}
 	
 	/*
@@ -315,10 +312,8 @@ public function configPagination($base_url,$total_rows,$per_page)
         return $config;
 
      //   $this->pagination->initialize($this->configPagination($config['base_url'],$config['total_rows'],$config['per_page']));
-
   }
 
- 
 }
 
 

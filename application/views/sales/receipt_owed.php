@@ -80,65 +80,35 @@ if (isset($error_message))
 	<td colspan="3" style='text-align:right;font-size:10px !important;'>Total Reil</td>
 	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_number_money_reil($total*$this->Exchange->select_last_exchange_rate_to_reil()); ?></td>
 	</tr>
-
     <tr><td colspan="6">&nbsp;</td></tr>
+	
+	<tr>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'>Total Payment : </td>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_currency($owed_info->total_amount); ?></td>
+	</tr>
 
-	<?php
-		foreach($payments as $payment_id=>$payment)
-	{ ?>
-		<tr>
-		<td colspan="2" style="text-align:right;font-size:10px !important;"><?php echo lang('sales_payment'); ?></td>
-		<td colspan="2" style="text-align:right;font-size:10px !important;"><?php $splitpayment=explode(':',$payment['payment_type']); echo $splitpayment[0]; ?> </td>
-		<td colspan="2" style="text-align:right;font-size:10px !important;"><?php echo to_currency( $payment['payment_amount'] ); ?>  </td>
-	    </tr>
-	<?php
-	}
-	?>	
+	<tr>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'>Paid Amount : </td>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_currency($owed_info->payment_amount); ?></td>
+	</tr>
+
+	<tr>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'>Remain Balance : </td>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_currency($owed_info->remain_balance); ?></td>
+	</tr>
+
+	
     <tr>
     <td colspan="6">&nbsp;</td>
     </tr>
 
-	<?php foreach($payments as $payment) {?>
-		<?php if (strpos($payment['payment_type'], lang('sales_giftcard'))!== FALSE) {?>
-	<tr>
-		<td colspan="2" style="text-align:right;font-size:10px !important;"><?php echo lang('sales_giftcard_balance'); ?></td>
-		<td colspan="2" style="text-align:right;font-size:10px !important;"><?php echo $payment['payment_type'];?> </td>
-		<td colspan="2" style="text-align:right;font-size:10px !important;"><?php echo to_currency($this->Giftcard->get_giftcard_value(end(explode(':', $payment['payment_type'])))); ?></td>
-	</tr>
-		<?php }?>
-	<?php }?>
-	
 	<tr>
 		<td colspan="2" style='text-align:right;font-size:10px !important;'>Exchange Rate</td>
 		<td colspan="4" style='text-align:right;font-size:10px !important;'>
 	 <?php echo to_currency($this->Exchange->select_last_exchange_rate_to_dollar()).' = '.to_number_money_reil($this->Exchange->select_last_exchange_rate_to_reil()); ?>
 		</td>
 	</tr>
-
-	<?php if($receive_payment_sale > 0){ ?>
-		<tr>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'>Receive Dollar</td>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'><?php echo to_currency($receive_payment_sale ); ?></td>
-	   </tr>
-	   <tr>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'>Receive Riel</td>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_number_money_reil($receive_payment_sale * $this->Exchange->select_last_exchange_rate_to_reil()); ?></td>
-	   </tr>
-
-	   </tr>
-	   <tr>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'>Exchange Dollar </td>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_currency($receive_payment_sale - $total); ?></td>
-	   </tr>
-
-	   <tr>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'>Exchange Dollar </td>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_number_money_reil(($receive_payment_sale - $total) * $this->Exchange->select_last_exchange_rate_to_reil()); ?></td>
-	   </tr>
-
-	<?php
-
-		}?>
+	
 	
 	</table>
 

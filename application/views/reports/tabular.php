@@ -21,8 +21,8 @@ if($export_excel == 1)
 	}
 	
 	$content = array_to_csv($rows);
-	
-	force_download(strip_tags($title) . '.csv', $content);
+	// chr(239) . chr(187) . chr(191) .  => convert unicode font
+	force_download(strip_tags($title) . '.csv', chr(239) . chr(187) . chr(191) .$content);
 	exit;
 }
 ?>

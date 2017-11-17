@@ -156,19 +156,25 @@
 	</li>
 
 	<li class="second">
-		<h3>Income Expense</h3>
+		<h3><?php echo lang('common_income_expense'); ?></h3>
 		<ul>
 			<li style="background: #f2f2f2;">&nbsp;</li>					
 			<li class="detailed"><a href="<?php echo site_url('reports/summary_income_expense');?>">
-				Income Expense Summary
+				<?php echo lang('reports_summary_reports'); ?>
 			</a></li>	
 				
 		</ul>
 	</li>
 
+	<li class="third">
+		<h3><?php echo lang('module_payoweds'); ?></h3>
+		<ul>
+			<li>&nbsp;</li>
 
-
-
+			<li class="summary"><a href="<?php echo site_url('reports/payowed_summary');?>"><?php echo lang('reports_summary_reports'); ?></a></li>	
+			<li class="detailed"><a href="<?php echo site_url('reports/detailed_payoweds');?>"><?php echo lang('reports_detailed_reports'); ?></a></li>			
+		</ul>
+	</li>
 	</ul>
 					</div>
 					<div class="panel-footer ">

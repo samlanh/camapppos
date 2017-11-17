@@ -43,7 +43,7 @@
 	 <div class="col-xs-9" style="padding-left: 0px; padding-right: 0px;">
    <div id="custom-search-input">
         <div class="input-group"> 
-					<?php echo form_input(array('name'=>'item','id'=>'item','size'=>'40','class'=>'form-control', 'accesskey' => 'i','style'=>'border: 1px solid;','placeholder'=>lang('common.scan_barcode')));?>
+					<?php echo form_input(array('name'=>'item','id'=>'item','size'=>'40','class'=>'form-control', 'accesskey' => 'i'));?>
 				 <span class="input-group-btn">
                         <button class="btn btn-info" type="button">
                             <i class="glyphicon glyphicon-search"></i>
@@ -55,7 +55,7 @@
      </div>
 
       <div class="col-xs-3" style="padding-left: 0px; padding-right: 0px;">
-      <?php echo anchor("items/view/width~550",
+      <?php echo anchor("items/view/-1/width~550",
 						"<div class='btn btn-primary pull-right'><i class='fa fa-plus'></i> <span>".lang('sales_new_item')."</span></div>",
 						array('class'=>'thickbox none','title'=>lang('sales_new_item')));?>
       </div>
@@ -93,7 +93,8 @@
 								<?php
 									echo form_open("sales/edit_item/$line", array('class' => 'line_item_form')); 	?>
 							
-									<table>							
+									<table>
+							
 											<tr id="reg_item_top">
 												<td id="reg_item_del" ><?php echo anchor("sales/delete_item/$line",lang('common_delete'), array('class' => 'delete_item'));?></td>
 												<td id="reg_item_name"><?php echo $item['name']; ?></td>
@@ -169,8 +170,12 @@
 				<?php echo anchor(site_url('sales/closeregister?continue=home'), lang('sales_close_register'),'class="btn btn-xs btn-danger clearfix"'); ?>
 			</div>
 		<?php } ?>
-			<div id="overall_sale">				
+
+
+			<div id="overall_sale">
+				
 				<div id="suspend_cancel">
+
 					<div id="suspend" <?php if(count($cart) > 0){ echo "style='visibility: visible;'";}?>>				
 						<?php
 						// Only show this part if there are Items already in the sale.
@@ -236,31 +241,17 @@
 							<td class="left"><?php echo lang('sales_items_in_cart'); ?>:</td>
 							<td class="right"><?php echo $items_in_cart; ?></td>
 						</tr>
-						<?php
-						$total_giftcard_free = 0;
-
-						 foreach($payments as $payment) {
-
-							?>
+						<?php foreach($payments as $payment) {?>
 							<?php if (strpos($payment['payment_type'], lang('sales_giftcard'))!== FALSE) {?>
 						<tr>
-							<td class="left"><?php echo $payment['payment_type'].' '.lang('sales_balance') ?>: </td>
-							<td class="right" style="white-space: nowrap;">
-							<?php echo to_currency($this->Giftcard->get_giftcard_value(end(explode(':', $payment['payment_type']))) - $payment['payment_amount']);	
-							?>
-							</td>
-						</tr>					
-							<?php
-							$total_giftcard_free +=  $payment['payment_amount'];
-							 }?>
-
-						<?php } ?>
-
+							<td class="left"><?php echo $payment['payment_type']. ' '.lang('sales_balance') ?>:</td>
+							<td class="right"><?php echo to_currency($this->Giftcard->get_giftcard_value(end(explode(':', $payment['payment_type']))) - $payment['payment_amount']);?></td>
+						</tr>
+							<?php }?>
+						<?php }?>
 						<tr>
-						<input type="hidden" name="total_giftcard_free" id="total_giftcard_free" value="<?= $total_giftcard_free < $subtotal? $total_giftcard_free : 0  ?>">
-
 							<td class="left"><?php echo lang('sales_sub_total'); ?>:</td>
-							<td class="right" style="display: inline-table;"><?php echo to_currency($subtotal); ?></td>
+							<td class="right"><?php echo to_currency($subtotal); ?></td>
 						</tr>
 						<?php foreach($taxes as $name=>$value) { ?>
 						<tr>
@@ -276,12 +267,13 @@
 						</tr>
 					</table>
 
+
 					<table id="sales_items_total">					
 						<tr>
 							<td class="left"><?php echo lang('sales_total_to_reil'); ?>:</td>
 							<td class="right">
 							<?php $exchange_to_reil = $this->Exchange->select_last_exchange_rate_to_reil(); ?>
-							<?php echo to_number_money_reil($total * $exchange_to_reil); ?>
+							<?php echo to_number_money_reil($total*$exchange_to_reil); ?>
 							</td>
 						</tr>
 					</table>
@@ -297,10 +289,12 @@
 							<?php echo to_currency($exchange_to_dollar).' = '.to_number_money_reil($exchange_to_reil); ?>
 							</td>
 						</tr>
-					</table>					
+					</table>
+					
 
 				</div>
 				
+
 
 				<?php
 				// Only show this part if there are Items already in the sale.
@@ -319,7 +313,8 @@
 							<th id="pt_delete"></th>
 							<th id="pt_type"><?php echo lang('sales_type'); ?></th>
 							<th id="pt_amount"><?php echo lang('sales_amount'); ?></th>
-
+				
+				
 							</tr>
 							</thead>
 							<tbody id="payment_contents">
@@ -330,17 +325,15 @@
 								?>
 								<tr>
 								<td id="pt_delete"><?php echo anchor("sales/delete_payment/".rawurlencode($payment_id),'['.lang('common_delete').']', array('class' => 'delete_payment'));?></td>
-								
+				
+				
 								<td id="pt_type"><?php echo  $payment['payment_type']    ?> </td>
-								<td id="pt_amount"><?php echo  to_currency($payment['payment_amount']);							
-								?>  
-								</td>				
+								<td id="pt_amount"><?php echo  to_currency($payment['payment_amount'])  ?>  </td>
+				
 				
 								</tr>
 								</form>
-
 								<?php
-
 								}
 								?>
 							</tbody>
@@ -348,7 +341,6 @@
 						<?php } ?>
 
 						<table id="amount_due">
-
 						<tr class="<?php if($payments_cover_total){ echo 'covered'; }?>">
 							<td>
 								<div class="float_left" style="font-size:.9em;"><?php echo lang('sales_amount_due'); ?>:</div>
@@ -373,18 +365,15 @@
 						
 								<tr id="mpt_bottom">
 									<td id="tender" colspan="2">
-									<label style="float: left;" id="amount_tendered_text">Dollar</label>
+									<label style="float: left;">Dollar</label>
 										<?php echo form_input(array('name'=>'amount_tendered','id'=>'amount_tendered','value'=>to_currency_no_money($amount_due),'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control'));	?>
 										<input type="hidden" id="amount_due_value" value="<?php echo $amount_due;?>">
 									</td>
 								</tr>
 							</table>
-
-						
 							<div class='btn btn-xs btn-success' id='add_payment_button'>
 								<span><?php echo lang('sales_add_payment'); ?></span>
 							</div>
-							
 							</form>
 						</div>
 					</div>
@@ -401,17 +390,9 @@
 							)).' '.lang('sales_email_receipt').': <br /><b style="font-size:1.1em; padding-left: 17px;">'.character_limiter($customer_email, 25).'</b><br />';
 						echo '</div>';
 					}
-
-					
 // 					print_r($this->Employee->get_logged_in_employee_info()); exit;
 					// Only show this part if there is at least one payment entered.
-					if(count($payments) > 0 ){
-
-						  if($mode !== 'owed'){ 
-						?>
-
-						<!-- start sale finish -->
-
+					if(count($payments) > 0 ){?>
 						<div id="finish_sale">
 
 								<table id="make_payment_table" >
@@ -434,7 +415,7 @@
 								<tr id="mpt_bottom">
 									<td id="tender" colspan="2">
 									<label style="float: left;font-size: 12px;">Exchange Reil</label>
-										<?php echo form_input(array('name'=>'exchange_sale_to_reil','id'=>'exchange_sale_to_reil','value'=>$receive_payment_sale=="0"? 0 : ($receive_payment_sale - ($total - $total_giftcard_free))*$exchange_to_reil,'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control','readonly'=>true)); ?>
+										<?php echo form_input(array('name'=>'exchange_sale_to_reil','id'=>'exchange_sale_to_reil','value'=>$receive_payment_sale=="0"? 0 : ($receive_payment_sale - $total)*$exchange_to_reil,'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control','readonly'=>true)); ?>
 									
 									</td>
 								</tr>
@@ -442,7 +423,7 @@
 								<tr id="mpt_bottom">
 									<td id="tender" colspan="2">
 									<label style="float: left; font-size: 12px;">Exchange Dollar</label>
-										<?php echo form_input(array('name'=>'exchange_sale_to_dollar','id'=>'exchange_sale_to_dollar','value'=>$receive_payment_sale=="0"?0 : $receive_payment_sale - ($total-$total_giftcard_free),'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control','readonly'=>true)); ?>
+										<?php echo form_input(array('name'=>'exchange_sale_to_dollar','id'=>'exchange_sale_to_dollar','value'=>$receive_payment_sale=="0"?0 : $receive_payment_sale - $total,'size'=>'10','autocomplete'=>'off', 'accesskey' => 'p','class'=>'form-control','readonly'=>true)); ?>
 									
 									</td>
 								</tr>
@@ -462,17 +443,6 @@
 							}
 							?>
 						</div>
-						<!-- end sale finish -->
-
-							<?php }else{ ?>
-							<a href="payoweds/view_payowed/-1/width~850" class="thickbox none" style="margin-top: 2px;">
-							<div class='btn btn-xs btn-primary' id='sales_payment_owed' style="width: 100%">
-								<span><?php echo lang('sales_payment_owed'); ?></span>
-							</div>
-							</a>
-							<?php } ?>
-						
-
 					</form>
 					<?php }	?>
 				<?php } ?>
@@ -483,7 +453,8 @@
 
 		</div>
 				<div class="panel-footer ">
-				
+						
+
 					</div>
                 </div>
 			</div>
@@ -497,6 +468,16 @@
 <div id="feedback_bar"></div>
 
 <script type="text/javascript">
+
+ // Fix chrome's ignore on autocomplete=off
+ /*   $('input[autocomplete=off]').each(function(){
+        var copy = $(this).clone();
+        copy.val('');
+        copy.removeAttr('autocomplete');
+        copy.insertAfter($(this));
+        $(this).hide().removeAttr('required id class');
+    }); */
+
 
 <?php
 if(isset($error))
@@ -519,48 +500,35 @@ if (isset($success))
 <script type="text/javascript" language="javascript">
 $(document).ready(function()
 {
-
- $("#sales_payment_owed").click(function()
-    {    	    	
-    if($("#customer").val() === "<?php echo lang('sales_start_typing_customer_name');?>"){
-    		alert($("#customer").val());    		
-    		$("#customer").focus();
-    		$("#customer").val('');
-
-     }
-    });
-
 	$('#amount_tendered_reil_exchange').keydown(function () {
-		var amount_tendered_reil_exchange = $('#amount_tendered_reil_exchange').val();			
+		var amount_tendered_reil_exchange = $('#amount_tendered_reil_exchange').val();	
 		var exchange_reil = <?= $exchange_to_reil ?>;
-		var total_exchange_to_dollar = (parseFloat(amount_tendered_reil_exchange).toFixed(2) / parseFloat(exchange_reil).toFixed(2));
+		var total_exchange_to_dollar = parseFloat(amount_tendered_reil_exchange).toFixed(2) / parseFloat(exchange_reil).toFixed(2);
 		$('#amount_tendered_dollar_exchange').val(parseFloat(total_exchange_to_dollar).toFixed(2));
-		
 		exchange_sale_total();
 	})
 
 	$('#amount_tendered_dollar_exchange').keydown(function () {
-		var amount_tendered_dollar_exchange = $('#amount_tendered_dollar_exchange').val();
-	
+		var amount_tendered_dollar_exchange = $('#amount_tendered_dollar_exchange').val();	
 		var exchange_reil = <?= $exchange_to_reil ?>;
-		var total_exchange_to_riel = amount_tendered_dollar_exchange * exchange_reil;		
+		var total_exchange_to_riel = amount_tendered_dollar_exchange*exchange_reil;		
 		$('#amount_tendered_reil_exchange').val(parseFloat(total_exchange_to_riel).toFixed(2));	
 		exchange_sale_total();			
 	})
 	
 	function exchange_sale_total(){
-		
-		var total_giftcard_free = $('#total_giftcard_free').val();
-		var total_sale = <?= $total ?> - total_giftcard_free;
-		var exchange_reil = <?= $exchange_to_reil ?>;
 
+		var total_sale = <?= $total ?>;
+		var exchange_reil = <?= $exchange_to_reil ?>;
 		var amount_tendered_reil_exchange = $('#amount_tendered_reil_exchange').val();
 		var amount_tendered_dollar_exchange = $('#amount_tendered_dollar_exchange').val();
 
 		var exchange_sale_to_reil = amount_tendered_reil_exchange - (total_sale * exchange_reil);
 		$('#exchange_sale_to_reil').val(parseFloat(exchange_sale_to_reil).toFixed(2));	
+
 		var exchange_sale_to_dollar = amount_tendered_dollar_exchange - total_sale;
 		$('#exchange_sale_to_dollar').val(parseFloat(exchange_sale_to_dollar).toFixed(2));
+
 	}
 	
 	
@@ -641,6 +609,8 @@ $(document).ready(function()
 		$.post('<?php echo site_url("sales/set_receive_payment_sale");?>', {receive_payment_sale: $('#amount_tendered_dollar_exchange').val()});
 	});
 
+
+
     $('#customer').blur(function()
     {
     	$(this).attr('value',<?php echo json_encode(lang('sales_start_typing_customer_name')); ?>);
@@ -685,26 +655,9 @@ $(document).ready(function()
 
 	$("#add_payment_button").click(function()
 	{
+		var mode =  $('#mode').val();
 
-		if($("#payment_types").val() == <?php echo json_encode(lang('sales_giftcard')); ?>){
-			$('#add_payment_form').ajaxSubmit({target: "#register_container", beforeSubmit: salesBeforeSubmit, success: salesSuccess});
-		}else{
-
-      var mode =  $('#mode').val();
-
-	  if(mode == 'sale'){
-
-		at = parseFloat($("#amount_tendered").val());
-		ad = parseFloat($("#amount_due_value").val());
-
-		if(at > 0  && at <= ad){    	
-			$('#add_payment_form').ajaxSubmit({target: "#register_container", beforeSubmit: salesBeforeSubmit, success: salesSuccess});
-		 }
-		else{
-			alert(<?php echo json_encode(lang("sales_payment_over")); ?>);
-		 }
-
-		}else  if(mode == 'owed'){
+		if(mode == 'sale'){
 
 		at = parseFloat($("#amount_tendered").val());
 		ad = parseFloat($("#amount_due_value").val());
@@ -732,9 +685,6 @@ $(document).ready(function()
 		}else{
 			console.log('something went wrong');
 		}
-
-		}
-			
 		
     });
 
@@ -782,19 +732,15 @@ function post_person_form_submit(response)
 
 function checkPaymentTypeGiftcard()
 {
-
 	if ($("#payment_types").val() == <?php echo json_encode(lang('sales_giftcard')); ?>)
 	{
 		$("#amount_tendered_label").html(<?php echo json_encode(lang('sales_giftcard_number')); ?>);
-		$("#amount_tendered_text").html(<?php echo json_encode(lang('sales_giftcard_number')); ?>);
 		$("#amount_tendered").val('');
 		$("#amount_tendered").focus();
 	}
 	else
-	{	
-		$("#amount_tendered").val($('#amount_due_value').val());
-		$("#amount_tendered_label").html(<?php echo json_encode(lang('sales_amount_tendered')); ?>);
-		$("#amount_tendered_text").html("Amount USD");		
+	{
+		$("#amount_tendered_label").html(<?php echo json_encode(lang('sales_amount_tendered')); ?>);		
 	}
 }
 
@@ -808,6 +754,5 @@ function salesBeforeSubmit(formData, jqForm, options)
 function salesSuccess(responseText, statusText, xhr, $form){
 
 }
-
 
 </script>

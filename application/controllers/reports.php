@@ -1449,6 +1449,98 @@ class Reports extends Secure_area
 		$this->load->view("reports/tabular_income_expense_summary",$data);
 	}
 
-	
+function specific_payoweds_input()
+	{
+		$data = $this->_get_common_report_data();
+		$data['specific_input_name'] = lang('reports_customer');
+		
+		$customers = array();
+		$customers[-1] = 'All'; 
+		foreach($this->Customer->get_all()->result() as $customer)
+		{
+		$customers[$customer->person_id] = $customer->first_name .' '.$customer->last_name;
+		}
+		$data['specific_input_data'] = $customers;
+		$this->load->view("reports/specific_payowed_input",$data);	
+	}
+
+	function detailed_payoweds($start_date, $end_date, $customer_id=-1, $export_excel=0)
+	{
+		$this->load->model('Payowed');
+		$this->load->model('reports/Detailed_payoweds');
+
+		$model = $this->Detailed_payoweds;
+
+		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date, 'customer_id' => $customer_id));
+
+		$this->Payowed->create_payowed_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date, 'customer_id' => $customer_id));
+		
+		$headers = $model->getDataColumns();
+		$report_data = $model->getData();
+		
+		$summary_data = array();
+		$details_data = array();
+		
+		foreach($report_data['summary'] as $key=>$row)
+		{
+			$summary_data[] = array(
+									array('data'=>$row['first_name'].' '.$row['last_name'], 'align'=>'left'), 
+									array('data'=>$row['email'], 'align'=>'left'), 
+									array('data'=>$row['phone_number'], 'align'=>'left'),
+									array('data'=>$row['total_amount'], 'align'=>'left'), 
+									array('data'=>$row['payment_amount'], 'align'=>'left'),
+									array('data'=>$row['remain_balance'], 'align'=>'left')
+											);
+
+			foreach($report_data['details'][$key] as $drow)
+			{
+				$details_data[$key][] = array(
+					array('data'=>'POS '.$drow['sale_id'], 'align'=>'right'),
+					array('data'=>date(get_date_format().'-'.get_time_format(), strtotime($drow['payment_date'])), 'align'=>'right'),
+					array('data'=>to_currency($drow['total_amount']), 'align'=>'right'),
+					array('data'=>to_currency($drow['payment_amount']), 'align'=>'right'),
+					array('data'=>to_currency($drow['remain_balance']), 'align'=>'right')
+					);
+			}
+		}
+
+		$data = array(
+			"title" =>lang('reports_detailed_owed_report'),
+			"subtitle" => date(get_date_format(), strtotime($start_date)) .'-'.date(get_date_format(), strtotime($end_date)),
+			"headers" => $model->getDataColumns(),
+			"summary_data" => $summary_data,
+			"details_data" => $details_data,
+			"overall_summary_data" => $model->getSummaryData(),
+			"export_excel" => $export_excel
+		);
+
+		$this->load->view("reports/tabular_details",$data);
+	}
+
+	function payowed_summary($start_date, $end_date, $customer_id=-1, $export_excel=0)
+	{
+		$this->load->model('Payowed');
+		$this->load->model('reports/Summary_payowed');
+		$model = $this->Summary_payowed;
+		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date, 'customer_id' => $customer_id));
+		$this->Payowed->create_payowed_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date, 'customer_id' => $customer_id));
+		$tabular_data = array();
+		$report_data = $model->getData(array());
+		foreach($report_data as $row)
+		{
+		$tabular_data[] = array(array('data'=>$row['first_name'].' '.$row['last_name'], 'align'=> 'left'), array('data'=>to_currency($row['total_amount']), 'align'=> 'left'), array('data'=>to_currency($row['payment_amount']), 'align'=> 'left'), array('data'=>to_currency($row['remain_balance']), 'align'=> 'right'));
+		}
+
+		$data = array(
+			"title" => lang('reports_inventory_summary_report'),
+			"subtitle" => '',
+			"headers" => $model->getDataColumns(),
+			"data" => $tabular_data,
+			"summary_data" => $model->getSummaryData(array()),
+			"export_excel" => $export_excel
+		);
+
+		$this->load->view("reports/tabular",$data);	
+	}
 }
 ?>

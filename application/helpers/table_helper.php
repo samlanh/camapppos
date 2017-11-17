@@ -752,7 +752,6 @@ function get_expense_income_categories_manage_table_data_rows($expense_income_ca
 
 function get_expense_income_categories_data_row($dataRow,$controller)
 {
-
 	$CI =& get_instance();
 	
 	$controller_name=strtolower(get_class($CI));
@@ -762,6 +761,87 @@ function get_expense_income_categories_data_row($dataRow,$controller)
 	$table_data_row.="<td width='3%'><input type='checkbox' id='categories_$dataRow->id' value='".$dataRow->id."'/></td>";
 	$table_data_row.='<td width="15%">'.$dataRow->name.'</td>';
 	$table_data_row.='<td width="5%" class="rightmost">'.anchor($controller_name."/view/$dataRow->id/width~$width", '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.lang('common_edit'),array('class'=>'thickbox btn btn-xs btn-primary text-center','title'=>lang($controller_name.'_update'))).'</td>';
+	$table_data_row.='</tr>';
+	return $table_data_row;
+}
+
+function get_payowed_manage_table($payowed, $controller )
+{
+	$CI =& get_instance();
+	
+	$table='<table class="tablesorter table table-bordered" id="sortable_table">';
+	
+	$headers = array(
+	lang('payoweds_sale_id'),
+	lang('payoweds_customer'),
+	lang('payoweds_payment_date'),
+	lang('payoweds_total_amount'),
+	lang('payoweds_payment_amount'),
+	lang('payoweds_remain_balance'),
+	lang('common_action'), 
+	);
+	
+	$table.='<thead><tr style="height:30px">';
+	$count = 0;
+	foreach($headers as $header)
+	{
+		$count++;
+		
+		if ($count == 1)
+		{
+			$table.="<th class='leftmost'>$header</th>";
+		}
+		elseif ($count == count($headers))
+		{
+			$table.="<th class='rightmost'>$header</th>";
+		}
+		else
+		{
+			$table.="<th>$header</th>";		
+		}
+	}
+	$table.='</tr></thead><tbody>';
+	$table.=get_payowed_manage_table_data_rows($payowed, $controller);
+	$table.='</tbody></table>';
+	return $table;
+}
+
+function get_payowed_manage_table_data_rows($payowed, $controller)
+{
+	$CI =& get_instance();
+	$table_data_rows='';
+	
+	foreach($payowed->result() as $dataRow)
+	{
+		$table_data_rows.=get_payowed_data_row($dataRow, $controller);
+	}
+	
+	if($payowed->num_rows()==0)
+	{
+		$table_data_rows.="<tr><td colspan='11'><div class='warning_message' style='padding:7px;'>".lang('expense_income_category_no_to_display')."</div></tr></tr>";
+	}
+	
+	return $table_data_rows;
+}
+
+
+function get_payowed_data_row($dataRow,$controller)
+{
+	$CI =& get_instance();	
+
+	$info=$CI->Customer->get_info($dataRow->customer_id);
+
+	$controller_name=strtolower(get_class($CI));
+	$width = $controller->get_form_width();
+
+	$table_data_row='<tr>';		
+	$table_data_row.='<td width="15%">POS '.$dataRow->sale_id.'</td>';
+	$table_data_row.='<td width="15%">'.$info->first_name.' '.$info->last_name.'</td>';
+	$table_data_row.='<td width="15%">'.date(get_date_format().'-'.get_time_format(), strtotime($dataRow->payment_date)).'</td>';
+	$table_data_row.='<td width="15%">'.to_currency($dataRow->total_amount).'</td>';
+	$table_data_row.='<td width="15%">'.to_currency($dataRow->payment_amount).'</td>';
+	$table_data_row.='<td width="15%">'.to_currency($dataRow->remain_balance).'</td>';
+	$table_data_row.='<td width="5%" class="rightmost">'.anchor($controller_name."/view/$dataRow->id/width~$width", '<i class="fa fa-dollar" aria-hidden="true"></i> '.lang('common_payment'),array('class'=>'thickbox btn btn-xs btn-success text-center','title'=>lang('common_payment'))).'</td>';
 	$table_data_row.='</tr>';
 	return $table_data_row;
 }

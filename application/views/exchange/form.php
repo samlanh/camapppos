@@ -14,7 +14,8 @@ echo form_open('exchanges/save/'.$exchange_info->id, array('id'=>'exchange_form'
 		'name'=>'dollar',
 		'class'=>'form-control',
 		'id'=>'dollar',
-		'value'=>$exchange_info->dollar)
+		'readonly'=>true,
+		'value'=>1)
 	);?>
 	</div>
 </div>

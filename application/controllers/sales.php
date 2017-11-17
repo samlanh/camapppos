@@ -179,7 +179,17 @@ class Sales extends Secure_area
 		$data=array();
 		$mode = $this->sale_lib->get_mode();
 		$item_id_or_number_or_item_kit_or_receipt = $this->input->post("item");
-		$quantity = $mode == "sale" ? 1:-1;
+
+		// 3 mode 
+		if($mode == "sale"){
+			$quantity = 1;
+		}elseif ($mode == "owed") {
+			$quantity = 1;
+		}else{
+			//mode = return
+			$quantity = -1;
+		}
+		//$quantity = $mode == "sale" ? 1:-1;
 
 		if($this->sale_lib->is_valid_receipt($item_id_or_number_or_item_kit_or_receipt) && $mode=='return')
 		{
@@ -474,7 +484,7 @@ class Sales extends Secure_area
 		$data['receive_payment_sale']=$this->sale_lib->get_receive_payment_sale();
 		$person_info = $this->Employee->get_logged_in_employee_info();
 		$data['cart']=$this->sale_lib->get_cart();
-		$data['modes']=array('sale'=>lang('sales_sale'),'return'=>lang('sales_return'));
+		$data['modes']=array('sale'=>lang('sales_sale'),'return'=>lang('sales_return'),'owed'=>lang('sales_owed'));
 		$data['mode']=$this->sale_lib->get_mode();
 		$data['items_in_cart'] = $this->sale_lib->get_items_in_cart();
 		$data['subtotal']=$this->sale_lib->get_subtotal();
@@ -612,5 +622,38 @@ class Sales extends Secure_area
 		}
     	$this->_reload(array('success' => lang('sales_successfully_deleted')), false);
 	}
+
+
+    public function receipt_owed($sale_id)
+    {     
+    	$this->load->model('Payowed');
+		$sale_info = $this->Sale->get_info($sale_id)->row_array();
+		$this->sale_lib->copy_entire_sale($sale_id);
+		$data['cart']=$this->sale_lib->get_cart();
+		$data['payments']=$this->sale_lib->get_payments();
+		$data['subtotal']=$this->sale_lib->get_subtotal();
+		$data['taxes']=$this->sale_lib->get_taxes($sale_id);
+		$data['total']=$this->sale_lib->get_total($sale_id);
+		$data['receipt_title']=lang('sales_receipt');
+		$data['transaction_time']= date(get_date_format().' '.get_time_format(), strtotime($sale_info['sale_time']));
+		$customer_id=$this->sale_lib->get_customer();
+		$emp_info=$this->Employee->get_info($sale_info['employee_id']);
+		$data['payment_type']=$sale_info['payment_type'];
+		$data['amount_change']=$this->sale_lib->get_amount_due($sale_id) * -1;
+		$data['employee']=$emp_info->first_name.' '.$emp_info->last_name;
+		$data['receive_payment_sale'] = $this->sale_lib->get_receive_payment_sale();
+		$data['owed_info'] = $this->Payowed->get_owed_by_sale($sale_id);
+
+		if($customer_id!=-1)
+		{
+			$cust_info=$this->Customer->get_info($customer_id);
+			$data['customer']=$cust_info->first_name.' '.$cust_info->last_name.($cust_info->company_name==''  ? '' :' ('.$cust_info->company_name.')');
+		}
+		$data['sale_id']='POS '.$sale_id;
+		$this->load->view("sales/receipt_owed",$data);
+		$this->sale_lib->clear_all();
+
+    }
+
 }
 ?>
