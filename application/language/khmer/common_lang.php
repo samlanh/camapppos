@@ -1,4 +1,5 @@
 <?php
+
 $lang['common.scan_barcode']='Scan Barcode នៅទីនេះ ....';
 $lang['common_common']='ទូទៅ';
 $lang['common_submit']='រក្សាទុក';
@@ -60,5 +61,17 @@ $lang['common_total'] = 'សរុប';
 $lang['common_payment'] = 'បង់ប្រាក់';
 $lang['common_action'] = 'សកម្មភាព';
 $lang['common_income_expense']= 'ចំនូល​ ចំណាយ';
+
+$lang['common_total_dollar'] = 'សរុបដុល្លារ';
+$lang['common_total_reil'] = 'សរុប​រៀល';
+$lang['common_total_amount'] = 'ចំនួនសរុប';
+$lang['common_payment_amount'] = 'បានបង់សរុប';
+$lang['common_remain_balance'] = 'ប្រាក់នូវសល់';
+$lang['common_receive_dollar'] = 'ទទួលប្រាក់ដុល្លារ';
+$lang['common_receive_reil'] = 'ទទួលការឆ្លើយតប';
+$lang['common_exchange_dollar'] = 'ប្តូរប្រាក់ដុល្លារ';
+$lang['common_exchange_reil'] = 'ប្តូរប្រាក់';
+$lang['common_exchange_rate'] = 'អត្រាប្តូរប្រាក់';
+$lang['common_required_money']= 'ប្រភេទនៃប្រាក់ត្រូវតែលេខ';
 
 ?>

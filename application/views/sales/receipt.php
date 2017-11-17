@@ -73,11 +73,11 @@ if (isset($error_message))
 	<?php }; ?>
 
 	<tr>
-	<td colspan="3" style='text-align:right;font-size:10px !important;'>Total Dollar</td>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_total_dollar') ?></td>
 	<td colspan="3" style='text-align:right;font-size:10px !important;'><?php echo to_currency($total); ?></td>
 	</tr>
 	<tr>
-	<td colspan="3" style='text-align:right;font-size:10px !important;'>Total Reil</td>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_total_reil') ?></td>
 	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_number_money_reil($total*$this->Exchange->select_last_exchange_rate_to_reil()); ?></td>
 	</tr>
 
@@ -109,7 +109,7 @@ if (isset($error_message))
 	<?php }?>
 	
 	<tr>
-		<td colspan="2" style='text-align:right;font-size:10px !important;'>Exchange Rate</td>
+		<td colspan="2" style='text-align:right;font-size:10px !important;'><?= lang('common_exchange_rate') ?></td>
 		<td colspan="4" style='text-align:right;font-size:10px !important;'>
 	 <?php echo to_currency($this->Exchange->select_last_exchange_rate_to_dollar()).' = '.to_number_money_reil($this->Exchange->select_last_exchange_rate_to_reil()); ?>
 		</td>
@@ -117,22 +117,22 @@ if (isset($error_message))
 
 	<?php if($receive_payment_sale > 0){ ?>
 		<tr>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'>Receive Dollar</td>
+		<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_receive_dollar') ?></td>
 		<td colspan="3" style='text-align:right;font-size:10px !important;'><?php echo to_currency($receive_payment_sale ); ?></td>
 	   </tr>
 	   <tr>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'>Receive Riel</td>
+		<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_total_reil') ?></td>
 		<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_number_money_reil($receive_payment_sale * $this->Exchange->select_last_exchange_rate_to_reil()); ?></td>
 	   </tr>
 
 	   </tr>
 	   <tr>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'>Exchange Dollar </td>
+		<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_exchange_dollar') ?></td>
 		<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_currency($receive_payment_sale - $total); ?></td>
 	   </tr>
 
 	   <tr>
-		<td colspan="3" style='text-align:right;font-size:10px !important;'>Exchange Dollar </td>
+		<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_exchange_reil') ?> </td>
 		<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_number_money_reil(($receive_payment_sale - $total) * $this->Exchange->select_last_exchange_rate_to_reil()); ?></td>
 	   </tr>
 

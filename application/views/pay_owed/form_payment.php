@@ -219,11 +219,20 @@ $('#payment_amount_reil').keydown(function () {
  		wrapper: "li",
 		rules: 
 		{
-			//first_name: "required",		
+		payment_amount_dollar: {
+      	required: true,
+     	 number: true
+   		 },
+   		 payment_amount_reil: {
+      	 required: true,
+     	 number: true
+   		 }
+				
    		},
 		messages: 
 		{
-     		// first_name: <?php echo json_encode(lang('common_first_name_required')); ?>,     		
+     	payment_amount_dollar : <?php echo json_encode(lang('common_required_money')); ?>,
+     	payment_amount_reil: <?php echo json_encode(lang('common_required_money')); ?>,     		
 		}
 	});
 });

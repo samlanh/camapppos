@@ -58,5 +58,18 @@ $lang['common_balance_to_pay'] = 'Balance to pay';
 $lang['common_total'] = 'Totals';
 $lang['common_payment'] = 'Payment';
 $lang['common_action'] = 'Action';
+
 $lang['common_income_expense']= 'Income Expense';
+$lang['common_total_dollar'] = 'Total Dollar';
+$lang['common_total_reil'] = 'Total Reil';
+$lang['common_total_amount'] = 'Total Amount';
+$lang['common_payment_amount'] = 'Paid Amount';
+$lang['common_payment_remain_balance'] = 'Remain Balance';
+$lang['common_receive_dollar'] = 'Receive Dollar';
+$lang['common_receive_reil'] = 'Receive Reil';
+$lang['common_exchange_dollar'] = 'Exchange Dollar';
+$lang['common_exchange_reil'] = 'Exchange Reil';
+$lang['common_exchange_rate'] = 'Exchange Rate';
+$lang['common_required_money']= 'Type money must numberic';
+
 ?>

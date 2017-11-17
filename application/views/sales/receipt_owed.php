@@ -73,27 +73,27 @@ if (isset($error_message))
 	<?php }; ?>
 
 	<tr>
-	<td colspan="3" style='text-align:right;font-size:10px !important;'>Total Dollar</td>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_total_dollar') ?></td>
 	<td colspan="3" style='text-align:right;font-size:10px !important;'><?php echo to_currency($total); ?></td>
 	</tr>
 	<tr>
-	<td colspan="3" style='text-align:right;font-size:10px !important;'>Total Reil</td>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_total_reil') ?></td>
 	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_number_money_reil($total*$this->Exchange->select_last_exchange_rate_to_reil()); ?></td>
 	</tr>
     <tr><td colspan="6">&nbsp;</td></tr>
 	
 	<tr>
-	<td colspan="3" style='text-align:right;font-size:10px !important;'>Total Payment : </td>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_total_amount') ?> : </td>
 	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_currency($owed_info->total_amount); ?></td>
 	</tr>
 
 	<tr>
-	<td colspan="3" style='text-align:right;font-size:10px !important;'>Paid Amount : </td>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_payment_amount') ?> : </td>
 	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_currency($owed_info->payment_amount); ?></td>
 	</tr>
 
 	<tr>
-	<td colspan="3" style='text-align:right;font-size:10px !important;'>Remain Balance : </td>
+	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= lang('common_remain_balance') ?> : </td>
 	<td colspan="3" style='text-align:right;font-size:10px !important;'><?= to_currency($owed_info->remain_balance); ?></td>
 	</tr>
 
@@ -103,7 +103,7 @@ if (isset($error_message))
     </tr>
 
 	<tr>
-		<td colspan="2" style='text-align:right;font-size:10px !important;'>Exchange Rate</td>
+		<td colspan="2" style='text-align:right;font-size:10px !important;'><?= lang('common_exchange_rate') ?></td>
 		<td colspan="4" style='text-align:right;font-size:10px !important;'>
 	 <?php echo to_currency($this->Exchange->select_last_exchange_rate_to_dollar()).' = '.to_number_money_reil($this->Exchange->select_last_exchange_rate_to_reil()); ?>
 		</td>
