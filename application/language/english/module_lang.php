@@ -56,7 +56,7 @@ $lang['module_expenses_desc']=' Add, Update, Delete Expense';
 $lang['module_expense_income_categories'] = 'Expense Income Category';
 $lang['module_expense_income_categories_desc'] = 'Add, Update, Delete Category';
 
-$lang['payoweds'] = 'Pay Owed';
-$lang['payoweds_desc'] = 'Payment Customer';
+$lang['module_payoweds'] = 'Pay Owed';
+$lang['module_payoweds_desc'] = 'Payment Customer';
 
 ?>

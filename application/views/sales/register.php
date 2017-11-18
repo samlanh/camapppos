@@ -478,8 +478,6 @@
 							</div>
 							</a>
 							<?php } ?>
-						
-
 					</form>
 					<?php }	?>
 				<?php } ?>
@@ -490,7 +488,7 @@
 
 		</div>
 				<div class="panel-footer ">
-				
+			
 					</div>
                 </div>
 			</div>
@@ -538,23 +536,44 @@ $(document).ready(function()
     });
 
 	$('#amount_tendered_reil_exchange').keydown(function () {
-		var amount_tendered_reil_exchange = $('#amount_tendered_reil_exchange').val();			
+	calc_amount_tendered_reil_exchange();
+	});
+		$('#amount_tendered_reil_exchange').change(function () {
+	calc_amount_tendered_reil_exchange();
+	});
+	$('#amount_tendered_reil_exchange').blur(function () {
+	calc_amount_tendered_reil_exchange();
+
+	});
+
+	function calc_amount_tendered_reil_exchange(){
+			var amount_tendered_reil_exchange = $('#amount_tendered_reil_exchange').val();			
 		var exchange_reil = <?= $exchange_to_reil ?>;
 		var total_exchange_to_dollar = (parseFloat(amount_tendered_reil_exchange).toFixed(2) / parseFloat(exchange_reil).toFixed(2));
-		$('#amount_tendered_dollar_exchange').val(parseFloat(total_exchange_to_dollar).toFixed(2));
-		
+		$('#amount_tendered_dollar_exchange').val(parseFloat(total_exchange_to_dollar).toFixed(2));	
 		exchange_sale_total();
-	})
+		set_receive_payment_sale();
+	}
 
 	$('#amount_tendered_dollar_exchange').keydown(function () {
-		var amount_tendered_dollar_exchange = $('#amount_tendered_dollar_exchange').val();
-	
+	  calc_amount_tendered_dollar_exchange();	 
+	});
+	$('#amount_tendered_dollar_exchange').blur(function () {
+	  calc_amount_tendered_dollar_exchange();	 
+	});
+	$('#amount_tendered_dollar_exchange').change(function () {
+	  calc_amount_tendered_dollar_exchange();	  
+	});
+
+	function calc_amount_tendered_dollar_exchange(){
+		var amount_tendered_dollar_exchange = $('#amount_tendered_dollar_exchange').val();	
 		var exchange_reil = <?= $exchange_to_reil ?>;
 		var total_exchange_to_riel = amount_tendered_dollar_exchange * exchange_reil;		
 		$('#amount_tendered_reil_exchange').val(parseFloat(total_exchange_to_riel).toFixed(2));	
-		exchange_sale_total();			
-	})
-	
+		exchange_sale_total();
+		set_receive_payment_sale();		
+	}
+
 	function exchange_sale_total(){
 		
 		var total_giftcard_free = $('#total_giftcard_free').val();
@@ -643,10 +662,9 @@ $(document).ready(function()
 		}
 	});
 
-   $('#amount_tendered_dollar_exchange').change(function() 
-	{
+	function set_receive_payment_sale() {
 		$.post('<?php echo site_url("sales/set_receive_payment_sale");?>', {receive_payment_sale: $('#amount_tendered_dollar_exchange').val()});
-	});
+	}
 
     $('#customer').blur(function()
     {
