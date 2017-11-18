@@ -367,7 +367,14 @@
 										<?php echo lang('sales_add_payment'); ?>:
 									</td>
 									<td>
-										<?php echo form_dropdown('payment_type',$payment_options,array(), 'id="payment_types"');?>
+								<?php 
+								 if($mode !== 'owed'){
+								  echo form_dropdown('payment_type',$payment_options,array(), 'id="payment_types"');	
+								 }else{
+								
+								 echo form_dropdown('payment_type',[lang('sales_owed')=>lang('sales_owed')],array(), 'id="payment_types"');	
+								 }
+								?>										
 									</td>
 								</tr>
 						

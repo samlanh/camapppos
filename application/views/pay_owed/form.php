@@ -185,22 +185,40 @@ $(document).ready(function()
 {
 
 $('#payment_amount_reil').keydown(function () {			
-	
+		calc_payment_amount_reil();		
+	});
+$('#payment_amount_reil').blur(function () {			
+		calc_payment_amount_reil();		
+	});
+$('#payment_amount_reil').change(function () {			
+		calc_payment_amount_reil();		
+	});
+
+	function calc_payment_amount_reil() {		
 		 payment_amount_reil = $('#payment_amount_reil').val();	
 		 payment_amount_dollar = $('#payment_amount_dollar').val();	
 		 exchange_reil = $('#exchange_rate_reil').val();
 		 exchange_to_reil = payment_amount_reil / exchange_reil;
-			total_to_dollar = Number(payment_amount_dollar) + Number(exchange_to_reil);
+		total_to_dollar = Number(payment_amount_dollar) + Number(exchange_to_reil);
 		$('#payment_amount').val(parseFloat(total_to_dollar).toFixed(2));
 		total_amount = $('#total_amount_hidden').val();
 		remain_balance = Number(total_amount) - Number(total_to_dollar);
 		$('#remain_balance').val(parseFloat(remain_balance).toFixed(2));
-		console.log(remain_balance);
-
-	});
+	}
 
 	$('#payment_amount_dollar').keydown(function () {
+		calc_payment_amount_dollar();
+	});
 
+	$('#payment_amount_dollar').blur(function () {
+		calc_payment_amount_dollar();
+	});
+
+	$('#payment_amount_dollar').change(function () {
+		calc_payment_amount_dollar();
+	});
+
+function calc_payment_amount_dollar() {
 		payment_amount_reil = $('#payment_amount_reil').val();	
 		 payment_amount_dollar = $('#payment_amount_dollar').val();	
 		 exchange_reil = $('#exchange_rate_reil').val();
@@ -210,10 +228,7 @@ $('#payment_amount_reil').keydown(function () {
 		total_amount = $('#total_amount_hidden').val();
 		remain_balance = Number(total_amount) - Number(total_to_dollar);
 		$('#remain_balance').val(parseFloat(remain_balance).toFixed(2));
-		console.log(remain_balance);
-
-	});
-
+}
 
 if(<?=$this->session->userdata('customer') ?> === -1){
 	tb_remove();

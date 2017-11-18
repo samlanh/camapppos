@@ -166,8 +166,22 @@ echo form_close();
 $(document).ready(function()
 {
 
-$('#payment_amount_reil').keydown(function () {			
-	
+$('#payment_amount_reil').keydown(function () {		
+		calc_payment_amount_reil();
+		//console.log(remain_balance);
+	});
+
+$('#payment_amount_reil').change(function () {		
+		calc_payment_amount_reil();
+		//console.log(remain_balance);
+	});
+
+$('#payment_amount_reil').blur(function () {		
+		calc_payment_amount_reil();
+		//console.log(remain_balance);
+	});
+
+	function calc_payment_amount_reil(){
 		 payment_amount_reil = $('#payment_amount_reil').val();	
 		 payment_amount_dollar = $('#payment_amount_dollar').val();	
 		 exchange_reil = $('#exchange_rate_reil').val();
@@ -177,12 +191,27 @@ $('#payment_amount_reil').keydown(function () {
 		remain_balance_before_hidden = $('#remain_balance_before_hidden').val();
 		remain_balance = Number(remain_balance_before_hidden) - Number(total_to_dollar);
 		$('#remain_balance').val(parseFloat(remain_balance).toFixed(2));
-		console.log(remain_balance);
-
+	}
+	
+	// $(document).on('change keyup blur','#payment_amount_dollar',function(){
+	$('#payment_amount_dollar').keydown(function () {
+		calc_payment_amount_dollar();
+		//console.log(remain_balance);
+	});
+	$('#payment_amount_dollar').blur(function () {
+		calc_payment_amount_dollar();
+		//console.log(remain_balance);
+	});
+	$('#payment_amount_dollar').change(function () {
+		calc_payment_amount_dollar();
+		//console.log(remain_balance);
+	});
+			$('#payment_amount_dollar').keydown(function () {
+		calc_payment_amount_dollar();
+		//console.log(remain_balance);
 	});
 
-	$('#payment_amount_dollar').keydown(function () {
-
+	function calc_payment_amount_dollar(){
 		payment_amount_reil = $('#payment_amount_reil').val();	
 		 payment_amount_dollar = $('#payment_amount_dollar').val();	
 		 exchange_reil = $('#exchange_rate_reil').val();
@@ -192,9 +221,7 @@ $('#payment_amount_reil').keydown(function () {
 		remain_balance_before_hidden = $('#remain_balance_before_hidden').val();
 		remain_balance = Number(remain_balance_before_hidden) - Number(total_to_dollar);
 		$('#remain_balance').val(parseFloat(remain_balance).toFixed(2));
-		console.log(remain_balance);
-
-	});
+	} 
 
 	var submitting = false;
 	$('#payowed_form').validate({
