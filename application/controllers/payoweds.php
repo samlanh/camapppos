@@ -29,17 +29,18 @@ class Payoweds extends Person_controller
 
 	public function save($id=-1)
 	{
-
 		$payowed_before_hidden =  $this->input->post('payowed_before_hidden');
 		$payment_amount = $this->input->post('payment_amount');
 		$total_payment_amount = $payowed_before_hidden + $payment_amount;
 		$this->db->trans_begin();
 		try {
-			// save payment owed		
+			$owed_date = $this->Payowed->get_info_by_id($id)->owed_date;
+		// save payment owed		
 			$dataOwed = array(
 							'total_amount' => $this->input->post('total_amount_hidden'),
 							'payment_amount' => $total_payment_amount,
 							'remain_balance' => $this->input->post('remain_balance'),
+							'owed_date' => $owed_date,
 							'payment_date' => date('Y-m-d H:i:s'),
 							'sale_id' => $this->input->post('sale_id'),
 							'customer_id' => $this->input->post('customer_id'),
@@ -124,6 +125,7 @@ class Payoweds extends Person_controller
 			$dataOwed = array('total_amount' => $this->input->post('total_amount_hidden'),
 							'payment_amount' => $this->input->post('payment_amount'),
 							'remain_balance' => $this->input->post('remain_balance'),
+							'owed_date' => date('Y-m-d H:i:s'),
 							'payment_date' => date('Y-m-d H:i:s'),
 							'sale_id' => $data['sale_id'],
 							'customer_id' => $customer_id,

@@ -25,13 +25,13 @@ function get_date_format()
 	switch($CI->config->item('date_format'))
 	{
 		case "middle_endian":
-			return "d/m/Y";
+			return "m/d/Y";
 		case "little_endian":
 			return "d-m-Y";
 		case "big_endian":
 			return "Y-m-d";
 		default:
-			return "d/m/Y";
+			return "m/d/Y";
 	}
 }
 
@@ -41,13 +41,13 @@ function get_flot_date_format()
 	switch($CI->config->item('date_format'))
 	{
 		case "middle_endian":
-			return "%d/%m/%y";
+			return "%m/%d/%y";
 		case "little_endian":
 			return "%d-%m-%y";
 		case "big_endian":
 			return "%y-%m-%d";
 		default:
-			return "%d/%m/%y";
+			return "%m/%d/%y";
 	}
 }
 
@@ -57,13 +57,13 @@ function get_js_date_format()
 	switch($CI->config->item('date_format'))
 	{
 		case "middle_endian":
-			return "dd/mm/yyyy";
+			return "mm/dd/yyyy";
 		case "little_endian":
 			return "dd-mm-yyyy";
 		case "big_endian":
 			return "yyyy-mm-dd";
 		default:
-			return "dd/mm/yyyy";
+			return "mm/dd/yyyy";
 	}
 }
 

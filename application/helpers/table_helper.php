@@ -774,6 +774,7 @@ function get_payowed_manage_table($payowed, $controller )
 	$headers = array(
 	lang('payoweds_sale_id'),
 	lang('payoweds_customer'),
+	lang('payoweds_owed_date'),
 	lang('payoweds_payment_date'),
 	lang('payoweds_total_amount'),
 	lang('payoweds_payment_amount'),
@@ -837,6 +838,7 @@ function get_payowed_data_row($dataRow,$controller)
 	$table_data_row='<tr>';		
 	$table_data_row.='<td width="15%">POS '.$dataRow->sale_id.'</td>';
 	$table_data_row.='<td width="15%">'.$info->first_name.' '.$info->last_name.'</td>';
+	$table_data_row.='<td width="15%">'.date(get_date_format().'-'.get_time_format(), strtotime($dataRow->owed_date)).'</td>';
 	$table_data_row.='<td width="15%">'.date(get_date_format().'-'.get_time_format(), strtotime($dataRow->payment_date)).'</td>';
 	$table_data_row.='<td width="15%">'.to_currency($dataRow->total_amount).'</td>';
 	$table_data_row.='<td width="15%">'.to_currency($dataRow->payment_amount).'</td>';

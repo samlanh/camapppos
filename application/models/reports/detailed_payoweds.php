@@ -19,6 +19,7 @@ class Detailed_payoweds extends Report
 										array('data'=>lang('payoweds_remain_balance'), 'align'=> 'right')),
 					    'details' => array(
 										array('data'=>lang('payoweds_sale_id'), 'align'=> 'left'), 
+										array('data'=>lang('payoweds_owed_date'), 'align'=> 'left'), 
 										array('data'=>lang('payoweds_payment_date'), 'align'=> 'left'), 
 										array('data'=>lang('payoweds_total_amount'), 'align'=> 'left'), 
 										array('data'=>lang('payoweds_payment_amount'), 'align'=> 'left'), 
@@ -40,7 +41,7 @@ class Detailed_payoweds extends Report
 		$data['details'] = array();
 		foreach($data['summary'] as $key=>$value)
 		{
-			$this->db->select('sale_id, payment_date,total_amount ,payment_amount,remain_balance');
+			$this->db->select('sale_id, owed_date,payment_date,total_amount ,payment_amount,remain_balance');
 			$this->db->from('payment_owed_tbl_temp');
 			$this->db->where(['deleted' => 0, 'customer_id'=>$value['person_id']]);
 			$this->db->order_by('sale_id', 'desc');

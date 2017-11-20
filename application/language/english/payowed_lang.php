@@ -14,5 +14,6 @@ $lang['payoweds_payment_reil'] = 'Payment Reil';
 $lang['payoweds_exchange_rate'] = 'Exachange Rate';
 $lang['payoweds_phone'] = 'Phone';
 $lang['payoweds_email'] = 'Email';
+$lang['payoweds_owed_date'] = 'Owed Date';
 
 ?>

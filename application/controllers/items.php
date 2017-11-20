@@ -256,8 +256,6 @@ class Items extends Secure_area implements iData_controller
 	{
 		$this->check_action_permission('add_update');	
 
-
-
 		$item_data = array(
 		'name'=>$this->input->post('name'),
 		'description'=>$this->input->post('description'),

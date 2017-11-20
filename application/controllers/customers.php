@@ -28,8 +28,6 @@ class Customers extends Person_controller
 
 		$data['per_page'] = $config['per_page'];
 
-		
-
 		$data['manage_table']=get_people_manage_table($this->Customer->get_all($data['per_page']),$this);
        $this->load->view('people/manage',$data);
 
@@ -119,8 +117,7 @@ class Customers extends Person_controller
 		'state'=>$this->input->post('state'),
 		'zip'=>$this->input->post('zip'),
 		'country'=>$this->input->post('country'),
-		'comments'=>$this->input->post('comments')
-		
+		'comments'=>$this->input->post('comments')		
 		);
 		$customer_data=array(
 		'company_name' => $this->input->post('company_name'),

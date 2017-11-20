@@ -1496,6 +1496,7 @@ function specific_payoweds_input()
 			{
 				$details_data[$key][] = array(
 					array('data'=>'POS '.$drow['sale_id'], 'align'=>'right'),
+					array('data'=>date(get_date_format().'-'.get_time_format(), strtotime($drow['owed_date'])), 'align'=>'right'),
 					array('data'=>date(get_date_format().'-'.get_time_format(), strtotime($drow['payment_date'])), 'align'=>'right'),
 					array('data'=>to_currency($drow['total_amount']), 'align'=>'right'),
 					array('data'=>to_currency($drow['payment_amount']), 'align'=>'right'),

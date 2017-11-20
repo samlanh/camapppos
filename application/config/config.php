@@ -243,7 +243,7 @@ $config['encryption_key'] = '3fc44e18de1bda61e094b5512f9c8c40';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'phppos';
+$config['sess_cookie_name']		= 'bsitezone';
 $config['sess_expiration']		= 86400;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= FALSE;

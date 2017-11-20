@@ -55,7 +55,7 @@
      </div>
 
       <div class="col-xs-3" style="padding-left: 0px; padding-right: 0px;">
-      <?php echo anchor("items/view/width~550",
+      <?php echo anchor("items/view/-1/width~550",
 						"<div class='btn btn-primary pull-right'><i class='fa fa-plus'></i> <span>".lang('sales_new_item')."</span></div>",
 						array('class'=>'thickbox none','title'=>lang('sales_new_item')));?>
       </div>

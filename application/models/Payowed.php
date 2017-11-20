@@ -162,7 +162,7 @@ public function create_payowed_temp_table($params)
 
 function _create_payowed_temp_table_query($where)
 		{
-		$this->db->query("CREATE TEMPORARY TABLE ".$this->db->dbprefix('payment_owed_tbl_temp')." (SELECT ".$this->db->dbprefix('payment_owed_tbl').".sale_id,customer_id, payment_date,total_amount,payment_amount,remain_balance,deleted, ".$this->db->dbprefix('people').".person_id,first_name, last_name, email, phone_number FROM ".$this->db->dbprefix('payment_owed_tbl')." 
+		$this->db->query("CREATE TEMPORARY TABLE ".$this->db->dbprefix('payment_owed_tbl_temp')." (SELECT ".$this->db->dbprefix('payment_owed_tbl').".sale_id,customer_id, owed_date, payment_date,total_amount,payment_amount,remain_balance,deleted, ".$this->db->dbprefix('people').".person_id,first_name, last_name, email, phone_number FROM ".$this->db->dbprefix('payment_owed_tbl')." 
 			INNER JOIN ".$this->db->dbprefix('people')." ON  ".$this->db->dbprefix('payment_owed_tbl').'.customer_id ='.$this->db->dbprefix('people').'.person_id'."
 			$where			
 			)");

@@ -128,6 +128,7 @@ class Receiving_lib
 	function edit_item($line,$description,$serialnumber,$quantity,$discount,$price)
 	{
 		$items = $this->get_cart();
+		
 		if(isset($items[$line]))
 		{
 			$items[$line]['description'] = $description;
@@ -205,7 +206,6 @@ class Receiving_lib
 			$this->add_item($row->item_id,$row->quantity_purchased,$row->discount_percent,$row->item_unit_price,$row->description,$row->serialnumber);
 		}
 		$this->set_supplier($this->CI->Receiving->get_supplier($receiving_id)->person_id);
-
 	}
 
 	function delete_item($line)

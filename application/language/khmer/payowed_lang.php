@@ -13,5 +13,6 @@ $lang['payoweds_payment_reil'] = 'បង់ជារៀល';
 $lang['payoweds_exchange_rate'] = 'អត្រា​ប្តូ​រ​ប្រាក់';
 $lang['payoweds_phone'] = 'ទូរស័ព្ទ';
 $lang['payoweds_email'] = 'អ៊ីមែល';
+$lang['payoweds_owed_date'] = 'កាលបរិច្ឆេទជំពាក់';
 
 ?>

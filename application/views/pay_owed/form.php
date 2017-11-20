@@ -61,6 +61,7 @@ echo form_open('payoweds/save_payowed',array('id'=>'payowed_form'));
 	<table id="item_kit_items" class="table">
 	<tr>
 		<th><?= lang('payoweds_sale_id') ?></th>
+		<th><?= lang('payoweds_owed_date') ?></th>
 		<th><?= lang('payoweds_payment_date') ?></th>
 		<th><?= lang('payoweds_total_amount') ?></th>
 		<th><?= lang('payoweds_payment_amount') ?></th>
@@ -69,7 +70,8 @@ echo form_open('payoweds/save_payowed',array('id'=>'payowed_form'));
 	<?php 
 	foreach ($payment_owed->result() as $value) {?>
 		<tr>
-			<td>POS <?= $value->sale_id ?></td>		
+			<td style="padding-bottom: 1px; padding-top: 1px;">POS <?= $value->sale_id ?></td>		
+			<td><?= date('d-M-Y',strtotime($value->owed_date)) ?></td>
 			<td><?= date('d-M-Y',strtotime($value->payment_date)) ?></td>
 			<td><?= to_currency($value->total_amount) ?></td>
 			<td><?= to_currency($value->payment_amount) ?></td>

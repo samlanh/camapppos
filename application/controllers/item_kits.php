@@ -8,8 +8,7 @@ class Item_kits extends Secure_area implements iData_controller
 		parent::__construct('item_kits');
 	}
 
-
-		public function configPagination($base_url,$total_rows,$per_page)
+	public function configPagination($base_url,$total_rows,$per_page)
        {		
 	    $config['base_url']=$base_url;
 		$config['total_rows']=$total_rows;
@@ -31,8 +30,7 @@ class Item_kits extends Secure_area implements iData_controller
         $config['attributes'] = array('class' => 'page-link');
 
         return $config;
-
-         }
+        }
 
 	function index()
 	{
