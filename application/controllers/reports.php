@@ -98,6 +98,47 @@ class Reports extends Secure_area
 		$this->load->view("reports/tabular", $data);
 	}
 	
+	function sale_detail_list($start_date, $end_date, $sale_type, $export_excel=0)
+	{
+		$this->load->model('reports/Sale_detail_list');
+		$model = $this->Sale_detail_list;
+		$model->setParams(array('start_date'=>$start_date, 'end_date'=>$end_date, 'sale_type' => $sale_type));
+
+		$this->Sale->create_sales_items_temp_table(array('start_date'=>$start_date, 'end_date'=>$end_date, 'sale_type' => $sale_type));
+		$tabular_data = array();
+		$report_data = $model->getData();
+		
+		foreach($report_data as $row)
+		{
+			$tabular_data[] = array(	
+										array('data'=>'POS '.$row['sale_id'], 'align'=>'left'),
+										array('data'=>date(get_date_format(), strtotime($row['sale_date'])), 'align'=>'left'), 
+										array('data'=>$row['item_name'], 'align'=>'left'),
+										array('data'=>$row['category'], 'align'=>'left'),
+										array('data'=>$row['item_unit_price'], 'align'=>'left'),
+										array('data'=>$row['quantity_purchased'], 'align'=>'left'),
+										array('data'=>$row['discount_percent'].'%', 'align'=>'left'),
+										array('data'=>to_currency($row['subtotal']), 'align'=>'right'), 
+										array('data'=>to_currency($row['tax']), 'align'=> 'right'),
+										array('data'=>to_currency($row['total']), 'align'=>'right'), 
+										array('data'=>$row['emp_fname'].' '.$row['emp_lname'], 'align'=>'left'),
+										array('data'=>$row['cus_fname'].' '.$row['cus_lname'], 'align'=>'left'),
+										);
+		}
+
+		$data = array(
+			"title" => lang('reports_sales_summary_report'),
+			"subtitle" => date(get_date_format(), strtotime($start_date)) .'-'.date(get_date_format(), strtotime($end_date)),
+			"headers" => $model->getDataColumns(),
+			"data" => $tabular_data,
+			"summary_data" => $model->getSummaryData(),
+			"export_excel" => $export_excel
+		);
+
+		$this->load->view("reports/tabular",$data);
+	}
+
+
 	//Summary sales report
 	function summary_sales($start_date, $end_date, $sale_type, $export_excel=0)
 	{

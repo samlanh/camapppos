@@ -27,6 +27,14 @@ if($export_excel == 1)
 }
 ?>
 <?php $this->load->view("partial/header"); ?>
+<div class="col-xs-12">
+ <button class="btn btn-primary pull-right" onclick="printReciept()"><i class="fa fa-print"></i> Print</button>
+<button class="btn btn-default pull-right" onclick="preView()" style="margin-right:5px"><i class="fa fa-search"></i> Print Preview</button>
+</div>
+
+
+<div id="print_report">
+
 <table id="title_bar">
 	<tr>
 		<td id="title_icon">
@@ -71,9 +79,59 @@ if($export_excel == 1)
 		</td>
 	</tr>
 </table>
+
+</div>
+
 <div id="feedback_bar"></div>
 
 <?php $this->load->view("partial/footer"); ?>
+
+
+<script type="text/javascript">
+$(window).load(function()
+{
+	//window.print();
+});
+function preView(){
+
+	//window.print('');
+	 var disp_setting="toolbar=yes,location=no,directories=yes,menubar=yes,"; 
+     disp_setting+="scrollbars=yes,width=1123, height=794, left=100, top=25"; 
+ var content_vlue = document.getElementById("print_report").innerHTML; 
+ 
+ var docprint=window.open("","",disp_setting); 
+  docprint.document.open(); 
+  docprint.document.write('<html><head><title>Stock inventory System</title>'); 
+  docprint.document.write('</head><body style=" margin:0px; font-family :Verdana, Khmer Os Battambang; font-size:13px;"><center>');          
+  docprint.document.write('<style type="text/css">#report_summary{text-align:right;font-size:14px;}#contents{width:100%} .report{width:100%;border-collapse:collapse;} .report tr>th, .report tr>td{ white-space:nowrap;font-size:12px; border-collapse:collapse;border:1px solid;padding-left:3px;padding-right:3px;} h5{padding-left: 3px; text-align:center;} h4{padding-left: 3px; text-align:center;}body{ margin:0px;');
+  docprint.document.write('font-family:Helvetica Neue",Helvetica,Arial,sans-serif, khmer os battambang; font-size:14px;border-spacing: 0; border-collapse: collapse;padding-left: 3px; padding-right: 3px; }');
+  docprint.document.write('a{color:#000;text-decoration:none;} p{display: inline;}</style>');
+  docprint.document.write(content_vlue);          
+  docprint.document.write('</center></body></html>'); 
+  docprint.document.close(); 
+  docprint.focus(); 
+}
+function printReciept(){
+	//window.print('');
+var disp_setting="toolbar=yes,location=no,directories=yes,menubar=yes,"; 
+   disp_setting+="scrollbars=yes,width=1123, height=794, left=100, top=25"; 
+var content_vlue = document.getElementById("print_report").innerHTML; 
+
+var docprint=window.open("","",disp_setting); 
+docprint.document.open(); 
+docprint.document.write('<html><head><title>Stock inventory System</title>'); 
+docprint.document.write('</head><body onLoad="self.print()" style=" margin:0px; font-family:Verdana,Khmer Os Battambang; font-size:13px;"><center>');          
+docprint.document.write('<style type="text/css">#report_summary{text-align:right;font-size:15px;} #contents{width:100%} .report{width:100%;border-collapse:collapse;} .report tr>th, .report tr>td{font-size:12px; white-space:nowrap;border-collapse:collapse;border:1px solid;padding-left:3px;padding-right:3px;} h5{padding-left: 3px; text-align:center;} h4{padding-left: 3px; text-align:center;}body{ margin:0px;');
+docprint.document.write('font-family:Helvetica Neue",Helvetica,Arial,sans-serif, khmer os battambang; font-size:14px;border-spacing: 0; border-collapse: collapse;padding-left: 3px; padding-right: 3px; }');
+docprint.document.write('a{color:#000;text-decoration:none;} p{display: inline;}</style>');
+//window.print();
+docprint.document.write(content_vlue);          
+docprint.document.write('</center></body></html>'); 
+docprint.document.close(); 
+docprint.focus(); 
+}
+</script>
+
 
 <script type="text/javascript" language="javascript">
 function init_table_sorting()

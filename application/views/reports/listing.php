@@ -37,6 +37,18 @@
 			<li class="detailed"><a href="<?php echo site_url('reports/detailed_sales');?>"><?php echo lang('reports_detailed_reports'); ?></a></li>			
 		</ul>
 	</li>
+
+
+	<li class="third">
+		<h3><?php echo lang('reports_sales'); ?></h3>
+		<ul>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li class="detailed"><a href="<?php echo site_url('reports/sale_detail_list');?>"><?php echo lang('reports_detailed_reports'); ?></a></li>			
+		</ul>
+	</li>
+	
+	
 	<?php if ($this->config->item('track_cash')) { ?>
 	<li class="third">
 		<h3><?php echo lang('reports_register_log_title'); ?></h3>

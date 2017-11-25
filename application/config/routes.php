@@ -83,6 +83,9 @@ $route['reports/(detailed_payoweds)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$
 $route['reports/payowed_summary'] = "reports/specific_payoweds_input";
 $route['reports/(payowed_summary)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4";
 
+$route['reports/sale_detail_list'] = "reports/date_input";
+$route['reports/(sale_detail_list)/(:any)/(:any)/(:any)/(:any)'] = "reports/$1/$2/$3/$4/$5";
+
 
 
 /* End of file routes.php */
